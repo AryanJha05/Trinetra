@@ -51,7 +51,7 @@ export default function Header({ selectedStation, setSelectedStation, activeAler
           <div className="w-5 h-5 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px] font-bold">
             <User className="w-3 h-3 text-white" />
           </div>
-          <span className="font-semibold text-slate-900 hidden sm:inline font-sans">RPF Insp. A. Sharma</span>
+          <span className="font-semibold text-slate-900 hidden sm:inline font-sans">RPF Lead Aryan Jha</span>
         </div>
 
         {/* Primary Action Button */}

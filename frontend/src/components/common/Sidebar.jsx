@@ -80,16 +80,16 @@ export default function Sidebar({ activeTab, setActiveTab }) {
         </div>
       </div>
 
-      {/* RPF Duty Unit Profile Card */}
+      {/* RPF Duty Unit & Team Trinetra Credits */}
       <div className="pt-4 border-t border-[#E4E4DF] space-y-2">
-        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2">RPF Security Desk</p>
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2">SIH 2026 Team</p>
         <div className="flex items-center space-x-3 p-2 bg-[#F4F4F0] rounded-xl border border-[#E4E4DF]">
-          <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-xs flex items-center justify-center font-mono">
-            RPF
+          <div className="w-8 h-8 rounded-full bg-navy-900 text-white font-bold text-xs flex items-center justify-center font-mono">
+            SIH
           </div>
           <div className="text-xs">
-            <p className="font-bold text-slate-900 font-heading">Control Room 4</p>
-            <p className="text-[10px] text-slate-500 font-mono">Shift Active · 8 Ops</p>
+            <p className="font-bold text-slate-900 font-heading">Team Trinetra</p>
+            <p className="text-[10px] text-slate-500 font-mono">Aryan · Mahipal · Sandeep · Nikita · Aastha · Smrutirani</p>
           </div>
         </div>
       </div>

@@ -10,6 +10,20 @@
 
 ---
 
+## 👥 Smart India Hackathon 2026 — Team Trinetra
+
+| Member Name | Role & System Responsibility |
+|---|---|
+| **Aryan Jha** | **Team Lead** · AI Architecture, Full-Stack & System Integration |
+| **Mahipal** | AI Computer Vision Specialist (YOLOv11 & ByteTrack Pipeline) |
+| **Sandeep** | Backend Systems & REST API Infrastructure Engineer |
+| **Nikita** | Frontend UI/UX Architect & Control Room Interface Lead |
+| **Aastha** | Safety Compliance & Design Tokens Specialist |
+| **Smrutirani** | Database Architecture & Security Audit Engineer |
+
+
+---
+
 ## Key Features & Control Room Screens
 
 ### 1. 🚉 Railway Command Center Dashboard

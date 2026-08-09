@@ -3,10 +3,12 @@ import { Lock } from 'lucide-react';
 
 export default function AuditLogsView() {
   const auditLogs = [
-    { id: 101, user: 'USR-001 (RPF Controller)', action: 'ALERT_DISPATCH', resource: 'INC-2026-892', time: '10:43 AM IST', ip: '10.1.4.22', status: 'SUCCESS' },
-    { id: 102, user: 'USR-001 (RPF Controller)', action: 'PRIVACY_MASK_ENABLE', resource: 'CAM-202', time: '10:35 AM IST', ip: '10.1.4.22', status: 'SUCCESS' },
-    { id: 103, user: 'SYSTEM_ENGINE', action: 'MULTI_FRAME_VERIFY', resource: 'INC-2026-887', time: '10:15 AM IST', ip: '127.0.0.1', status: 'VERIFIED' },
-    { id: 104, user: 'USR-002 (Station Director)', action: 'ANALYTICS_EXPORT', resource: 'SURVEILLANCE_REPORT', time: '09:10 AM IST', ip: '10.1.2.14', status: 'SUCCESS' },
+    { id: 101, user: 'Aryan Jha (Team Lead & RPF Controller)', action: 'ALERT_DISPATCH', resource: 'INC-2026-892', time: '10:43 AM IST', ip: '10.1.4.22', status: 'SUCCESS' },
+    { id: 102, user: 'Mahipal (AI Vision Pipeline Lead)', action: 'PRIVACY_MASK_ENABLE', resource: 'CAM-202', time: '10:35 AM IST', ip: '10.1.4.23', status: 'SUCCESS' },
+    { id: 103, user: 'Sandeep (Backend Infrastructure)', action: 'MULTI_FRAME_VERIFY', resource: 'INC-2026-887', time: '10:15 AM IST', ip: '10.1.4.24', status: 'VERIFIED' },
+    { id: 104, user: 'Nikita (Frontend UI Architect)', action: 'ANALYTICS_EXPORT', resource: 'SURVEILLANCE_REPORT', time: '09:10 AM IST', ip: '10.1.2.14', status: 'SUCCESS' },
+    { id: 105, user: 'Aastha (Safety Compliance Lead)', action: 'PPE_RULE_UPDATE', resource: 'WORKFORCE_POLICIES', time: '08:50 AM IST', ip: '10.1.2.15', status: 'SUCCESS' },
+    { id: 106, user: 'Smrutirani (Database & Audit Lead)', action: 'SECURITY_LOG_AUDIT', resource: 'RBAC_AUDIT_TRAIL', time: '08:30 AM IST', ip: '10.1.2.16', status: 'SUCCESS' },
   ];
 
   return (
