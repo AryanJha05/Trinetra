@@ -29,3 +29,47 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #A8A8A0;
 }
+
+/* Smooth Enterprise Animations */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSmooth {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUpSmooth {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fadeInSmooth {
+  animation: fadeInSmooth 0.25s ease-out forwards;
+}
+
+.animate-scaleUpSmooth {
+  animation: scaleUpSmooth 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

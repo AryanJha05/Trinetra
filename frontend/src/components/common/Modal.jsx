@@ -27,12 +27,12 @@ export default function Modal({
   return (
     /* Modal Backdrop Layer: z-[1000] fixed top-0 left-0 right-0 bottom-0 */
     <div
-      className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-200 select-none animate-fadeIn"
+      className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-200 select-none animate-fadeInSmooth"
       onClick={onClose}
     >
       {/* Modal Dialog Window: z-[1100] centered, floating above backdrop without layout displacement */}
       <div
-        className={`relative z-[1100] bg-[#F4F4F0] border border-[#E4E4DF] rounded-2xl w-full ${maxWidth} shadow-2xl overflow-hidden text-slate-900 font-sans transform transition-all duration-200 scale-100 animate-scaleUp`}
+        className={`relative z-[1100] bg-[#F4F4F0] border border-[#E4E4DF] rounded-2xl w-full ${maxWidth} shadow-2xl overflow-hidden text-slate-900 font-sans transform transition-all duration-200 animate-scaleUpSmooth`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
