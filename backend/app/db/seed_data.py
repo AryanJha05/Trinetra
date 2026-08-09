@@ -126,7 +126,7 @@ def seed_database():
         Worker(worker_id="EMP-3341", name="Sandeep", role="Electrical Tech", zone="Depot Yard B", activity="Switch Gear Check", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
         Worker(worker_id="EMP-5529", name="Nikita", role="Track Worker", zone="Track A - Sector 5", activity="Rail Inspection", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
         Worker(worker_id="EMP-4902", name="Aastha", role="Safety Inspector", zone="Sector 3 Alpha", activity="PPE Inspection", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
-        Worker(worker_id="EMP-6120", name="Smrutirani", role="Control Inspector", zone="Control Center Node", activity="Safety Verification", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now)
+        Worker(worker_id="EMP-6120", name="Smurtirani", role="Control Inspector", zone="Control Center Node", activity="Safety Verification", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now)
     ]
     for w in workers:
         db.add(w)

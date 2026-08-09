@@ -8,7 +8,7 @@ export default function AuditLogsView() {
     { id: 103, user: 'Sandeep', action: 'MULTI_FRAME_VERIFY', resource: 'INC-2026-887', time: '10:15 AM IST', ip: '10.1.4.24', status: 'VERIFIED' },
     { id: 104, user: 'Nikita', action: 'ANALYTICS_EXPORT', resource: 'SURVEILLANCE_REPORT', time: '09:10 AM IST', ip: '10.1.2.14', status: 'SUCCESS' },
     { id: 105, user: 'Aastha', action: 'PPE_RULE_UPDATE', resource: 'WORKFORCE_POLICIES', time: '08:50 AM IST', ip: '10.1.2.15', status: 'SUCCESS' },
-    { id: 106, user: 'Smrutirani', action: 'SECURITY_LOG_AUDIT', resource: 'RBAC_AUDIT_TRAIL', time: '08:30 AM IST', ip: '10.1.2.16', status: 'SUCCESS' },
+    { id: 106, user: 'Smurtirani', action: 'SECURITY_LOG_AUDIT', resource: 'RBAC_AUDIT_TRAIL', time: '08:30 AM IST', ip: '10.1.2.16', status: 'SUCCESS' },
   ];
 
   return (

@@ -247,7 +247,7 @@ export default function App() {
                   <p className="text-sm font-bold text-white">Aastha</p>
                 </div>
                 <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Smrutirani</p>
+                  <p className="text-sm font-bold text-white">Smurtirani</p>
                 </div>
               </div>
             </div>

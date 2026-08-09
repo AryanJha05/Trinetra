@@ -18,7 +18,7 @@ export default function WorkforceSafety() {
     { id: 'EMP-3341', name: 'Sandeep', role: 'Electrical Tech', zone: 'Depot Yard B', activity: 'Switch Gear Check', status: 'NORMAL', helmet: true, vest: true, boots: true },
     { id: 'EMP-5529', name: 'Nikita', role: 'Track Worker', zone: 'Track A - Sector 5', activity: 'Rail Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
     { id: 'EMP-4902', name: 'Aastha', role: 'Safety Inspector', zone: 'Sector 3 Alpha', activity: 'PPE Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-6120', name: 'Smrutirani', role: 'Control Inspector', zone: 'Control Center Node', activity: 'Safety Verification', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-6120', name: 'Smurtirani', role: 'Control Inspector', zone: 'Control Center Node', activity: 'Safety Verification', status: 'NORMAL', helmet: true, vest: true, boots: true },
   ];
 
   const filteredWorkers = workers.filter(w =>

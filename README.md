@@ -19,7 +19,7 @@
 | **Sandeep** | Backend Systems & REST API Infrastructure Engineer |
 | **Nikita** | Frontend UI/UX Architect & Control Room Interface Lead |
 | **Aastha** | Safety Compliance & Design Tokens Specialist |
-| **Smrutirani** | Database Architecture & Security Audit Engineer |
+| **Smurtirani** | Database Architecture & Security Audit Engineer |
 
 
 ---
