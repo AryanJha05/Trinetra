@@ -1,5 +1,6 @@
 import React from 'react';
-import { LayoutDashboard, Camera, Users, AlertTriangle, HardHat, BarChart3, Lock, Settings, Train } from 'lucide-react';
+import { LayoutDashboard, Camera, Users, AlertTriangle, HardHat, BarChart3, Lock, Settings } from 'lucide-react';
+import trinetraLogo from '../../assets/trinetra_logo.png';
 
 export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen }) {
   const primaryMenu = [
@@ -42,16 +43,27 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
           mobileMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'
         }`}
       >
-        <div className="space-y-6">
-          {/* Brand Header */}
-          <div className="flex items-center space-x-3 pb-3 border-b border-[#E4E4DF]">
-            <div className="w-9 h-9 rounded-xl bg-navy-900 text-white flex items-center justify-center shadow-sm flex-shrink-0">
-              <Train className="w-5 h-5 text-railway-mint" />
+        <div className="space-y-5">
+          {/* Official TRINETRA Brand Header with Integrated Logo */}
+          <div className="pb-3 border-b border-[#E4E4DF] space-y-2">
+            <div className="flex items-center space-x-3">
+              <img
+                src={trinetraLogo}
+                alt="TRINETRA Official Logo"
+                className="h-11 w-auto max-w-[50px] object-contain flex-shrink-0"
+              />
+              <div>
+                <h1 className="font-extrabold text-base text-slate-900 leading-tight font-heading tracking-tight">
+                  TRINETRA
+                </h1>
+                <span className="inline-block text-[9px] font-extrabold text-navy-900 bg-slate-100 px-1.5 py-0.5 rounded font-mono uppercase tracking-wider">
+                  Indian Railways AI
+                </span>
+              </div>
             </div>
-            <div>
-              <h1 className="font-extrabold text-base text-slate-900 leading-tight font-heading">Trinetra</h1>
-              <p className="text-[10px] font-semibold text-slate-500 font-sans leading-tight">Intelligent CCTV Surveillance & Safety Platform</p>
-            </div>
+            <p className="text-[10px] font-semibold text-slate-500 font-sans leading-tight">
+              Intelligent CCTV Surveillance & Safety Platform
+            </p>
           </div>
 
           {/* Primary Navigation Menu */}
@@ -88,8 +100,8 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
           </nav>
 
           {/* Section Header: Station Zones */}
-          <div className="pt-4 border-t border-[#E4E4DF] space-y-2">
-            <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2">Station Zones</p>
+          <div className="pt-3 border-t border-[#E4E4DF] space-y-2">
+            <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 font-mono">Station Zones</p>
             <div className="space-y-1">
               {stationZones.map((zone, idx) => (
                 <div key={idx} className="flex items-center justify-between px-3 py-1.5 text-xs text-slate-600 hover:text-slate-900 cursor-pointer rounded-lg hover:bg-slate-50">
@@ -102,8 +114,8 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
         </div>
 
         {/* Team Trinetra Credits */}
-        <div className="pt-4 border-t border-[#E4E4DF] space-y-2">
-          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2">SIH 2026 Team</p>
+        <div className="pt-3 border-t border-[#E4E4DF] space-y-2">
+          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 font-mono">SIH 2026 Team</p>
           <div className="flex items-center space-x-3 p-2 bg-[#F4F4F0] rounded-xl border border-[#E4E4DF]">
             <div className="w-8 h-8 rounded-full bg-navy-900 text-white font-bold text-xs flex items-center justify-center font-mono flex-shrink-0">
               SIH
