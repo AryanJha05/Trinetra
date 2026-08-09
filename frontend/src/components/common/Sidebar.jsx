@@ -89,7 +89,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           </div>
           <div className="text-xs">
             <p className="font-bold text-slate-900 font-heading">Team Trinetra</p>
-            <p className="text-[10px] text-slate-500 font-mono">Aryan · Mahipal · Sandeep · Nikita · Aastha · Smrutirani</p>
+            <p className="text-[10px] text-slate-500 font-mono">Aryan Jha · Mahipal · Sandeep · Nikita · Aastha · Smrutirani</p>
           </div>
         </div>
       </div>

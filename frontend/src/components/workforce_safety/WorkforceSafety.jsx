@@ -13,12 +13,12 @@ export default function WorkforceSafety() {
   ];
 
   const workers = [
-    { id: 'EMP-8472', name: 'Aryan Jha', role: 'Team Lead & AI Architect', zone: 'Track A - Sector 4', activity: 'Signal Calibration', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-9102', name: 'Mahipal', role: 'AI Vision Specialist', zone: 'Platform 3 - North', activity: 'Track Welding', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-3341', name: 'Sandeep', role: 'Backend Systems Lead', zone: 'Depot Yard B', activity: 'Server Health Check', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-5529', name: 'Nikita', role: 'Frontend Architect', zone: 'Track A - Sector 5', activity: 'UI Telemetry Test', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-4902', name: 'Aastha', role: 'Safety Compliance Lead', zone: 'Sector 3 Alpha', activity: 'PPE Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-6120', name: 'Smrutirani', role: 'Database Audit Specialist', zone: 'Control Center Node', activity: 'Log Integrity Verification', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-8472', name: 'Aryan Jha', role: 'Signal Technician', zone: 'Track A - Sector 4', activity: 'Signal Calibration', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-9102', name: 'Mahipal', role: 'Track Maintenance', zone: 'Platform 3 - North', activity: 'Track Welding', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-3341', name: 'Sandeep', role: 'Electrical Tech', zone: 'Depot Yard B', activity: 'Switch Gear Check', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-5529', name: 'Nikita', role: 'Track Worker', zone: 'Track A - Sector 5', activity: 'Rail Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-4902', name: 'Aastha', role: 'Safety Inspector', zone: 'Sector 3 Alpha', activity: 'PPE Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-6120', name: 'Smrutirani', role: 'Control Inspector', zone: 'Control Center Node', activity: 'Safety Verification', status: 'NORMAL', helmet: true, vest: true, boots: true },
   ];
 
   const filteredWorkers = workers.filter(w =>

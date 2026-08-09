@@ -100,36 +100,24 @@ export default function App() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 font-mono">
-                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <p className="text-xs font-bold text-white">Aryan Jha</p>
-                    <p className="text-[10px] text-railway-mint font-semibold">Team Lead</p>
-                    <p className="text-[10px] text-slate-400">AI Architecture & Full-Stack</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono">
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <p className="text-sm font-bold text-white">Aryan Jha</p>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <p className="text-xs font-bold text-white">Mahipal</p>
-                    <p className="text-[10px] text-slate-300 font-semibold">AI Vision Specialist</p>
-                    <p className="text-[10px] text-slate-400">YOLOv11 & ByteTrack Pipeline</p>
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <p className="text-sm font-bold text-white">Mahipal</p>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <p className="text-xs font-bold text-white">Sandeep</p>
-                    <p className="text-[10px] text-slate-300 font-semibold">Backend Lead</p>
-                    <p className="text-[10px] text-slate-400">FastAPI & REST Infrastructure</p>
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <p className="text-sm font-bold text-white">Sandeep</p>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <p className="text-xs font-bold text-white">Nikita</p>
-                    <p className="text-[10px] text-slate-300 font-semibold">Frontend Architect</p>
-                    <p className="text-[10px] text-slate-400">Control Room UI/UX</p>
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <p className="text-sm font-bold text-white">Nikita</p>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <p className="text-xs font-bold text-white">Aastha</p>
-                    <p className="text-[10px] text-slate-300 font-semibold">Safety Compliance</p>
-                    <p className="text-[10px] text-slate-400">Design System & PPE Rules</p>
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <p className="text-sm font-bold text-white">Aastha</p>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <p className="text-xs font-bold text-white">Smrutirani</p>
-                    <p className="text-[10px] text-slate-300 font-semibold">Security & Audit</p>
-                    <p className="text-[10px] text-slate-400">Database & Security Logs</p>
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <p className="text-sm font-bold text-white">Smrutirani</p>
                   </div>
                 </div>
               </div>
