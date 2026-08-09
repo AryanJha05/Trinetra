@@ -1,55 +1,26 @@
 import React from 'react';
-import { Camera, AlertTriangle, Users, ShieldCheck, ArrowRight, Eye, Send, MoreVertical, Clock } from 'lucide-react';
+import { Camera, AlertTriangle, Users, ShieldCheck, ArrowRight, Eye, Send, MoreVertical, Clock, AlertCircle } from 'lucide-react';
 import StationBlueprintMap from './StationBlueprintMap';
 
-export default function CommandDashboard({ onNavigateToFeed, onNavigateToAlerts, onDispatchGuard }) {
-  const incidentsList = [
-    {
-      id: 'INC-2026-892',
-      title: 'Unattended Object Detected',
-      desc: 'Black backpack stationary for >5 mins near Platform 3 Pillar 12 without owner in 10m perimeter.',
-      cam: 'CAM-202',
-      zone: 'Platform 3, Sector B',
-      time: '10:42 AM',
-      severity: 'CRITICAL',
-      conf: '96.4%',
-    },
-    {
-      id: 'INC-2026-887',
-      title: 'Unauthorized Perimeter Access',
-      desc: 'Individual detected in non-uniform clothing breaching maintenance yard Gate 4.',
-      cam: 'CAM-042',
-      zone: 'Maintenance Yard B',
-      time: '10:15 AM',
-      severity: 'CRITICAL',
-      conf: '92.1%',
-    },
-    {
-      id: 'INC-2026-881',
-      title: 'High Crowd Surge Warning',
-      desc: 'Commuter density exceeded 3.8 pax/m² near North FOB staircase due to delayed Express Train 1204.',
-      cam: 'CAM-301',
-      zone: 'Platform 2 North',
-      time: '09:50 AM',
-      severity: 'WARNING',
-      conf: '88.5%',
-    },
-    {
-      id: 'INC-2026-875',
-      title: 'PPE Helmet Compliance Violation',
-      desc: 'Technician working track maintenance line without high-visibility helmet.',
-      cam: 'CAM-200',
-      zone: 'Service Hall B',
-      time: '08:30 AM',
-      severity: 'NOTICE',
-      conf: '94.2%',
-    },
+export default function CommandDashboard({
+  onNavigateToFeed,
+  onNavigateToAlerts,
+  onDispatchGuard,
+  onNavigateToCrowd,
+  onNavigateToSafety,
+  incidentsList = []
+}) {
+  const platformsOverview = [
+    { name: 'Platform 1', pax: 450, risk: 'Low', status: 'Safe', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
+    { name: 'Platform 2', pax: 780, risk: 'Medium', status: 'Moderate', color: 'bg-blue-100 text-blue-800 border-blue-200' },
+    { name: 'Platform 3', pax: 1200, risk: 'High', status: 'Advisory', color: 'bg-amber-100 text-amber-800 border-amber-200' },
+    { name: 'Platform 4', pax: 1800, risk: 'Critical', status: 'Overcrowded', color: 'bg-red-100 text-red-800 border-red-200' },
   ];
 
   return (
-    <div className="p-8 space-y-8">
-      {/* Top Banner Card matching exact visual language of reference image hero banner */}
-      <div className="bg-[#ECECE7] border border-[#E4E4DF] rounded-3xl p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <div className="p-8 space-y-8 select-none">
+      {/* Top Banner Hero KPI Cards matching visual language */}
+      <div className="bg-[#ECECE7] border border-[#E4E4DF] rounded-3xl p-6 md:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         {/* Left Bar Chart Widget */}
         <div className="lg:col-span-4 space-y-3">
           <p className="text-xs font-extrabold text-slate-600 uppercase tracking-wider font-heading">Weekly Incident Trends</p>
@@ -69,11 +40,14 @@ export default function CommandDashboard({ onNavigateToFeed, onNavigateToAlerts,
           </div>
         </div>
 
-        {/* Center Semi-Circle Gauge Widget - Fixed SVG Arc Gauge */}
-        <div className="lg:col-span-4 flex flex-col items-center justify-center text-center space-y-1 border-y lg:border-y-0 lg:border-x border-[#D8D8D0] py-4 lg:py-0 px-4">
+        {/* Center Semi-Circle Gauge Widget */}
+        <div
+          onClick={() => onNavigateToSafety && onNavigateToSafety()}
+          className="lg:col-span-4 flex flex-col items-center justify-center text-center space-y-1 border-y lg:border-y-0 lg:border-x border-[#D8D8D0] py-4 lg:py-0 px-4 cursor-pointer group hover:bg-[#E4E4DE] transition-colors rounded-2xl"
+          title="Click to view Workforce Safety Compliance"
+        >
           <div className="relative w-44 h-24 flex flex-col items-center justify-end">
             <svg className="w-44 h-22" viewBox="0 0 100 55">
-              {/* Background Arc Track */}
               <path 
                 d="M 10 50 A 40 40 0 0 1 90 50" 
                 fill="none" 
@@ -81,7 +55,6 @@ export default function CommandDashboard({ onNavigateToFeed, onNavigateToAlerts,
                 strokeWidth="9" 
                 strokeLinecap="round" 
               />
-              {/* Active Progress Arc (88% of 180 degrees) */}
               <path 
                 d="M 10 50 A 40 40 0 0 1 87.2 35.3" 
                 fill="none" 
@@ -94,20 +67,82 @@ export default function CommandDashboard({ onNavigateToFeed, onNavigateToAlerts,
               <span className="text-3xl font-extrabold text-slate-900 leading-none font-mono">88%</span>
             </div>
           </div>
-          <p className="text-xs font-bold text-slate-700 font-sans">Station Safety Score Index</p>
+          <p className="text-xs font-bold text-slate-700 group-hover:text-navy-900 font-sans flex items-center gap-1">
+            Station Safety Score Index <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </p>
         </div>
 
-        {/* Right Numerical Metrics matching reference image */}
+        {/* Right Numerical Metrics */}
         <div className="lg:col-span-4 flex items-center justify-around">
-          <div className="text-center">
-            <div className="text-4xl font-extrabold text-slate-900 tracking-tight font-mono">1,248</div>
-            <p className="text-xs text-slate-600 font-medium mt-1 font-sans">Cameras Connected</p>
+          {/* Interactive Camera Counter Card */}
+          <div
+            onClick={() => onNavigateToFeed && onNavigateToFeed('CAM-101')}
+            className="text-center p-3 rounded-2xl hover:bg-[#E4E4DE] cursor-pointer transition-colors group"
+            title="Click to view Live CCTV Monitoring"
+          >
+            <div className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight font-mono group-hover:text-blue-900">1,248</div>
+            <p className="text-xs text-slate-600 font-medium mt-1 font-sans flex items-center justify-center gap-1">
+              <Camera className="w-3.5 h-3.5 text-slate-500" /> Cameras (1239 Active)
+            </p>
           </div>
+
           <div className="h-12 w-px bg-[#D8D8D0]"></div>
-          <div className="text-center">
-            <div className="text-4xl font-extrabold text-slate-900 tracking-tight font-mono">4</div>
-            <p className="text-xs text-slate-600 font-medium mt-1 font-sans">Active Incidents</p>
+
+          {/* Interactive Incidents Counter Card */}
+          <div
+            onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
+            className="text-center p-3 rounded-2xl hover:bg-[#E4E4DE] cursor-pointer transition-colors group"
+            title="Click to view Active Incidents"
+          >
+            <div className="text-3xl md:text-4xl font-extrabold text-red-700 tracking-tight font-mono group-hover:scale-105 transition-transform">{incidentsList.length}</div>
+            <p className="text-xs text-slate-600 font-medium mt-1 font-sans flex items-center justify-center gap-1">
+              <AlertTriangle className="w-3.5 h-3.5 text-red-600" /> Active Incidents
+            </p>
           </div>
+        </div>
+      </div>
+
+      {/* Interactive Platform Crowd Status Row */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 font-heading">
+            <Users className="w-4 h-4 text-navy-900" /> Live Platform Crowd Status Overview
+          </h3>
+          <button
+            onClick={() => onNavigateToCrowd && onNavigateToCrowd()}
+            className="text-xs font-bold text-slate-900 hover:underline font-mono flex items-center gap-1"
+          >
+            Open Crowd Analytics <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {platformsOverview.map((p, idx) => (
+            <div
+              key={idx}
+              onClick={() => onNavigateToCrowd && onNavigateToCrowd()}
+              className="bg-white border border-[#E4E4DF] hover:border-slate-400 p-4 rounded-2xl space-y-2 cursor-pointer transition-all shadow-sm group hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900 text-sm font-heading">{p.name}</span>
+                <span className={`text-[10px] font-extrabold font-mono px-2 py-0.5 rounded-md border ${p.color}`}>
+                  {p.risk} Risk
+                </span>
+              </div>
+              <div className="flex items-baseline justify-between pt-1">
+                <span className="text-2xl font-extrabold text-slate-900 font-mono">{p.pax.toLocaleString()}</span>
+                <span className="text-xs text-slate-500 font-medium font-sans">commuters</span>
+              </div>
+              <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div
+                  className={`h-full ${
+                    p.risk === 'Critical' ? 'bg-red-600' : p.risk === 'High' ? 'bg-amber-500' : p.risk === 'Medium' ? 'bg-blue-600' : 'bg-emerald-500'
+                  }`}
+                  style={{ width: `${Math.min(100, (p.pax / 2000) * 100)}%` }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -125,7 +160,7 @@ export default function CommandDashboard({ onNavigateToFeed, onNavigateToAlerts,
           <StationBlueprintMap onSelectCamera={(camId) => onNavigateToFeed(camId)} />
         </div>
 
-        {/* Right 5 Cols: Live Incidents Grid - All Clean Uniform White Cards */}
+        {/* Right 5 Cols: Live Incidents Stack */}
         <div className="lg:col-span-5 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -142,8 +177,8 @@ export default function CommandDashboard({ onNavigateToFeed, onNavigateToAlerts,
             </button>
           </div>
 
-          {/* Cards Stack: All Clean White Cards */}
-          <div className="space-y-4">
+          {/* Cards Stack */}
+          <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
             {incidentsList.map((inc) => (
               <div
                 key={inc.id}

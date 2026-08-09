@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/common/Header';
 import Sidebar from './components/common/Sidebar';
+import CreateIncidentModal from './components/common/CreateIncidentModal';
 import CommandDashboard from './components/dashboard/CommandDashboard';
 import LiveMonitoring from './components/live_monitoring/LiveMonitoring';
 import CrowdIntelligence from './components/crowd_intelligence/CrowdIntelligence';
@@ -16,6 +17,80 @@ export default function App() {
   const [selectedCamForLive, setSelectedCamForLive] = useState('CAM-202');
   const [notificationToast, setNotificationToast] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [demoMode, setDemoMode] = useState(false);
+
+  // Dynamic Incidents List state
+  const [incidentsList, setIncidentsList] = useState([
+    {
+      id: 'INC-2026-892',
+      title: 'Unattended Object Detected',
+      type: 'Unattended Object',
+      desc: 'Black backpack stationary for >5 mins near Platform 3 Pillar 12 without owner in 10m perimeter.',
+      cam: 'CAM-202',
+      zone: 'Platform 3, Sector B',
+      time: '10:42 AM',
+      severity: 'CRITICAL',
+      conf: '96.4%',
+      status: 'PENDING'
+    },
+    {
+      id: 'INC-2026-887',
+      title: 'Unauthorized Perimeter Access',
+      type: 'Perimeter Breach',
+      desc: 'Individual detected in non-uniform clothing breaching maintenance yard Gate 4.',
+      cam: 'CAM-042',
+      zone: 'Maintenance Yard B',
+      time: '10:15 AM',
+      severity: 'CRITICAL',
+      conf: '92.1%',
+      status: 'PENDING'
+    },
+    {
+      id: 'INC-2026-881',
+      title: 'High Crowd Surge Warning',
+      type: 'Crowd Surge Warning',
+      desc: 'Commuter density exceeded 3.8 pax/m² near North FOB staircase due to delayed Express Train 1204.',
+      cam: 'CAM-301',
+      zone: 'Platform 2 North',
+      time: '09:50 AM',
+      severity: 'WARNING',
+      conf: '88.5%',
+      status: 'TEAM ASSIGNED'
+    },
+    {
+      id: 'INC-2026-875',
+      title: 'PPE Helmet Compliance Violation',
+      type: 'PPE Violation',
+      desc: 'Technician working track maintenance line without high-visibility helmet.',
+      cam: 'CAM-200',
+      zone: 'Service Hall B',
+      time: '08:30 AM',
+      severity: 'NOTICE',
+      conf: '94.2%',
+      status: 'RESOLVED'
+    },
+  ]);
+
+  // Demo Live Simulation Interval Effect
+  useEffect(() => {
+    if (!demoMode) return;
+
+    const interval = setInterval(() => {
+      const simEvents = [
+        "AI Telemetry Update: Platform 4 crowd flow peaked at 1,840 pax.",
+        "Camera CAM-202 AI Inference Latency: 11ms (Optimal).",
+        "DPDP Privacy Engine: 142 faces anonymized in current frame.",
+        "Safety Audit Check: Maintenance Yard B Worker PPE Compliance 100%.",
+        "RPF Control Center: All 1,248 CCTV Nodes Operational."
+      ];
+      const randomMsg = simEvents[Math.floor(Math.random() * simEvents.length)];
+      setNotificationToast(`⚡ Live Simulation: ${randomMsg}`);
+      setTimeout(() => setNotificationToast(null), 3500);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [demoMode]);
 
   const handleNavigateToFeed = (camId) => {
     setSelectedCamForLive(camId);
@@ -27,25 +102,38 @@ export default function App() {
   };
 
   const handleDispatchGuard = (incidentId) => {
+    setIncidentsList(prev =>
+      prev.map(inc => inc.id === incidentId ? { ...inc, status: 'TEAM ASSIGNED' } : inc)
+    );
     setNotificationToast(`RPF Quick Response Unit dispatched to ${incidentId}`);
+    setTimeout(() => setNotificationToast(null), 4000);
+  };
+
+  const handleAddIncident = (newIncident) => {
+    setIncidentsList(prev => [newIncident, ...prev]);
+    setNotificationToast(`New Control Room Incident Logged: ${newIncident.id}`);
     setTimeout(() => setNotificationToast(null), 4000);
   };
 
   return (
     <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col font-sans relative">
-      {/* Fixed Top Header (Occupies remaining width from left-0 md:left-[260px] to right-0) */}
+      {/* Fixed Top Header */}
       <Header
         selectedStation={selectedStation}
         setSelectedStation={setSelectedStation}
-        activeAlertCount={4}
+        activeAlertCount={incidentsList.filter(i => i.status !== 'RESOLVED').length}
         privacyMasking={privacyMasking}
         setPrivacyMasking={setPrivacyMasking}
-        onCreateIncident={() => setActiveTab('incident_alerts')}
+        onCreateIncident={() => setIsCreateModalOpen(true)}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
+        demoMode={demoMode}
+        setDemoMode={setDemoMode}
+        onNavigateToTab={(tab) => setActiveTab(tab)}
+        onSelectCamera={(camId) => handleNavigateToFeed(camId)}
       />
 
-      {/* Fixed Left Sidebar (Fixed 260px width, full viewport height) */}
+      {/* Fixed Left Sidebar */}
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -53,13 +141,13 @@ export default function App() {
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      {/* Main Workspace Area (starts at left margin 260px, top padding 72px) */}
+      {/* Main Workspace Container */}
       <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-navy-950 overflow-y-auto transition-all">
-        {/* Dispatch Notification Banner */}
+        {/* Dispatch & Telemetry Notification Banner */}
         {notificationToast && (
           <div className="m-6 mb-0 p-4 bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 rounded-xl font-bold text-xs flex items-center justify-between shadow-xl animate-bounce">
             <span>✅ {notificationToast}</span>
-            <span className="text-[10px] font-mono opacity-75 font-normal">RPF Dispatch System Logged</span>
+            <span className="text-[10px] font-mono opacity-75 font-normal">Trinetra Live Telemetry Logged</span>
           </div>
         )}
 
@@ -68,6 +156,9 @@ export default function App() {
             onNavigateToFeed={handleNavigateToFeed}
             onNavigateToAlerts={handleNavigateToAlerts}
             onDispatchGuard={handleDispatchGuard}
+            onNavigateToCrowd={() => setActiveTab('crowd_intelligence')}
+            onNavigateToSafety={() => setActiveTab('workforce_safety')}
+            incidentsList={incidentsList}
           />
         )}
 
@@ -82,7 +173,11 @@ export default function App() {
         {activeTab === 'crowd_intelligence' && <CrowdIntelligence />}
 
         {activeTab === 'incident_alerts' && (
-          <IncidentAlertCenter onDispatchGuard={handleDispatchGuard} />
+          <IncidentAlertCenter
+            onDispatchGuard={handleDispatchGuard}
+            incidents={incidentsList}
+            setIncidents={setIncidentsList}
+          />
         )}
 
         {activeTab === 'workforce_safety' && <WorkforceSafety />}
@@ -96,6 +191,29 @@ export default function App() {
             <div>
               <h2 className="text-xl font-bold text-white mb-1 font-heading">System Settings & Platform Credits</h2>
               <p className="text-xs text-slate-400 font-mono">Trinetra Platform Config v1.0.0 · Model: YOLOv11x / ByteTrack / VideoMAE</p>
+            </div>
+
+            {/* Platform Control Settings Panel */}
+            <div className="bg-navy-900 border border-[#E4E4DF]/20 rounded-2xl p-6 space-y-4 shadow-lg text-xs font-mono">
+              <h3 className="text-sm font-bold text-white font-heading border-b border-slate-700 pb-3">AI Vision Model Configurations</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                  <span>AI Inference Precision</span>
+                  <span className="text-railway-mint font-bold">FP16 TensorRT</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                  <span>ByteTrack Overlap Threshold</span>
+                  <span className="text-railway-mint font-bold">0.65 IoU</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                  <span>DPDP Act Privacy Mode</span>
+                  <span className="text-emerald-400 font-bold">{privacyMasking ? 'ENABLED (Face Masking Active)' : 'DISABLED'}</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                  <span>RPF Alert Auto-Dispatch</span>
+                  <span className="text-railway-mint font-bold">AUTOMATIC (&gt;90% Conf)</span>
+                </div>
+              </div>
             </div>
 
             {/* Official SIH 2026 Team Section */}
@@ -131,6 +249,13 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* Interactive New Incident Report Modal */}
+      <CreateIncidentModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onSubmitIncident={handleAddIncident}
+      />
     </div>
   );
 }
