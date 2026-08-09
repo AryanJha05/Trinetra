@@ -126,7 +126,7 @@ export default function Header({
           className={`min-w-[115px] ${
             demoMode 
               ? '!bg-amber-500 hover:!bg-amber-600 !text-slate-950 !border-amber-500 font-extrabold shadow-sm' 
-              : 'bg-white hover:bg-slate-100 text-slate-800 border-[#E4E4DF]'
+              : '!bg-white hover:!bg-slate-100 !text-slate-900 !border-[#E4E4DF]'
           }`}
           title="Toggle Dynamic Real-Time Simulation"
         >
@@ -136,7 +136,7 @@ export default function Header({
 
         {/* Station Selector */}
         <div className="hidden sm:flex items-center space-x-2 bg-white px-3 py-1.5 rounded-xl border border-[#E4E4DF] shadow-sm h-9.5">
-          <MapPin className="w-3.5 h-3.5 text-navy-900 flex-shrink-0" />
+          <MapPin className="w-3.5 h-3.5 text-slate-900 flex-shrink-0" />
           <select
             value={selectedStation}
             onChange={(e) => setSelectedStation(e.target.value)}
@@ -158,7 +158,7 @@ export default function Header({
           className={`min-w-[110px] ${
             privacyMasking
               ? '!bg-emerald-600 hover:!bg-emerald-700 !text-white !border-emerald-600 font-bold shadow-sm'
-              : 'bg-white hover:bg-slate-100 text-slate-800 border-[#E4E4DF]'
+              : '!bg-white hover:!bg-slate-100 !text-slate-900 !border-[#E4E4DF]'
           }`}
         >
           <span className="hidden lg:inline">Blur: <strong>{privacyMasking ? 'ON' : 'OFF'}</strong></span>
@@ -167,7 +167,7 @@ export default function Header({
 
         {/* User Profile */}
         <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-xl border border-[#E4E4DF] shadow-sm h-9.5">
-          <div className="w-5.5 h-5.5 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px] font-bold">
+          <div className="w-5.5 h-5.5 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] font-bold">
             <User className="w-3 h-3 text-white" />
           </div>
           <span className="font-bold text-slate-900 hidden sm:inline font-sans">Mahipal</span>
@@ -179,7 +179,7 @@ export default function Header({
           size="sm"
           icon={Plus}
           onClick={onCreateIncident}
-          className="min-w-[130px] !bg-navy-900 hover:!bg-navy-950 !text-white font-bold shadow-md"
+          className="min-w-[130px] !bg-slate-900 hover:!bg-black !text-white !border-slate-900 font-bold shadow-md"
         >
           <span className="hidden md:inline">New Incident</span>
           <span className="md:hidden">New</span>

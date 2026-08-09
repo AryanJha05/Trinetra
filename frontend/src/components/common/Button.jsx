@@ -17,7 +17,7 @@ export default function Button({
   ...props
 }) {
   // Base classes for standard enterprise button geometry
-  const baseClasses = 'inline-flex items-center justify-center font-heading font-bold text-xs rounded-xl select-none transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-navy-900/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:transform-none';
+  const baseClasses = 'inline-flex items-center justify-center font-heading font-bold text-xs rounded-xl select-none transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:transform-none';
 
   // Fixed height & padding per size
   const sizeClasses = {
@@ -26,9 +26,9 @@ export default function Button({
     lg: 'h-11 px-5 text-xs md:text-sm gap-2.5',
   };
 
-  // Explicit high-contrast color variants
+  // Explicit high-contrast standard Tailwind color variants
   const variantClasses = {
-    primary: 'bg-navy-900 hover:bg-navy-950 text-white shadow-sm border border-navy-900',
+    primary: 'bg-slate-900 hover:bg-black text-white shadow-sm border border-slate-900',
     secondary: 'bg-slate-200 hover:bg-slate-300 text-slate-900 border border-slate-300',
     danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm border border-red-600',
     success: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm border border-emerald-600',
