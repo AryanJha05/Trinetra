@@ -87,7 +87,9 @@
 
 ## Quickstart Instructions
 
-### 1. Run Backend Service (FastAPI)
+### Local Development Setup
+
+#### 1. Run Backend Service (FastAPI)
 ```bash
 cd backend
 pip install -r requirements.txt
@@ -96,7 +98,7 @@ uvicorn app.main:app --reload --port 8000
 ```
 *API Swagger Documentation available at `http://localhost:8000/docs`*
 
-### 2. Run Frontend Dashboard (React + Vite)
+#### 2. Run Frontend Dashboard (React + Vite)
 ```bash
 cd frontend
 npm install
@@ -104,7 +106,97 @@ npm run dev
 ```
 *Access control room interface at `http://localhost:3000`*
 
-### 3. Docker Compose Deployment
+---
+
+## 🐳 Docker Deployment & Containerization Guide
+
+### Why Use Docker for Trinetra?
+
+1. **Zero-Dependency Isolation**: Bundles complex Python AI vision runtime libraries (OpenCV, PyTorch, C-level system dependencies like `libgl1`), FastAPI backend, and React/Vite frontend into self-contained containers.
+2. **Environment Parity**: Eliminates *"works on my machine"* issues by matching runtime environments across local dev setups, staging servers, and edge nodes deployed in RPF Command Centers.
+3. **One-Command Orchestration**: Launches both backend (`:8000`) and frontend (`:3000`) simultaneously with automated inter-container networking and restart policies.
+4. **Production Readiness**: Provides repeatable, versioned builds ready for edge container runtimes (Podman / Docker / Kubernetes).
+
+---
+
+### Container Architecture
+
+| Container Name | Base Image / Context | Port Mapping | Purpose |
+|---|---|---|---|
+| `visionguard_backend` | `python:3.11-slim` (`./backend`) | `8000:8000` | REST API, AI Inference Engine, DB Seeding |
+| `visionguard_frontend` | `node:20-alpine` (`./frontend`) | `3000:3000` | React Dashboard UI & Live Monitoring Canvas |
+
+---
+
+### Step-by-Step Instructions: Standard Docker Compose
+
+If Docker Engine and Docker Compose are installed on your system:
+
+#### 1. Build and Start All Containers
 ```bash
+docker compose up --build
+# Or legacy syntax:
 docker-compose up --build
 ```
+
+#### 2. Run in Detached Mode (Background)
+```bash
+docker compose up -d --build
+```
+
+#### 3. View Real-Time Container Logs
+```bash
+docker compose logs -f
+```
+
+#### 4. Stop and Remove Containers
+```bash
+docker compose down
+```
+
+---
+
+### Standalone Docker Compose Installation Guide (Without Root/System Package Managers)
+
+If `docker compose` or `docker-compose` is missing on your system, you can download the standalone executable directly into your user profile or local project directory without requiring `sudo` or system package management.
+
+#### Option A: Install Docker Compose CLI Plugin (User Local Profile)
+
+```bash
+# 1. Create Docker CLI plugin directory
+mkdir -p ~/.docker/cli-plugins
+
+# 2. Download official Docker Compose binary (v2.39.1 for Linux x86_64)
+curl -SL https://github.com/docker/compose/releases/download/v2.39.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+
+# 3. Grant executable permissions
+chmod +x ~/.docker/cli-plugins/docker-compose
+
+# 4. Verify installation
+docker compose version
+```
+Now you can execute `docker compose up --build` anywhere on your machine.
+
+---
+
+#### Option B: Download Standalone Executable Directly into Project Directory
+
+If you only want Docker Compose binary inside this project folder:
+
+```bash
+# 1. Create local bin directory inside project
+mkdir -p ./bin
+
+# 2. Download standalone executable
+curl -SL https://github.com/docker/compose/releases/download/v2.39.1/docker-compose-linux-x86_64 -o ./bin/docker-compose
+
+# 3. Make executable
+chmod +x ./bin/docker-compose
+
+# 4. Verify version
+./bin/docker-compose version
+
+# 5. Build and launch Trinetra stack using local binary
+./bin/docker-compose up --build
+```
+
