@@ -1,6 +1,7 @@
 import React from 'react';
 import { Camera, AlertTriangle, Users, ShieldCheck, ArrowRight, Eye, Send, MoreVertical, Clock, AlertCircle } from 'lucide-react';
 import StationBlueprintMap from './StationBlueprintMap';
+import Button from '../common/Button';
 
 export default function CommandDashboard({
   onNavigateToFeed,
@@ -214,18 +215,24 @@ export default function CommandDashboard({
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <button
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      icon={Eye}
                       onClick={() => onNavigateToFeed(inc.cam)}
-                      className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs flex items-center gap-1 transition-all font-mono"
+                      className="min-w-[75px]"
                     >
-                      <Eye className="w-3.5 h-3.5 text-slate-600" /> Feed
-                    </button>
-                    <button
+                      Feed
+                    </Button>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      icon={Send}
                       onClick={() => onDispatchGuard(inc.id)}
-                      className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-xs flex items-center gap-1 shadow-sm font-mono"
+                      className="min-w-[95px]"
                     >
-                      <Send className="w-3.5 h-3.5" /> Dispatch
-                    </button>
+                      Dispatch
+                    </Button>
                   </div>
                 </div>
               </div>

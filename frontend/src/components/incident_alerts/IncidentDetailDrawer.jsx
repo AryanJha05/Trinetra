@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, AlertTriangle, Send, Camera } from 'lucide-react';
+import Button from '../common/Button';
 
 export default function IncidentDetailDrawer({ incident, onClose, onDispatch }) {
   useEffect(() => {
@@ -70,21 +71,26 @@ export default function IncidentDetailDrawer({ incident, onClose, onDispatch }) 
         </div>
 
         <div className="pt-6 border-t border-slate-100 space-y-3 font-mono">
-          <button
+          <Button
+            variant="primary"
+            size="lg"
+            icon={Send}
             onClick={() => {
               onDispatch(incident.id);
               onClose();
             }}
-            className="w-full py-3 bg-navy-900 hover:bg-slate-900 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-md transition-all font-heading"
+            className="w-full"
           >
-            <Send className="w-4 h-4 text-railway-mint" /> Dispatch RPF Quick Response Guard
-          </button>
-          <button
+            Dispatch RPF Quick Response Guard
+          </Button>
+          <Button
+            variant="secondary"
+            size="md"
             onClick={onClose}
-            className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-300 transition-colors"
+            className="w-full"
           >
             Close Panel
-          </button>
+          </Button>
         </div>
       </div>
     </>

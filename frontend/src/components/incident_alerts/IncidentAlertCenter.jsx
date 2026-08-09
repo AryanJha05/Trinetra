@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { AlertTriangle, Eye, Send, Filter } from 'lucide-react';
+import { AlertTriangle, Filter, CheckCircle, Clock, Eye, Send } from 'lucide-react';
 import IncidentDetailDrawer from './IncidentDetailDrawer';
+import Button from '../common/Button';
 
 export default function IncidentAlertCenter({ onDispatchGuard }) {
   const [selectedFilter, setSelectedFilter] = useState('ALL');
@@ -130,18 +131,30 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <span className="font-mono">Confidence: <strong className="text-slate-900">{inc.conf}</strong></span>
               <div className="flex items-center space-x-2 font-mono">
-                <button className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs flex items-center gap-1 transition-all">
-                  <Eye className="w-3.5 h-3.5 text-slate-600" /> Evidence
-                </button>
-                <button
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  icon={Eye}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedIncident(inc);
+                  }}
+                  className="min-w-[85px]"
+                >
+                  Evidence
+                </Button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  icon={Send}
                   onClick={(e) => {
                     e.stopPropagation();
                     onDispatchGuard(inc.id);
                   }}
-                  className="px-3.5 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-xs flex items-center gap-1 shadow-sm"
+                  className="min-w-[95px]"
                 >
-                  <Send className="w-3.5 h-3.5" /> Dispatch
-                </button>
+                  Dispatch
+                </Button>
               </div>
             </div>
           </div>

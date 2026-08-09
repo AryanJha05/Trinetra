@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import Button from './Button';
 import { AlertTriangle, Send } from 'lucide-react';
 
 export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident }) {
@@ -35,21 +36,24 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
 
   const footerActions = (
     <>
-      <button
-        type="button"
+      <Button
+        variant="secondary"
+        size="md"
         onClick={onClose}
-        className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl font-bold text-xs transition-colors font-mono"
+        className="min-w-[85px]"
       >
         Cancel
-      </button>
-      <button
+      </Button>
+      <Button
         type="submit"
         form="create-incident-form"
-        className="px-5 py-2 bg-navy-900 hover:bg-slate-900 text-white rounded-xl font-bold text-xs flex items-center space-x-2 transition-all shadow-md font-heading"
+        variant="primary"
+        size="md"
+        icon={Send}
+        className="min-w-[170px]"
       >
-        <Send className="w-3.5 h-3.5 text-railway-mint" />
-        <span>Submit & Dispatch Alert</span>
-      </button>
+        Submit & Dispatch
+      </Button>
     </>
   );
 
