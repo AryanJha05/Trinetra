@@ -119,12 +119,14 @@ export default function App() {
     <div className="min-h-screen bg-[#F4F4F0] text-slate-900 flex flex-col font-sans relative">
       {/* Fixed Floating Notification Toast Overlay (z-[2000]) */}
       {notificationToast && (
-        <div className="fixed top-20 right-6 z-[2000] max-w-md p-4 bg-slate-900 border border-emerald-500/50 text-emerald-400 rounded-2xl font-bold text-xs flex items-center justify-between space-x-4 shadow-2xl animate-slideInRight font-mono transition-all">
-          <div className="flex items-center space-x-2.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
-            <span className="truncate">{notificationToast}</span>
+        <div className="fixed top-20 right-6 z-[2000] max-w-lg bg-slate-900/85 backdrop-blur-md border border-emerald-500/40 text-emerald-300 rounded-2xl px-4 py-3 shadow-2xl animate-slideInRight font-mono transition-all overflow-hidden flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+            <span className="text-xs font-bold truncate text-slate-100">{notificationToast}</span>
           </div>
-          <span className="text-[10px] opacity-75 font-normal flex-shrink-0 bg-slate-800 px-2 py-1 rounded-md text-slate-300">Trinetra Logged</span>
+          <span className="text-[10px] font-semibold flex-shrink-0 bg-emerald-500/15 border border-emerald-500/30 px-2 py-1 rounded-lg text-emerald-400">
+            Trinetra Logged
+          </span>
         </div>
       )}
 
