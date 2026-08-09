@@ -5,6 +5,12 @@ frontend/dist/
 frontend/dist-ssr/
 *.lcov
 
+# Prompts & Documentation Scratchpads
+Prompt/
+prompts/
+Prompt
+prompts
+
 # Logs
 logs
 *.log
