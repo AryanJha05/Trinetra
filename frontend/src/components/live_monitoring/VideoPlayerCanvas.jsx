@@ -32,7 +32,7 @@ export default function VideoPlayerCanvas({ camera, privacyMasking, aiOverlaysEn
       ctx.stroke();
 
       // Commuters
-      const numPeople = (camera?.camera_id === 'CAM-NDLS-042' || camera?.status === 'ALERT') ? 6 : 3;
+      const numPeople = camera?.camera_id === 'CAM-202' ? 6 : 3;
       for (let i = 0; i < numPeople; i++) {
         const px = (canvas.width * 0.2) + (i * 50) + (Math.sin((tick + i * 20) * 0.03) * 15);
         const py = (canvas.height * 0.45) + (i * 25);
@@ -64,8 +64,8 @@ export default function VideoPlayerCanvas({ camera, privacyMasking, aiOverlaysEn
         }
       }
 
-      // Special Incident Bounding Box for Alert Cameras (Clean Red Solid Outline, NO NEON)
-      if ((camera?.camera_id === 'CAM-NDLS-042' || camera?.status === 'ALERT') && aiOverlaysEnabled) {
+      // Special Incident Bounding Box for CAM-202 (Clean Red Solid Outline, NO NEON)
+      if (camera?.camera_id === 'CAM-202' && aiOverlaysEnabled) {
         const ox = canvas.width * 0.58;
         const oy = canvas.height * 0.62;
         const ow = 45;
@@ -76,10 +76,10 @@ export default function VideoPlayerCanvas({ camera, privacyMasking, aiOverlaysEn
         ctx.strokeRect(ox, oy, ow, oh);
 
         ctx.fillStyle = '#DC2626';
-        ctx.fillRect(ox, oy - 20, 135, 20);
+        ctx.fillRect(ox, oy - 20, 130, 20);
         ctx.fillStyle = '#FFFFFF';
         ctx.font = 'bold 11px Inter, sans-serif';
-        ctx.fillText('Unattended Bag 96.0%', ox + 5, oy - 5);
+        ctx.fillText('Unattended Bag 96.4%', ox + 5, oy - 5);
       }
 
       // Telemetry Overlay

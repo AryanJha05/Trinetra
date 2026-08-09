@@ -4,9 +4,9 @@ import { Users, AlertTriangle, Clock, TrendingUp } from 'lucide-react';
 export default function CrowdIntelligence() {
   const platforms = [
     { id: 'Platform 1', pax: '1,240', density: '1.4 pax/m²', status: 'NORMAL', badge: 'bg-emerald-100 text-emerald-800 border-emerald-300' },
-    { id: 'Platform 2', pax: '2,850', density: '2.8 pax/m²', status: 'MEDIUM', badge: 'bg-amber-100 text-amber-800 border-amber-300', trend: '+18% flow' },
-    { id: 'Platform 3', pax: '3,890', density: '3.6 pax/m²', status: 'HIGH', badge: 'bg-orange-100 text-orange-800 border-orange-300', trend: '+28% flow' },
-    { id: 'Platform 4', pax: '4,650', density: '4.8 pax/m²', status: 'CRITICAL', badge: 'bg-red-100 text-red-800 border-red-300', trend: '+45% surge' },
+    { id: 'Platform 2', pax: '3,850', density: '3.8 pax/m²', status: 'SURGING / HIGH', badge: 'bg-red-100 text-red-800 border-red-300', trend: '+38% flow' },
+    { id: 'Platform 3', pax: '890', density: '0.9 pax/m²', status: 'NORMAL', badge: 'bg-emerald-100 text-emerald-800 border-emerald-300' },
+    { id: 'Platform 4', pax: '2,100', density: '2.3 pax/m²', status: 'MODERATE', badge: 'bg-amber-100 text-amber-800 border-amber-300' },
   ];
 
   const queues = [
