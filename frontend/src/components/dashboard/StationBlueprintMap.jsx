@@ -3,11 +3,11 @@ import { Camera, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function StationBlueprintMap({ onSelectCamera }) {
   const cameraNodes = [
-    { id: 'CAM-101', name: 'Concourse North Entrance', status: 'ACTIVE', x: 20, y: 30, pax: 140 },
-    { id: 'CAM-202', name: 'Platform 3 - Sector B', status: 'ALERT', x: 55, y: 45, pax: 380 },
-    { id: 'CAM-301', name: 'Platform 4 FOB Staircase', status: 'ACTIVE', x: 80, y: 35, pax: 210 },
-    { id: 'CAM-042', name: 'Maintenance Yard B', status: 'ALERT', x: 35, y: 75, pax: 15 },
-    { id: 'CAM-112', name: 'Waiting Area B', status: 'ACTIVE', x: 70, y: 70, pax: 95 },
+    { id: 'CAM-NDLS-001', name: 'Platform 1 Main Concourse', status: 'ACTIVE', x: 20, y: 30, pax: 140 },
+    { id: 'CAM-NDLS-002', name: 'Platform 2 North Staircase', status: 'ACTIVE', x: 55, y: 45, pax: 380 },
+    { id: 'CAM-NDLS-003', name: 'Entry Gate 1 Security', status: 'ACTIVE', x: 80, y: 35, pax: 210 },
+    { id: 'CAM-NDLS-004', name: 'Foot Over Bridge (FOB-1)', status: 'ACTIVE', x: 35, y: 75, pax: 85 },
+    { id: 'CAM-NDLS-042', name: 'Platform 4 - Sector B', status: 'ALERT', x: 70, y: 70, pax: 195 },
   ];
 
   return (

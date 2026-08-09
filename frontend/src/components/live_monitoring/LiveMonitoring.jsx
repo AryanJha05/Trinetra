@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import { Grid, ZoomIn, Eye, EyeOff } from 'lucide-react';
 import VideoPlayerCanvas from './VideoPlayerCanvas';
 
-export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, initialCameraId = 'CAM-202' }) {
+export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, initialCameraId = 'CAM-NDLS-042' }) {
   const [gridLayout, setGridLayout] = useState(4);
   const [aiOverlaysEnabled, setAiOverlaysEnabled] = useState(true);
   const [zoomLevel, setZoomLevel] = useState(1.0);
   const [activeCamId, setActiveCamId] = useState(initialCameraId);
 
   const cameras = [
-    { camera_id: 'CAM-202', location: 'Platform 3 - Sector B (Pillar 12)', zone: 'Platform 3', status: 'ALERT' },
-    { camera_id: 'CAM-101', location: 'Concourse North Entrance', zone: 'Concourse', status: 'ONLINE' },
-    { camera_id: 'CAM-301', location: 'Platform 4 East FOB Staircase', zone: 'Platform 4', status: 'ONLINE' },
-    { camera_id: 'CAM-042', location: 'Maintenance Yard Sector 4', zone: 'Restricted Yard', status: 'ALERT' },
-    { camera_id: 'CAM-112', location: 'Food Court & Waiting Area B', zone: 'Concourse', status: 'ONLINE' },
-    { camera_id: 'CAM-005', location: 'Escalator Bank A Main Hall', zone: 'Concourse', status: 'ONLINE' },
-    { camera_id: 'CAM-404', location: 'Tunnel Westway 2 Track Edge', zone: 'Track', status: 'ONLINE' },
-    { camera_id: 'CAM-200', location: 'Service Hall B Maintenance Depot', zone: 'Depot Yard', status: 'ONLINE' },
-    { camera_id: 'CAM-009', location: 'Exterior Ramp & Gate 2 Security', zone: 'Security', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-001', location: 'Platform 1 - Sector A (Main Concourse)', zone: 'Platform 1', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-002', location: 'Platform 2 - Sector B North Staircase', zone: 'Platform 2', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-003', location: 'Entry Gate 1 Main Security Counter', zone: 'Entry Gate', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-004', location: 'Foot Over Bridge (FOB-1 North)', zone: 'Foot Over Bridge', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-042', location: 'Platform 4 - Sector B (Pillar 12)', zone: 'Platform 4', status: 'ALERT' },
+    { camera_id: 'CAM-NDLS-012', location: 'Food Court & Waiting Area B', zone: 'Concourse', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-005', location: 'Escalator Bank A Main Hall', zone: 'Concourse', status: 'ONLINE' },
+    { camera_id: 'CAM-NDLS-008', location: 'Maintenance Yard B Sector 4', zone: 'Restricted Yard', status: 'ALERT' },
+    { camera_id: 'CAM-NDLS-009', location: 'Exterior Ramp & Gate 2 Security', zone: 'Security', status: 'ONLINE' },
   ];
 
   const displayedCameras = cameras.slice(0, gridLayout);
