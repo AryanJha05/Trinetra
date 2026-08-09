@@ -40,7 +40,7 @@ export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, init
             <button
               onClick={() => setGridLayout(4)}
               className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all ${
-                gridLayout === 4 ? 'bg-navy-900 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+                gridLayout === 4 ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <Grid className="w-3.5 h-3.5" /> 2x2 (4)
@@ -48,7 +48,7 @@ export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, init
             <button
               onClick={() => setGridLayout(9)}
               className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all ${
-                gridLayout === 9 ? 'bg-navy-900 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+                gridLayout === 9 ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <Grid className="w-3.5 h-3.5" /> 3x3 (9)
@@ -60,7 +60,7 @@ export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, init
             onClick={() => setAiOverlaysEnabled(!aiOverlaysEnabled)}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border shadow-sm ${
               aiOverlaysEnabled 
-                ? 'bg-navy-900 text-white border-navy-900' 
+                ? 'bg-slate-900 text-white border-slate-900' 
                 : 'bg-white text-slate-800 border-[#E4E4DF] hover:bg-slate-100'
             }`}
           >

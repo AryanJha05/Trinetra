@@ -36,7 +36,7 @@ export default function Modal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="bg-navy-900 text-white px-6 py-4 flex items-center justify-between border-b border-navy-800">
+        <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center space-x-3">
             {Icon && <Icon className="w-5 h-5 text-railway-mint flex-shrink-0" />}
             <div>

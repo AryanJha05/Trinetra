@@ -50,7 +50,7 @@ export default function WorkforceSafety() {
             <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider font-heading">{stat.title}</span>
             <div className="text-3xl font-extrabold text-slate-900 font-mono">{stat.value}</div>
             <div className="w-full bg-[#ECECE7] h-1.5 rounded-full overflow-hidden">
-              <div className="h-full bg-navy-900 rounded-full" style={{ width: `${stat.progress}%` }}></div>
+              <div className="h-full bg-slate-900 rounded-full" style={{ width: `${stat.progress}%` }}></div>
             </div>
             <p className="text-[10px] text-slate-500 font-mono">{stat.sub}</p>
           </div>

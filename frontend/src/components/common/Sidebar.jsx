@@ -76,7 +76,7 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
 
                   {item.count && (
                     <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full ${
-                      isActive ? 'bg-navy-900 text-white' : 'bg-slate-100 text-slate-700 border border-[#E4E4DF]'
+                      isActive ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700 border border-[#E4E4DF]'
                     }`}>
                       {item.count}
                     </span>
@@ -104,7 +104,7 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
         <div className="pt-3 border-t border-[#E4E4DF] space-y-2">
           <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 font-mono">SIH 2026 Team</p>
           <div className="flex items-center space-x-3 p-2 bg-[#F4F4F0] rounded-xl border border-[#E4E4DF]">
-            <div className="w-8 h-8 rounded-full bg-navy-900 text-white font-bold text-xs flex items-center justify-center font-mono flex-shrink-0">
+            <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-xs flex items-center justify-center font-mono flex-shrink-0">
               SIH
             </div>
             <div className="text-xs">

@@ -85,7 +85,7 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
               onClick={() => setSelectedFilter(f)}
               className={`px-3.5 py-1.5 rounded-lg font-bold transition-all ${
                 selectedFilter === f
-                  ? 'bg-navy-900 text-white shadow-sm'
+                  ? 'bg-slate-900 text-white shadow-sm'
                   : 'bg-white text-slate-700 border border-[#E4E4DF] hover:bg-slate-50'
               }`}
             >

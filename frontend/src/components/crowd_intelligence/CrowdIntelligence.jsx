@@ -26,7 +26,7 @@ export default function CrowdIntelligence() {
           </h2>
           <p className="text-xs text-slate-500 font-sans mt-0.5">Real-time station occupancy monitoring, flow trends, and queue bottleneck diagnostics</p>
         </div>
-        <div className="flex items-center space-x-2 bg-navy-900 text-white px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold shadow-sm">
+        <div className="flex items-center space-x-2 bg-slate-900 text-white px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold shadow-sm">
           <span className="w-2 h-2 rounded-full bg-railway-mint animate-pulse"></span>
           <span>Density Engine Active</span>
         </div>

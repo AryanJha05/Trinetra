@@ -34,7 +34,7 @@ export default function CommandDashboard({
               { day: 'Fri', h: 'h-22' },
             ].map((bar, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                <div className={`w-full ${bar.h} bg-navy-900 rounded-t-md`}></div>
+                <div className={`w-full ${bar.h} bg-slate-900 rounded-t-md`}></div>
                 <span className="text-[10px] font-semibold text-slate-600 font-mono">{bar.day}</span>
               </div>
             ))}
@@ -59,7 +59,7 @@ export default function CommandDashboard({
               <path 
                 d="M 10 50 A 40 40 0 0 1 87.2 35.3" 
                 fill="none" 
-                stroke="#0A192F" 
+                stroke="#0F172A" 
                 strokeWidth="9" 
                 strokeLinecap="round" 
               />
@@ -68,7 +68,7 @@ export default function CommandDashboard({
               <span className="text-3xl font-extrabold text-slate-900 leading-none font-mono">88%</span>
             </div>
           </div>
-          <p className="text-xs font-bold text-slate-700 group-hover:text-navy-900 font-sans flex items-center gap-1">
+          <p className="text-xs font-bold text-slate-700 group-hover:text-slate-900 font-sans flex items-center gap-1">
             Station Safety Score Index <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function CommandDashboard({
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 font-heading">
-            <Users className="w-4 h-4 text-navy-900" /> Live Platform Crowd Status Overview
+            <Users className="w-4 h-4 text-slate-900" /> Live Platform Crowd Status Overview
           </h3>
           <button
             onClick={() => onNavigateToCrowd && onNavigateToCrowd()}

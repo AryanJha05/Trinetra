@@ -78,7 +78,7 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
             placeholder="e.g. Unattended Suitcase on FOB Staircase"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full bg-white border border-[#E4E4DF] rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-navy-900 shadow-sm"
+            className="w-full bg-white border border-[#E4E4DF] rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-slate-900 shadow-sm"
           />
         </div>
 
@@ -162,7 +162,7 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
             placeholder="Provide context for RPF field dispatch team..."
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            className="w-full bg-white border border-[#E4E4DF] rounded-xl px-3.5 py-2 text-slate-900 focus:outline-none focus:border-navy-900 shadow-sm"
+            className="w-full bg-white border border-[#E4E4DF] rounded-xl px-3.5 py-2 text-slate-900 focus:outline-none focus:border-slate-900 shadow-sm"
           />
         </div>
       </form>

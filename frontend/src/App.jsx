@@ -116,7 +116,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col font-sans relative">
+    <div className="min-h-screen bg-[#F4F4F0] text-slate-900 flex flex-col font-sans relative">
       {/* Fixed Floating Notification Toast Overlay (z-[2000]) */}
       {notificationToast && (
         <div className="fixed top-20 right-6 z-[2000] max-w-md p-4 bg-slate-900 border border-emerald-500/50 text-emerald-400 rounded-2xl font-bold text-xs flex items-center justify-between space-x-4 shadow-2xl animate-bounce font-mono">
@@ -150,7 +150,7 @@ export default function App() {
       />
 
       {/* Main Workspace Container */}
-      <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-navy-950 overflow-y-auto transition-all">
+      <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-[#F4F4F0] overflow-y-auto transition-all">
         {activeTab === 'dashboard' && (
           <CommandDashboard
             onNavigateToFeed={handleNavigateToFeed}
@@ -187,40 +187,40 @@ export default function App() {
         {activeTab === 'audit_logs' && <AuditLogsView />}
 
         {activeTab === 'settings' && (
-          <div className="p-8 text-slate-300 space-y-6 max-w-4xl">
+          <div className="p-8 text-slate-800 space-y-6 max-w-4xl">
             <div>
-              <h2 className="text-xl font-bold text-white mb-1 font-heading">System Settings & Platform Credits</h2>
-              <p className="text-xs text-slate-400 font-mono">Trinetra Platform Config v1.0.0 · Model: YOLOv11x / ByteTrack / VideoMAE</p>
+              <h2 className="text-xl font-bold text-slate-900 mb-1 font-heading">System Settings & Platform Credits</h2>
+              <p className="text-xs text-slate-500 font-mono">Trinetra Platform Config v1.0.0 · Model: YOLOv11x / ByteTrack / VideoMAE</p>
             </div>
 
             {/* Platform Control Settings Panel */}
-            <div className="bg-navy-900 border border-[#E4E4DF]/20 rounded-2xl p-6 space-y-4 shadow-lg text-xs font-mono">
-              <h3 className="text-sm font-bold text-white font-heading border-b border-slate-700 pb-3">AI Vision Model Configurations</h3>
+            <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-4 shadow-sm text-xs font-mono">
+              <h3 className="text-sm font-bold text-slate-900 font-heading border-b border-slate-200 pb-3">AI Vision Model Configurations</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <span>AI Inference Precision</span>
-                  <span className="text-railway-mint font-bold">FP16 TensorRT</span>
+                  <span className="text-blue-600 font-bold">FP16 TensorRT</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <span>ByteTrack Overlap Threshold</span>
-                  <span className="text-railway-mint font-bold">0.65 IoU</span>
+                  <span className="text-blue-600 font-bold">0.65 IoU</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <span>DPDP Act Privacy Mode</span>
-                  <span className="text-emerald-400 font-bold">{privacyMasking ? 'ENABLED (Face Masking Active)' : 'DISABLED'}</span>
+                  <span className="text-emerald-600 font-bold">{privacyMasking ? 'ENABLED (Face Masking Active)' : 'DISABLED'}</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <span>RPF Alert Auto-Dispatch</span>
-                  <span className="text-railway-mint font-bold">AUTOMATIC (&gt;90% Conf)</span>
+                  <span className="text-blue-600 font-bold">AUTOMATIC (&gt;90% Conf)</span>
                 </div>
               </div>
             </div>
 
             {/* Official SIH 2026 Team Section */}
-            <div className="bg-navy-900 border border-[#E4E4DF]/20 rounded-2xl p-6 space-y-4 shadow-lg">
-              <div className="flex items-center justify-between border-b border-slate-700/50 pb-3">
-                <h3 className="text-sm font-bold text-white font-heading">Smart India Hackathon 2026 — Official Team Trinetra (SIH1349)</h3>
-                <span className="text-[10px] font-bold font-mono bg-railway-mint/20 text-railway-mint border border-railway-mint/40 px-2.5 py-1 rounded-md">
+            <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-4 shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">Smart India Hackathon 2026 — Official Team Trinetra (SIH1349)</h3>
+                <span className="text-[10px] font-bold font-mono bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-md">
                   Ministry of Railways
                 </span>
               </div>

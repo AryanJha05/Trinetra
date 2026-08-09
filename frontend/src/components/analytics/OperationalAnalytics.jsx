@@ -12,7 +12,7 @@ export default function OperationalAnalytics() {
           </h2>
           <p className="text-xs text-slate-500 font-sans mt-0.5">Aggregated metrics, RPF response KPIs, and DPDP audit compliance reports</p>
         </div>
-        <button className="px-4 py-2.5 bg-navy-900 hover:bg-slate-900 text-white rounded-xl text-xs font-bold font-mono flex items-center gap-2 shadow-sm">
+        <button className="px-4 py-2.5 bg-slate-900 hover:bg-black text-white rounded-xl text-xs font-bold font-mono flex items-center gap-2 shadow-sm">
           <Download className="w-4 h-4 text-railway-mint" /> Export PDF Operational Report
         </button>
       </div>
