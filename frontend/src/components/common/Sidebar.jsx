@@ -44,26 +44,13 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
         }`}
       >
         <div className="space-y-5">
-          {/* Official TRINETRA Brand Header with Integrated Logo */}
-          <div className="pb-3 border-b border-[#E4E4DF] space-y-2">
-            <div className="flex items-center space-x-3">
-              <img
-                src={trinetraLogo}
-                alt="TRINETRA Official Logo"
-                className="h-11 w-auto max-w-[50px] object-contain flex-shrink-0"
-              />
-              <div>
-                <h1 className="font-extrabold text-base text-slate-900 leading-tight font-heading tracking-tight">
-                  TRINETRA
-                </h1>
-                <span className="inline-block text-[9px] font-extrabold text-navy-900 bg-slate-100 px-1.5 py-0.5 rounded font-mono uppercase tracking-wider">
-                  Indian Railways AI
-                </span>
-              </div>
-            </div>
-            <p className="text-[10px] font-semibold text-slate-500 font-sans leading-tight">
-              Intelligent CCTV Surveillance & Safety Platform
-            </p>
+          {/* Official TRINETRA Brand Header - Full Area Logo Display */}
+          <div className="pb-3 border-b border-[#E4E4DF] flex items-center justify-center px-1">
+            <img
+              src={trinetraLogo}
+              alt="TRINETRA Official Logo"
+              className="w-full max-h-16 object-contain"
+            />
           </div>
 
           {/* Primary Navigation Menu */}
