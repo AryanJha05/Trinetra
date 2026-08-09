@@ -36,18 +36,20 @@ export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, init
         {/* View Controls & Toggles */}
         <div className="flex items-center space-x-3 flex-wrap gap-y-2">
           {/* Grid Layout Toggle */}
-          <div className="flex items-center bg-[#F4F4F0] border border-[#E4E4DF] rounded-xl p-1">
+          <div className="flex items-center bg-white border border-[#E4E4DF] rounded-xl p-1 shadow-sm">
             <button
               onClick={() => setGridLayout(4)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1 transition-all ${gridLayout === 4 ? 'bg-[#18181B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
-                }`}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all ${
+                gridLayout === 4 ? 'bg-navy-900 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+              }`}
             >
               <Grid className="w-3.5 h-3.5" /> 2x2 (4)
             </button>
             <button
               onClick={() => setGridLayout(9)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1 transition-all ${gridLayout === 9 ? 'bg-[#18181B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
-                }`}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all ${
+                gridLayout === 9 ? 'bg-navy-900 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+              }`}
             >
               <Grid className="w-3.5 h-3.5" /> 3x3 (9)
             </button>
@@ -56,8 +58,11 @@ export default function LiveMonitoring({ privacyMasking, setPrivacyMasking, init
           {/* AI Overlays Toggle */}
           <button
             onClick={() => setAiOverlaysEnabled(!aiOverlaysEnabled)}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${aiOverlaysEnabled ? 'bg-[#18181B] text-white border-[#18181B]' : 'bg-white text-slate-700 border-[#E4E4DF]'
-              }`}
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border shadow-sm ${
+              aiOverlaysEnabled 
+                ? 'bg-navy-900 text-white border-navy-900' 
+                : 'bg-white text-slate-800 border-[#E4E4DF] hover:bg-slate-100'
+            }`}
           >
             Detection Overlays: <strong>{aiOverlaysEnabled ? 'ON' : 'OFF'}</strong>
           </button>

@@ -26,14 +26,14 @@ export default function Button({
     lg: 'h-11 px-5 text-xs md:text-sm gap-2.5',
   };
 
-  // Color variants matching Indian Railways Deep Navy design system
+  // Explicit high-contrast color variants
   const variantClasses = {
-    primary: 'bg-navy-900 hover:bg-[#06101E] text-white shadow-sm border border-transparent',
-    secondary: 'bg-slate-200 hover:bg-slate-300 text-slate-800 border border-transparent',
-    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm border border-transparent',
-    success: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm border border-transparent',
-    outline: 'bg-white hover:bg-slate-50 text-slate-700 border border-[#E4E4DF] shadow-sm',
-    ghost: 'bg-transparent hover:bg-slate-200/60 text-slate-700 border border-transparent',
+    primary: 'bg-navy-900 hover:bg-navy-950 text-white shadow-sm border border-navy-900',
+    secondary: 'bg-slate-200 hover:bg-slate-300 text-slate-900 border border-slate-300',
+    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm border border-red-600',
+    success: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm border border-emerald-600',
+    outline: 'bg-white hover:bg-slate-100 text-slate-800 border border-[#E4E4DF] shadow-sm',
+    ghost: 'bg-transparent hover:bg-slate-200/60 text-slate-800 border border-transparent',
   };
 
   return (
