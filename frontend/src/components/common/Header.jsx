@@ -89,9 +89,9 @@ export default function Header({
             className="w-full bg-white border border-[#E4E4DF] rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-400 shadow-sm font-sans"
           />
 
-          {/* Autocomplete Floating Dropdown */}
+          {/* Autocomplete Floating Dropdown (z-[500]) */}
           {isSearchOpen && searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#E4E4DF] rounded-2xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-100 max-h-80 overflow-y-auto">
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#E4E4DF] rounded-2xl shadow-2xl overflow-hidden z-[500] divide-y divide-slate-100 max-h-80 overflow-y-auto">
               <div className="p-2 bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">
                 Found {searchResults.length} System Records
               </div>

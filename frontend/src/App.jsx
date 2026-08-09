@@ -117,6 +117,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col font-sans relative">
+      {/* Fixed Floating Notification Toast Overlay (z-[2000]) */}
+      {notificationToast && (
+        <div className="fixed top-20 right-6 z-[2000] max-w-md p-4 bg-slate-900 border border-emerald-500/50 text-emerald-400 rounded-2xl font-bold text-xs flex items-center justify-between space-x-4 shadow-2xl animate-bounce font-mono">
+          <span>✅ {notificationToast}</span>
+          <span className="text-[10px] opacity-75 font-normal flex-shrink-0">Trinetra Logged</span>
+        </div>
+      )}
+
       {/* Fixed Top Header */}
       <Header
         selectedStation={selectedStation}
@@ -143,14 +151,6 @@ export default function App() {
 
       {/* Main Workspace Container */}
       <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-navy-950 overflow-y-auto transition-all">
-        {/* Dispatch & Telemetry Notification Banner */}
-        {notificationToast && (
-          <div className="m-6 mb-0 p-4 bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 rounded-xl font-bold text-xs flex items-center justify-between shadow-xl animate-bounce">
-            <span>✅ {notificationToast}</span>
-            <span className="text-[10px] font-mono opacity-75 font-normal">Trinetra Live Telemetry Logged</span>
-          </div>
-        )}
-
         {activeTab === 'dashboard' && (
           <CommandDashboard
             onNavigateToFeed={handleNavigateToFeed}
