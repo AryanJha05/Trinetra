@@ -109,10 +109,10 @@ export default function App() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono">
                 <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Aryan Jha</p>
+                  <p className="text-sm font-bold text-white">Mahipal</p>
                 </div>
                 <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Mahipal</p>
+                  <p className="text-sm font-bold text-white">Aryan Jha</p>
                 </div>
                 <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
                   <p className="text-sm font-bold text-white">Sandeep</p>

@@ -14,8 +14,8 @@
 
 | Member Name | Role & System Responsibility |
 |---|---|
-| **Aryan Jha** | **Team Lead** · AI Architecture, Full-Stack & System Integration |
-| **Mahipal** | AI Computer Vision Specialist (YOLOv11 & ByteTrack Pipeline) |
+| **Mahipal** | **Team Lead** · AI Computer Vision Specialist (YOLOv11 & ByteTrack Pipeline) |
+| **Aryan Jha** | AI Architecture, Full-Stack & System Integration |
 | **Sandeep** | Backend Systems & REST API Infrastructure Engineer |
 | **Nikita** | Frontend UI/UX Architect & Control Room Interface Lead |
 | **Aastha** | Safety Compliance & Design Tokens Specialist |
