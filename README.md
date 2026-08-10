@@ -121,10 +121,10 @@ npm run dev
 
 ### Container Architecture
 
-| Container Name | Base Image / Context | Port Mapping | Purpose |
+| Container Name | Base Image / Build Stage | Host : Container Port | Purpose |
 |---|---|---|---|
-| `visionguard_backend` | `python:3.11-slim` (`./backend`) | `8000:8000` | REST API, AI Inference Engine, DB Seeding |
-| `visionguard_frontend` | `node:20-alpine` (`./frontend`) | `3000:3000` | React Dashboard UI & Live Monitoring Canvas |
+| `visionguard_backend` | `python:3.11-slim` (with `libgl1` & `libglib2.0`) | `8000 : 8000` | FastAPI REST API, AI Inference Engine, DB Seeding |
+| `visionguard_frontend` | Multi-Stage (`node:22-alpine` ➔ `nginx:alpine`) | `3000 : 80` | Production Nginx Web Server serving compiled React UI |
 
 ---
 

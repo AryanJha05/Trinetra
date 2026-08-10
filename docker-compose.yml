@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     build:
@@ -19,7 +17,7 @@ services:
       dockerfile: Dockerfile
     container_name: visionguard_frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend
     restart: always
