@@ -12,7 +12,7 @@ def seed_database():
         db.close()
         return
 
-    print("Seeding VisionGuard AI database with realistic Indian Railways telemetry...")
+    print("Seeding Trinetra database with realistic CCTV telemetry...")
 
     # 1. Cameras
     cameras = [
@@ -121,12 +121,12 @@ def seed_database():
 
     # 4. Workers
     workers = [
-        Worker(worker_id="EMP-8472", name="Aryan Jha", role="Signal Technician", zone="Track A - Sector 4", activity="Signal Calibration", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
-        Worker(worker_id="EMP-9102", name="Mahipal", role="Track Maintenance", zone="Platform 3 - North", activity="Track Welding", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
-        Worker(worker_id="EMP-3341", name="Sandeep", role="Electrical Tech", zone="Depot Yard B", activity="Switch Gear Check", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
-        Worker(worker_id="EMP-5529", name="Nikita", role="Track Worker", zone="Track A - Sector 5", activity="Rail Inspection", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
-        Worker(worker_id="EMP-4902", name="Aastha", role="Safety Inspector", zone="Sector 3 Alpha", activity="PPE Inspection", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
-        Worker(worker_id="EMP-6120", name="Smurtirani", role="Control Inspector", zone="Control Center Node", activity="Safety Verification", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now)
+        Worker(worker_id="EMP-8472", name="Aryan Jha", role="Security Operator", zone="Track A - Sector 4", activity="Signal Calibration", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
+        Worker(worker_id="EMP-9102", name="Mahipal", role="Security Operator", zone="Platform 3 - North", activity="Track Welding", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
+        Worker(worker_id="EMP-3341", name="Sandeep", role="Security Operator", zone="Depot Yard B", activity="Switch Gear Check", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
+        Worker(worker_id="EMP-5529", name="Nikita", role="Security Operator", zone="Track A - Sector 5", activity="Rail Inspection", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
+        Worker(worker_id="EMP-4902", name="Aastha", role="Security Operator", zone="Sector 3 Alpha", activity="PPE Inspection", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now),
+        Worker(worker_id="EMP-6120", name="Smurtirani", role="Security Operator", zone="Control Center Node", activity="Safety Verification", compliance_status="NORMAL", helmet_ok=True, vest_ok=True, boots_ok=True, eye_protection_ok=True, timestamp=now)
     ]
     for w in workers:
         db.add(w)

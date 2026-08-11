@@ -14,12 +14,12 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
   ];
 
   const workers = [
-    { id: 'EMP-8472', name: 'Aryan Jha', role: 'Senior Systems Lead', zone: 'Zone B - Maintenance Sector 4', activity: 'AI Telemetry Calibration', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-9102', name: 'Mahipal', role: 'Operations Manager', zone: 'Zone A - Main Concourse', activity: 'System Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-3341', name: 'Sandeep', role: 'AI Vision Engineer', zone: 'Zone D - Service Depot B', activity: 'Switch Gear Check', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-5529', name: 'Nikita', role: 'Safety Compliance Officer', zone: 'Zone C - Perimeter Gate', activity: 'Compliance Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-4902', name: 'Aastha', role: 'Risk Assessment Analyst', zone: 'Sector 3 Alpha', activity: 'PPE Audit', status: 'NORMAL', helmet: true, vest: true, boots: true },
-    { id: 'EMP-6120', name: 'Smurtirani', role: 'Control Room Supervisor', zone: 'Control Center Node', activity: 'Safety Verification', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-8472', name: 'Aryan Jha', role: 'Security Operator', zone: 'Zone B - Maintenance Sector 4', activity: 'AI Telemetry Calibration', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-9102', name: 'Mahipal', role: 'Security Operator', zone: 'Zone A - Main Concourse', activity: 'System Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-3341', name: 'Sandeep', role: 'Security Operator', zone: 'Zone D - Service Depot B', activity: 'Switch Gear Check', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-5529', name: 'Nikita', role: 'Security Operator', zone: 'Zone C - Perimeter Gate', activity: 'Compliance Inspection', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-4902', name: 'Aastha', role: 'Security Operator', zone: 'Sector 3 Alpha', activity: 'PPE Audit', status: 'NORMAL', helmet: true, vest: true, boots: true },
+    { id: 'EMP-6120', name: 'Smurtirani', role: 'Security Operator', zone: 'Control Center Node', activity: 'Safety Verification', status: 'NORMAL', helmet: true, vest: true, boots: true },
   ];
 
   const filteredWorkers = workers.filter(w =>

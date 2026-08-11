@@ -2,7 +2,7 @@ import random
 
 class CrowdAnalyzer:
     """
-    Crowd Density & Flow Analysis Module (VisionGuard AI Stub)
+    Crowd Density & Flow Analysis Module (Trinetra AI Stub)
     Calculates passenger density per m², heatmap spatial matrices, and risk scoring.
     """
     def __init__(self, critical_density_threshold=3.5):

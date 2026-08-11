@@ -273,29 +273,23 @@ export default function App() {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono">
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
                   <p className="text-sm font-bold text-white font-heading">Aryan Jha</p>
-                  <p className="text-[10px] text-teal-400">Senior Systems Architect</p>
                 </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
                   <p className="text-sm font-bold text-white font-heading">Mahipal</p>
-                  <p className="text-[10px] text-teal-400">Full Stack Lead</p>
                 </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
                   <p className="text-sm font-bold text-white font-heading">Sandeep</p>
-                  <p className="text-[10px] text-teal-400">AI Vision Engineer</p>
                 </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
                   <p className="text-sm font-bold text-white font-heading">Nikita</p>
-                  <p className="text-[10px] text-teal-400">Compliance & UI Lead</p>
                 </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
                   <p className="text-sm font-bold text-white font-heading">Aastha</p>
-                  <p className="text-[10px] text-teal-400">Risk Analytics Lead</p>
                 </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
                   <p className="text-sm font-bold text-white font-heading">Smurtirani</p>
-                  <p className="text-[10px] text-teal-400">UX & Operations Lead</p>
                 </div>
               </div>
             </div>

@@ -4,9 +4,9 @@ from app.ai_engine.ppe_detector import PpeDetector
 from app.ai_engine.privacy_masker import PrivacyMasker
 from app.ai_engine.decision_engine import DecisionEngine
 
-class VisionGuardPipeline:
+class TrinetraPipeline:
     """
-    Master Vision Intelligence Orchestrator (VisionGuard AI)
+    Master Vision Intelligence Orchestrator (Trinetra AI)
     Combines YOLOv11 detection, ByteTrack tracking, crowd density calculation,
     PPE safety compliance, privacy face masking, and decision intelligence.
     """
@@ -48,4 +48,4 @@ class VisionGuardPipeline:
             "verified_incidents": evaluated_incidents
         }
 
-vision_pipeline = VisionGuardPipeline()
+vision_pipeline = TrinetraPipeline()

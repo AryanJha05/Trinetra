@@ -1,6 +1,6 @@
 class PrivacyMasker:
     """
-    Dynamic Face Masking & Privacy Anonymization Engine (VisionGuard AI Privacy Safeguard)
+    Dynamic Face Masking & Privacy Anonymization Engine (Trinetra AI Privacy Safeguard)
     In production: Detects facial landmarks and applies real-time Gaussian pixelation or blur overlays
     to ensure compliance with Indian DPDP Act & international GDPR privacy standards before storing or exporting footage.
     """

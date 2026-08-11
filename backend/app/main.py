@@ -5,8 +5,8 @@ from app.db.seed_data import seed_database
 from app.api.endpoints import cameras, alerts, analytics, incidents, workers, audit
 
 app = FastAPI(
-    title="VisionGuard AI — CCTV Intelligence Platform (SIH1349)",
-    description="AI-powered CCTV Intelligence Platform for Indian Railways — Ministry of Railways",
+    title="Trinetra — CCTV Intelligence Platform (SIH1349)",
+    description="AI-powered CCTV Intelligence Platform — Smart India Hackathon SIH1349",
     version="1.0.0"
 )
 
@@ -36,9 +36,9 @@ app.include_router(audit.router, tags=["Privacy & Audit Security"])
 @app.get("/")
 def root():
     return {
-        "system": "VisionGuard AI — Railway CCTV Intelligence Engine",
+        "system": "Trinetra — CCTV Intelligence Engine",
         "status": "OPERATIONAL",
-        "organization": "Indian Railways / RPF Command Center",
+        "organization": "Security Operations Center",
         "sih_problem_id": "SIH1349",
         "api_docs": "/docs"
     }

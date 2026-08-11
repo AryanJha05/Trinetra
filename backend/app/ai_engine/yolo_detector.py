@@ -3,7 +3,7 @@ import random
 
 class YoloDetector:
     """
-    YOLOv11 Object Detection & ByteTrack Multi-Object Tracking Engine (VisionGuard AI Stub)
+    YOLOv11 Object Detection & ByteTrack Multi-Object Tracking Engine (Trinetra AI Stub)
     In production: Loads PyTorch weights `yolov11n.pt` / `yolov11x.pt` and ByteTrack tracker.
     """
     def __init__(self, confidence_threshold=0.75):

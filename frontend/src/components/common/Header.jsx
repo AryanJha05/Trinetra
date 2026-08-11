@@ -28,7 +28,7 @@ export default function Header({
     { type: 'incident', id: 'INC-2026-002', label: 'INC-2026-002 · Crowd Surge Alert', target: 'incident_alerts' },
     { type: 'incident', id: 'INC-2026-003', label: 'INC-2026-003 · Restricted Area Entry', target: 'incident_alerts' },
     { type: 'zone', id: 'Zone A', label: 'Zone A · Main Concourse', target: 'crowd_intelligence' },
-    { type: 'worker', id: 'Aryan Jha', label: 'Aryan Jha · Security Admin (EMP-8472)', target: 'workforce_safety' },
+    { type: 'worker', id: 'Aryan Jha', label: 'Aryan Jha · Security Operator (EMP-8472)', target: 'workforce_safety' },
   ];
 
   const searchResults = searchQuery.trim() === ''

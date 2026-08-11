@@ -3,11 +3,11 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: visionguard_backend
+    container_name: trinetra_backend
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=sqlite:///./visionguard.db
+      - DATABASE_URL=sqlite:///./trinetra.db
       - CWD=/app
     restart: always
 
@@ -15,7 +15,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: visionguard_frontend
+    container_name: trinetra_frontend
     ports:
       - "3000:80"
     depends_on:

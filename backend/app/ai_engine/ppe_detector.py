@@ -1,6 +1,6 @@
 class PpeDetector:
     """
-    Workforce Safety & PPE Compliance Classifier (VisionGuard AI Stub)
+    Workforce Safety & PPE Compliance Classifier (Trinetra AI Stub)
     In production: Uses fine-tuned YOLOv11-PPE + VideoMAE for action recognition (welding, bolting, idling).
     """
     def evaluate_worker(self, worker_id, camera_id):

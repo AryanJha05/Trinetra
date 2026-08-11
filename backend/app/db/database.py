@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from app.db.models import Base
 
 # Default SQLite database for instant development setup (compatible with PostgreSQL)
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./visionguard.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./trinetra.db")
 
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 

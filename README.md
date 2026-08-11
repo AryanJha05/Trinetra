@@ -1,202 +1,131 @@
-# Trinetra – Intelligent CCTV Surveillance & Safety Management Platform
-### *Transforming Existing Railway CCTV Networks into Real-Time Decision Support*
-**Smart India Hackathon 2026 · Problem Statement SIH1349 · Ministry of Railways**
+# TRINETRA – AI-Powered Intelligent CCTV Surveillance & Safety Management Platform
+### *Transforming Existing CCTV Infrastructure into Real-Time Proactive Intelligence*
+**Smart India Hackathon 2026 · Problem Statement SIH1349**
 
 ---
 
-## Overview
+## 📌 Overview
 
-**Trinetra** turns existing passive CCTV infrastructure across Indian Railways into an active, intelligent decision-support system without replacing camera hardware. Developed specifically to meet the security and operational demands of Indian Railways control rooms (such as RPF Command Centers), Trinetra continuously processes RTSP video streams to detect crowd surges, security incidents, perimeter breaches, and workforce safety compliance (PPE).
+**TRINETRA** transforms existing passive CCTV infrastructure into an active, real-time AI surveillance & decision-support system without requiring camera hardware replacement. Designed for high-density enterprise Security Operations Centers (SOC), TRINETRA continuously analyzes video streams to detect security anomalies, crowd surges, perimeter breaches, loitering threats, and workforce safety compliance (PPE) while upholding data privacy standards (DPDP Act).
 
 ---
 
 ## 👥 Smart India Hackathon 2026 — Team Trinetra
 
-| Member Name | Role & System Responsibility |
-|---|---|
-| **Mahipal** | **Team Lead** · N/A |
-| **Aryan Jha** | N/A |
-| **Sandeep** | N/A |
-| **Nikita** | N/A |
-| **Aastha** | N/A |
-| **Smurtirani** | N/A |
-
+| Team Member |
+|---|
+| **Mahipal** |
+| **Aryan Jha** |
+| **Sandeep** |
+| **Nikita** |
+| **Aastha** |
+| **Smurtirani** |
 
 ---
 
-## Key Features & Control Room Screens
+## 🚀 Enterprise Viewport & Core Modules
 
-### 1. 🚉 Railway Command Center Dashboard
-- **KPI Summary Cards**: Total Connected Cameras (`1,248`), Active Incidents (`4`), Crowd Risk Level (`Medium`), Station Safety Score (`88/100`).
-- **Live Station Architectural Blueprint**: Interactive map of New Delhi Central station with color-coded live camera status pins (`Active`, `Alert`, `Offline`).
-- **Live Alerts Feed**: Compact, scrollable feeds with one-click **"View Cam"** and **"Dispatch Guard"** actions.
-- **Activity & Incident Timeline**: 12-hour historical trend graph of station anomaly occurrences.
+TRINETRA features a mission-critical, desktop-class enterprise UI built with a zero-scroll 100vh application shell, fixed header/sidebar navigation, and modular internally scrolling workspaces.
 
-### 2. 📹 Live CCTV Monitoring
-- **Multi-Camera Grid**: Interactive 2x2 (4-view) and 3x3 (9-view) layout grid.
-- **Dynamic HTML5 Canvas Video Simulation**: Visualizes live camera streams with AI detection bounding boxes, confidence tags (`Unattended Bag 96.4%`), object tracking IDs, and detection statuses.
-- **DPDP Act Privacy Safeguard**: Real-time **Face Anonymization & Blur** toggle for Indian data privacy compliance.
-- **Camera Cluster Health Sidebar**: Monitoring system health across Concourse Nodes, Platform 1-3, Exterior Perimeter, and Maintenance Yards.
+### 1. 🎛️ Command Operations Center Dashboard
+- **KPI Telemetry Cards**: Connected Cameras (`1,248`), Active Incidents (`7`), Crowd Surge Level (`Elevated`), Site Safety Index (`88/100`).
+- **Interactive Spatial Blueprint**: High-density floorplan & site map with real-time status pins (`ONLINE`, `ALERT`, `OFFLINE`).
+- **Incident Triage Queue**: Scrollable priority feed with instant **"View Cam"** and **"Dispatch Guard"** quick actions.
+- **24-Hour Threat Trend Analytics**: Temporal chart visualizing anomaly frequency and peak risk windows.
 
-### 3. 👥 Crowd Intelligence & Density Analysis
-- **Platform Density Heatmap**: Floorplan overlay with spatial color gradient heatmaps.
-- **Occupancy & Flow Telemetry**: Per-platform commuter readouts (`Platform 1: 1,240 pax`, `Platform 2: 3,850 pax Surging`).
-- **AI Congestion Prediction Engine**: Predictive bottleneck alerts (e.g. 15-minute advance surge warnings due to delayed train arrivals).
-- **Queue Wait-Time Monitoring**: Real-time passenger queue metrics for Ticketing Halls, Baggage Security Scanners, and Foot Overbridges.
+### 2. 📹 Live CCTV Monitoring Matrix
+- **Configurable Camera Grid**: Single, 2x2 (4-view), 3x3 (9-view), and 4x4 (16-view) operational layouts.
+- **HTML5 Canvas AI Overlays**: Dynamic bounding box visualization, confidence indicators, and multi-object tracking IDs.
+- **DPDP Act Privacy Safeguard**: One-click **Gaussian Face Anonymization & Privacy Blur** toggle for privacy compliance.
+- **Node Telemetry Sidebar**: Live feed health metrics across concourse nodes, perimeter gates, and maintenance yards.
+
+### 3. 👥 Crowd Intelligence & Flow Density
+- **Spatial Heatmap Overlay**: Live congestion density maps highlighting commuter and crowd accumulation zones.
+- **Predictive Bottleneck Engine**: Advance notifications for overcrowding before threshold saturation occurs.
+- **Queue Wait-Time Analytics**: Real-time passenger queue metering at ticketing halls, baggage scanners, and FOB access points.
 
 ### 4. 🚨 Smart Incident Alert Center
-- **Triage & Filterable Alert Feed**: Incident cards categorized by priority (`CRITICAL`, `WARNING`, `NOTICE`, `RESOLVED`).
-- **Detailed AI Snapshot Evidence Drawer**: High-res evidence thumbnail, event timeline, AI confidence metrics, and quick action protocol (`Dispatch RPF Quick Response Guard`).
+- **Prioritized Alert Triage**: Filterable operational queue (`CRITICAL`, `WARNING`, `NOTICE`, `RESOLVED`).
+- **AI Snapshot Evidence Drawer**: Detailed incident breakdown, confidence scoring, evidence frame snapshots, and guard response tracking.
 
 ### 5. 👷 Workforce Safety & PPE Compliance
-- **PPE Compliance Metrics**: Circular progress gauges tracking Overall Compliance (`94%`), Hardhats (`98%`), Safety Vests (`91%`), Boots (`96%`), and Eye Protection (`82%`).
-- **Worker Activity & PPE Log**: Searchable table tracking maintenance staff roles, assigned zones, and safety compliance status.
-- **Active Track-Side Maintenance Monitor**: Video feeds showing live track welding and signal maintenance teams with AI status overlays.
+- **PPE Detection Suite**: Automated AI monitoring for Hardhats, High-Visibility Vests, Safety Boots, and Eye Protection.
+- **Personnel Safety Log**: Real-time compliance tracking and zone activity inspection.
 
-### 6. 🔒 Privacy & RBAC Audit Logs
-- **Immutable Security Log**: Audit trail recording all access actions, privacy mask toggles, and guard dispatch events.
+### 6. 🧠 Explainable AI (XAI) Risk Assessment Engine
+- **Multi-Factor Threat Indexing**: Dynamic risk scoring combining spatial density, anomaly velocity, and perimeter proximity.
+- **Transparent Decision Auditing**: Step-by-step breakdown of AI confidence factors for security operator validation.
+
+### 7. 🔒 Security & RBAC Audit Logs
+- **Immutable Security Trail**: Comprehensive logs recording operator actions, privacy toggles, and incident escalations.
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 | Layer | Technology |
 |---|---|
-| **Frontend** | React.js (v18), Vite, Tailwind CSS, Lucide Icons, HTML5 Canvas |
-| **Backend** | FastAPI (Python 3.11), Pydantic v2, SQLAlchemy ORM |
-| **Database** | PostgreSQL / SQLite (with WAL mode & timestamp indexes) |
-| **AI / ML Layer** | YOLOv11 (Object Detection), ByteTrack (Multi-Object Tracking), OpenCV, PyTorch, VideoMAE |
-| **Deployment** | Docker & Docker Compose |
+| **Frontend UI** | React 18, Vite, Tailwind CSS, HTML5 Canvas, Lucide Icons |
+| **Backend API** | FastAPI (Python 3.11), Pydantic v2, SQLAlchemy ORM |
+| **Database** | PostgreSQL / SQLite (with WAL mode & indexed event logs) |
+| **Computer Vision** | YOLOv11 (Object Detection), ByteTrack (Multi-Object Tracking), OpenCV, PyTorch |
+| **Deployment** | Docker & Docker Compose (Multi-stage Nginx + Python runtime) |
 
 ---
 
-## REST API Surface
+## 🔌 REST API Surface
 
 | Endpoint | Method | Description |
 |---|---|---|
-| `GET /cameras` | GET | List all cameras, live status, and stream metadata |
-| `GET /live-feed` | GET | Stream active camera feed telemetry and AI bounding boxes |
-| `GET /alerts` | GET | List active and historical alerts (filterable by priority/status) |
-| `GET /analytics` | GET | Retrieve aggregated crowd risk, safety score, and timeline KPIs |
-| `POST /incident` | POST | Register new AI or manual incident |
-| `POST /notify` | POST | Route alert dispatch notification to assigned RPF team |
-| `GET /workers` | GET | Fetch worker safety compliance records and zone activities |
-| `GET /audit-logs` | GET | Retrieve privacy anonymization and security audit trail |
+| `GET /cameras` | GET | Retrieve connected cameras, status, and RTSP stream metadata |
+| `GET /live-feed` | GET | Stream real-time camera telemetry and AI bounding box overlays |
+| `GET /alerts` | GET | Fetch active and historical security alerts |
+| `GET /analytics` | GET | Retrieve aggregated crowd risk, safety scores, and timeline KPIs |
+| `POST /incident` | POST | Register manual or automated AI security incidents |
+| `POST /notify` | POST | Trigger quick-response guard dispatch protocols |
+| `GET /workers` | GET | Fetch workforce safety compliance logs and zone activity |
+| `GET /audit-logs` | GET | Retrieve system audit trail and privacy compliance records |
 
 ---
 
-## Quickstart Instructions
+## 💻 Quickstart Guide
 
-### Local Development Setup
-
-#### 1. Run Backend Service (FastAPI)
+### 1. Backend Service (FastAPI)
 ```bash
 cd backend
 pip install -r requirements.txt
 python -m app.db.seed_data
 uvicorn app.main:app --reload --port 8000
 ```
-*API Swagger Documentation available at `http://localhost:8000/docs`*
+*Interactive Swagger API documentation available at `http://localhost:8000/docs`*
 
-#### 2. Run Frontend Dashboard (React + Vite)
+### 2. Frontend Dashboard (React + Vite)
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*Access control room interface at `http://localhost:3000`*
+*Access Security Operations Center interface at `http://localhost:3000`*
 
 ---
 
-## 🐳 Docker Deployment & Containerization Guide
+## 🐳 Docker Deployment & Containerization
 
-### Why Use Docker for Trinetra?
+TRINETRA is fully containerized for seamless edge deployment in Security Operations Centers.
 
-1. **Zero-Dependency Isolation**: Bundles complex Python AI vision runtime libraries (OpenCV, PyTorch, C-level system dependencies like `libgl1`), FastAPI backend, and React/Vite frontend into self-contained containers.
-2. **Environment Parity**: Eliminates *"works on my machine"* issues by matching runtime environments across local dev setups, staging servers, and edge nodes deployed in RPF Command Centers.
-3. **One-Command Orchestration**: Launches both backend (`:8000`) and frontend (`:3000`) simultaneously with automated inter-container networking and restart policies.
-4. **Production Readiness**: Provides repeatable, versioned builds ready for edge container runtimes (Podman / Docker / Kubernetes).
-
----
-
-### Container Architecture
-
-| Container Name | Base Image / Build Stage | Host : Container Port | Purpose |
-|---|---|---|---|
-| `visionguard_backend` | `python:3.11-slim` (with `libgl1` & `libglib2.0`) | `8000 : 8000` | FastAPI REST API, AI Inference Engine, DB Seeding |
-| `visionguard_frontend` | Multi-Stage (`node:22-alpine` ➔ `nginx:alpine`) | `3000 : 80` | Production Nginx Web Server serving compiled React UI |
-
----
-
-### Step-by-Step Instructions: Standard Docker Compose
-
-If Docker Engine and Docker Compose are installed on your system:
-
-#### 1. Build and Start All Containers
+### Launch Stack via Docker Compose
 ```bash
+# Build and run containers in foreground
 docker compose up --build
-# Or legacy syntax:
-docker-compose up --build
-```
 
-#### 2. Run in Detached Mode (Background)
-```bash
+# Run in background (detached mode)
 docker compose up -d --build
-```
 
-#### 3. View Real-Time Container Logs
-```bash
-docker compose logs -f
-```
-
-#### 4. Stop and Remove Containers
-```bash
+# Stop stack
 docker compose down
 ```
 
 ---
 
-### Standalone Docker Compose Installation Guide (Without Root/System Package Managers)
-
-If `docker compose` or `docker-compose` is missing on your system, you can download the standalone executable directly into your user profile or local project directory without requiring `sudo` or system package management.
-
-#### Option A: Install Docker Compose CLI Plugin (User Local Profile)
-
-```bash
-# 1. Create Docker CLI plugin directory
-mkdir -p ~/.docker/cli-plugins
-
-# 2. Download official Docker Compose binary (v2.39.1 for Linux x86_64)
-curl -SL https://github.com/docker/compose/releases/download/v2.39.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-
-# 3. Grant executable permissions
-chmod +x ~/.docker/cli-plugins/docker-compose
-
-# 4. Verify installation
-docker compose version
-```
-Now you can execute `docker compose up --build` anywhere on your machine.
-
----
-
-#### Option B: Download Standalone Executable Directly into Project Directory
-
-If you only want Docker Compose binary inside this project folder:
-
-```bash
-# 1. Create local bin directory inside project
-mkdir -p ./bin
-
-# 2. Download standalone executable
-curl -SL https://github.com/docker/compose/releases/download/v2.39.1/docker-compose-linux-x86_64 -o ./bin/docker-compose
-
-# 3. Make executable
-chmod +x ./bin/docker-compose
-
-# 4. Verify version
-./bin/docker-compose version
-
-# 5. Build and launch Trinetra stack using local binary
-./bin/docker-compose up --build
-```
-
+## 📜 License
+Developed for **Smart India Hackathon 2026** (Problem Statement SIH1349).
