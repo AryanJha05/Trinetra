@@ -10,15 +10,13 @@ import {
   BarChart3,
   Lock,
   Settings,
-  ChevronsUpDown,
-  Eye
+  ChevronsUpDown
 } from 'lucide-react';
-import trinetraLogo from '../../assets/trinetra_logo.png';
 
 export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen }) {
   const menuGroups = [
     {
-      group: 'OVERVIEW',
+      group: 'MAIN',
       items: [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { id: 'live_monitoring', label: 'Live Monitoring', icon: Camera },
@@ -28,17 +26,22 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
     {
       group: 'OPERATIONS',
       items: [
-        { id: 'incident_alerts', label: 'Incident Management', icon: AlertTriangle, count: 7 },
+        { id: 'incident_alerts', label: 'Incidents', icon: AlertTriangle, count: 7 },
         { id: 'crowd_intelligence', label: 'Crowd Analytics', icon: Users },
         { id: 'workforce_safety', label: 'Workforce Safety', icon: HardHat },
         { id: 'crime_prevention', label: 'Threat Prevention', icon: ShieldAlert },
       ],
     },
     {
-      group: 'GOVERNANCE',
+      group: 'ANALYTICS',
       items: [
-        { id: 'analytics', label: 'Reports & Analytics', icon: BarChart3 },
+        { id: 'analytics', label: 'Reports', icon: BarChart3 },
         { id: 'audit_logs', label: 'Audit Logs', icon: Lock },
+      ],
+    },
+    {
+      group: 'SYSTEM',
+      items: [
         { id: 'settings', label: 'Settings', icon: Settings },
       ],
     },
@@ -53,7 +56,7 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
 
   return (
     <>
-      {/* Mobile Dark Backdrop Overlay */}
+      {/* Mobile Backdrop */}
       {mobileMenuOpen && (
         <div
           onClick={() => setMobileMenuOpen(false)}
@@ -63,33 +66,34 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
 
       {/* Fixed Navigation Sidebar (250px) */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-[100] w-[250px] bg-[#F8F9FA] text-[#111827] border-r border-[#E5E7EB] flex flex-col justify-between p-3.5 h-screen overflow-y-auto select-none transition-transform duration-200 ease-in-out ${mobileMenuOpen ? 'translate-x-0 shadow-xl' : '-translate-x-full md:translate-x-0'
-          }`}
+        className={`fixed top-0 left-0 bottom-0 z-[100] w-[250px] bg-[#F8F9FA] text-slate-900 border-r border-slate-200 flex flex-col justify-between p-4 h-screen overflow-y-auto select-none transition-transform duration-200 ease-in-out ${
+          mobileMenuOpen ? 'translate-x-0 shadow-xl' : '-translate-x-full md:translate-x-0'
+        }`}
       >
-        <div className="space-y-5">
-          {/* TRINETRA Brand Header */}
-          <div className="flex items-center space-x-2.5 px-2 pt-1 pb-2 border-b border-[#E5E7EB]">
-            <div className="w-8 h-8 rounded-lg bg-[#111827] text-white flex items-center justify-center font-black text-sm flex-shrink-0 shadow-xs">
+        <div className="space-y-6">
+          {/* TRINETRA Logo Header */}
+          <div className="flex items-center space-x-3 px-2 pt-1 pb-3 border-b border-slate-200">
+            <div className="w-8 h-8 rounded-md bg-slate-900 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-xs font-mono">
               T
             </div>
             <div className="min-w-0">
-              <h2 className="text-sm font-bold text-[#111827] font-heading tracking-tight leading-none">
+              <h2 className="text-sm font-bold text-slate-900 font-heading tracking-tight leading-none">
                 TRINETRA
               </h2>
-              <p className="text-[10px] text-slate-400 font-medium tracking-wide mt-0.5 truncate">
-                AI Surveillance Platform
+              <p className="text-[10px] text-slate-500 font-medium tracking-wide mt-1 truncate">
+                CCTV Surveillance SOC
               </p>
             </div>
           </div>
 
           {/* Grouped Navigation Menu */}
-          <nav className="space-y-4">
+          <nav className="space-y-5">
             {menuGroups.map((group, gIdx) => (
-              <div key={gIdx} className="space-y-1">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2 font-sans mb-1">
+              <div key={gIdx} className="space-y-1.5">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2 font-mono">
                   {group.group}
                 </p>
-                <div className="space-y-0.5">
+                <div className="space-y-1">
                   {group.items.map((item) => {
                     const Icon = item.icon;
                     const isActive = activeTab === item.id;
@@ -98,25 +102,28 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
                       <button
                         key={item.id}
                         onClick={() => handleTabClick(item.id)}
-                        className={`w-full flex items-center justify-between px-2.5 py-1.5 text-xs rounded-lg transition-all ${isActive
-                            ? 'bg-[#ECEEEF] text-[#111827] font-semibold border border-[#E2E4E6] shadow-2xs'
-                            : 'text-slate-600 hover:bg-[#F1F3F5] hover:text-[#111827] font-medium'
-                          }`}
+                        className={`w-full flex items-center justify-between px-3 py-2 text-xs rounded-md transition-all ${
+                          isActive
+                            ? 'bg-slate-200/80 text-slate-900 font-bold border border-slate-300 shadow-2xs'
+                            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium'
+                        }`}
                       >
-                        <div className="flex items-center space-x-2.5 min-w-0">
+                        <div className="flex items-center space-x-3 min-w-0">
                           <Icon
-                            className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-[#111827]' : 'text-slate-400'
-                              }`}
+                            className={`w-4 h-4 flex-shrink-0 ${
+                              isActive ? 'text-slate-900' : 'text-slate-500'
+                            }`}
                           />
                           <span className="truncate font-sans">{item.label}</span>
                         </div>
 
                         {item.count && (
                           <span
-                            className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0 ${isActive
-                                ? 'bg-[#111827] text-white'
-                                : 'bg-[#E2E8F0] text-slate-700'
-                              }`}
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded-full font-mono flex-shrink-0 ${
+                              isActive
+                                ? 'bg-slate-900 text-white'
+                                : 'bg-slate-200 text-slate-700'
+                            }`}
                           >
                             {item.count}
                           </span>
@@ -130,19 +137,19 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
           </nav>
         </div>
 
-        {/* User Profile Card (Reference Image Style) */}
-        <div className="pt-3 border-t border-[#E5E7EB]">
-          <div className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F1F3F5] cursor-pointer transition-colors">
+        {/* User Operator Profile Card */}
+        <div className="pt-3 border-t border-slate-200">
+          <div className="flex items-center justify-between p-2 rounded-md hover:bg-slate-100 cursor-pointer transition-colors">
             <div className="flex items-center space-x-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-full bg-[#111827] text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+              <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0 font-mono">
                 AJ
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-bold text-[#111827] truncate font-heading leading-tight">
+                <p className="text-xs font-bold text-slate-900 truncate font-heading leading-tight">
                   Aryan Jha
                 </p>
-                <p className="text-[10px] text-slate-400 truncate leading-none mt-0.5">
-                  Security Admin
+                <p className="text-[10px] text-slate-500 truncate leading-none mt-0.5 font-mono">
+                  Security Operator
                 </p>
               </div>
             </div>
@@ -153,4 +160,3 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
     </>
   );
 }
-

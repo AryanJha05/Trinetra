@@ -132,16 +132,16 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans relative">
-      {/* Notification Toast Overlay (z-[2000]) */}
+    <div className="h-screen max-h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 flex flex-col font-sans relative select-none">
+      {/* Fixed Floating Notification Toast Overlay (z-[2000]) */}
       {notificationToast && (
-        <div className="fixed top-16 right-6 z-[2000] max-w-md bg-[#111827] text-white border border-slate-700 rounded-lg px-4 py-3 shadow-lg animate-slideInRight font-sans transition-all overflow-hidden flex items-center justify-between gap-3">
+        <div className="fixed top-20 right-6 z-[2000] max-w-lg bg-slate-900/90 backdrop-blur-md border border-teal-500/50 text-teal-300 rounded-2xl px-4 py-3 shadow-2xl animate-slideInRight font-mono transition-all overflow-hidden flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0 flex-1">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
-            <span className="text-xs font-medium truncate text-slate-100">{notificationToast}</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse flex-shrink-0"></span>
+            <span className="text-xs font-bold truncate text-slate-100">{notificationToast}</span>
           </div>
-          <span className="text-[10px] font-bold flex-shrink-0 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded text-slate-300">
-            SYSTEM LOG
+          <span className="text-[10px] font-semibold flex-shrink-0 bg-teal-500/20 border border-teal-500/30 px-2 py-1 rounded-lg text-teal-300">
+            TRINETRA Log
           </span>
         </div>
       )}
@@ -171,7 +171,8 @@ export default function App() {
       />
 
       {/* Main Workspace Container */}
-      <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-[#F8FAFC] overflow-y-auto transition-all">
+      <main className="pl-0 md:pl-[250px] pt-[64px] h-screen max-h-screen overflow-hidden flex flex-col flex-1 bg-slate-50">
+        <div className="h-[calc(100vh-64px)] max-h-[calc(100vh-64px)] w-full overflow-hidden flex flex-col p-3.5 md:p-4">
         {activeTab === 'dashboard' && (
           <CommandDashboard
             deploymentEnv={deploymentEnv}
@@ -300,6 +301,7 @@ export default function App() {
             </div>
           </div>
         )}
+        </div>
       </main>
 
       {/* Interactive Log Event Modal */}

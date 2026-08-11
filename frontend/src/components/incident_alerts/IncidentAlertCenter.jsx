@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { AlertTriangle, Filter, CheckCircle, Clock, Eye, Send } from 'lucide-react';
+import { AlertTriangle, Filter, Eye, Send } from 'lucide-react';
 import IncidentDetailDrawer from './IncidentDetailDrawer';
 import Button from '../common/Button';
 
-export default function IncidentAlertCenter({ onDispatchGuard }) {
+export default function IncidentAlertCenter({ onDispatchGuard, incidents = [], setIncidents }) {
   const [selectedFilter, setSelectedFilter] = useState('ALL');
   const [selectedIncident, setSelectedIncident] = useState(null);
 
-  const incidents = [
+  const defaultIncidents = [
     {
       id: 'INC-2026-892',
       title: 'Unattended Object Detected in Public Zone',
@@ -62,31 +62,42 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
     }
   ];
 
+  const activeIncidentsList = incidents && incidents.length > 0 ? incidents : defaultIncidents;
+
   const filteredIncidents = selectedFilter === 'ALL'
-    ? incidents
-    : incidents.filter(i => i.severity === selectedFilter || i.status === selectedFilter);
+    ? activeIncidentsList
+    : activeIncidentsList.filter(i => i.severity === selectedFilter || i.status === selectedFilter);
 
   return (
-    <div className="p-4 md:p-6 space-y-6 font-sans text-[#111827] select-none">
-      {/* Header & Filter Chips */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs">
+    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+      {/* 1. Compact Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
         <div>
-          <h2 className="text-xl font-bold text-[#111827] tracking-tight flex items-center gap-2 font-heading">
-            <AlertTriangle className="w-5 h-5 text-red-600" />
-            Incident Alert Center
-          </h2>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">Real-time threat detection, AI verification, and guard dispatch queue</p>
+          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
+            <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
+            <span>OPERATIONS QUEUE</span>
+            <span>·</span>
+            <span>{activeIncidentsList.length} TOTAL LOGGED</span>
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+            Incident Management Center
+          </h1>
+          <p className="text-xs text-slate-600 mt-0.5">
+            Real-time threat triage, computer vision verification, and automated guard dispatch queue.
+          </p>
         </div>
 
-        <div className="flex items-center space-x-2 overflow-x-auto text-xs font-medium">
+        {/* Filter Pills */}
+        <div className="flex items-center space-x-1.5 overflow-x-auto text-xs font-medium">
           {['ALL', 'CRITICAL', 'WARNING', 'NOTICE', 'RESOLVED'].map((f) => (
             <button
               key={f}
               onClick={() => setSelectedFilter(f)}
-              className={`px-3.5 py-1.5 rounded-full font-semibold transition-all ${selectedFilter === f
-                  ? 'bg-[#111827] text-white shadow-2xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
+              className={`px-2.5 py-1 rounded-md font-semibold transition-all font-mono ${
+                selectedFilter === f
+                  ? 'bg-slate-900 text-white shadow-2xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
+              }`}
             >
               {f}
             </button>
@@ -94,40 +105,48 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
         </div>
       </div>
 
-      {/* Incidents Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* 2. Incidents Grid (Internal Container Scroll) */}
+      <div className="flex-1 overflow-y-auto pr-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredIncidents.map((inc) => (
           <div
             key={inc.id}
             onClick={() => setSelectedIncident(inc)}
-            className="bg-white text-[#111827] border border-[#E5E7EB] hover:border-slate-300 rounded-xl p-5 space-y-3 cursor-pointer transition-all shadow-2xs hover:shadow-xs"
+            className="bg-white text-slate-900 border border-slate-200 hover:border-slate-300 rounded-lg p-4 space-y-2.5 cursor-pointer transition-all shadow-2xs hover:shadow-xs"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 font-mono">
-                <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase ${inc.severity === 'CRITICAL'
-                    ? 'bg-red-50 text-red-600 border border-red-200'
-                    : inc.severity === 'WARNING'
-                      ? 'bg-amber-50 text-amber-600 border border-amber-200'
-                      : 'bg-slate-100 text-slate-700'
-                  }`}>
+                <span
+                  className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                    inc.severity === 'CRITICAL'
+                      ? 'bg-red-100 text-red-700 border border-red-200'
+                      : inc.severity === 'WARNING'
+                      ? 'bg-amber-100 text-amber-700 border border-amber-200'
+                      : 'bg-slate-100 text-slate-700 border border-slate-200'
+                  }`}
+                >
                   {inc.severity}
                 </span>
                 <span className="text-xs font-bold text-slate-500">{inc.id}</span>
               </div>
-              <span className="text-xs text-slate-400 font-medium">{inc.time}</span>
+              <span className="text-xs text-slate-500 font-mono">{inc.time}</span>
             </div>
 
-            <h3 className="text-base font-bold text-[#111827] font-heading leading-snug">
+            <h3 className="text-base font-bold text-slate-900 font-heading leading-snug">
               {inc.title}
             </h3>
-            <p className="text-xs text-slate-500 font-medium">LOCATION: <strong className="text-[#111827]">{inc.zone}</strong> · CAM: {inc.cam}</p>
+            <p className="text-xs text-slate-600">
+              LOCATION: <strong className="text-slate-900">{inc.zone}</strong> · CAM: <span className="font-mono">{inc.cam}</span>
+            </p>
 
-            <div className="p-3 bg-slate-50 border border-[#E5E7EB] rounded-lg text-xs text-slate-600 leading-relaxed">
-              <p className="line-clamp-2">{inc.details}</p>
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-600 leading-relaxed font-sans">
+              <p className="line-clamp-2">{inc.details || inc.desc}</p>
             </div>
 
-            <div className="pt-2.5 border-t border-[#F1F5F9] flex items-center justify-between text-xs text-slate-500">
-              <span className="font-medium text-[11px]">CONFIDENCE: <strong className="text-emerald-600 font-mono">{inc.conf}</strong></span>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span className="font-mono text-xs">
+                CONFIDENCE: <strong className="text-emerald-700">{inc.conf || '95.0%'}</strong>
+              </span>
               <div className="flex items-center space-x-2">
                 <Button
                   variant="secondary"
@@ -137,7 +156,7 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
                     e.stopPropagation();
                     setSelectedIncident(inc);
                   }}
-                  className="!h-7 !text-[10px]"
+                  className="!h-7 !px-2.5 !text-xs"
                 >
                   Evidence
                 </Button>
@@ -147,9 +166,9 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
                   icon={Send}
                   onClick={(e) => {
                     e.stopPropagation();
-                    onDispatchGuard(inc.id);
+                    if (onDispatchGuard) onDispatchGuard(inc.id);
                   }}
-                  className="!h-7 !text-[10px]"
+                  className="!h-7 !px-3 !text-xs"
                 >
                   Dispatch
                 </Button>
@@ -157,12 +176,13 @@ export default function IncidentAlertCenter({ onDispatchGuard }) {
             </div>
           </div>
         ))}
+        </div>
       </div>
 
       <IncidentDetailDrawer
         incident={selectedIncident}
         onClose={() => setSelectedIncident(null)}
-        onDispatch={(id) => onDispatchGuard(id)}
+        onDispatch={(id) => onDispatchGuard && onDispatchGuard(id)}
       />
     </div>
   );

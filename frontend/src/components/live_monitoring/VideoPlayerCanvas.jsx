@@ -107,7 +107,7 @@ export default function VideoPlayerCanvas({ camera, privacyMasking, aiOverlaysEn
   }, [camera, privacyMasking, aiOverlaysEnabled]);
 
   return (
-    <div className="relative w-full h-full bg-slate-950 rounded-xl overflow-hidden border border-[#E5E7EB]">
+    <div className="relative w-full h-full bg-slate-950 rounded-lg overflow-hidden border border-slate-200">
       <canvas
         ref={canvasRef}
         width={480}

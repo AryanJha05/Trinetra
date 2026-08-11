@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HardHat, ShieldCheck, Search, CheckCircle2, XCircle } from 'lucide-react';
+import DataTable from '../common/DataTable';
 
 export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,60 +29,71 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
   );
 
   return (
-    <div className="p-4 md:p-6 space-y-6 select-none font-sans text-[#111827]">
-      {/* Top Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs">
+    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+      {/* 1. Compact Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
         <div>
-          <div className="flex items-center space-x-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sans">
-              WORKFORCE SAFETY
-            </span>
+          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
+            <HardHat className="w-3.5 h-3.5 text-slate-800" />
+            <span>SAFETY & COMPLIANCE</span>
+            <span>·</span>
+            <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="text-xl md:text-2xl font-bold text-[#111827] font-heading tracking-tight mt-0.5">
-            Safety & PPE Compliance
+          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+            Workforce Safety & PPE Compliance
           </h1>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">Real-time safety compliance and tracking across active <strong className="text-[#111827]">{deploymentEnv}</strong> zones.</p>
+          <p className="text-xs text-slate-600 mt-0.5">
+            Real-time automated computer vision PPE verification and worker compliance tracking.
+          </p>
         </div>
-        <div className="flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3.5 py-2 rounded-full text-xs font-semibold">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" /> 94% SITE SAFETY SCORE
+
+        <div className="flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-md text-xs font-bold font-mono">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" /> 94% SAFETY SCORE
         </div>
       </div>
 
-      {/* PPE Compliance Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      {/* 2. Compact PPE Compliance Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 flex-shrink-0">
         {ppeStats.map((stat, idx) => (
-          <div key={idx} className="bg-white border border-[#E5E7EB] rounded-xl p-4 space-y-2 hover:border-slate-300 transition-all shadow-2xs">
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider font-heading">{stat.title}</span>
-            <div className="text-2xl font-bold text-[#111827] font-heading">{stat.value}</div>
+          <div key={idx} className="bg-white border border-slate-200 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition-all shadow-2xs">
+            <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-mono">{stat.title}</span>
+            <div className="text-xl font-bold text-slate-900 font-heading tracking-tight">{stat.value}</div>
             <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-              <div className="h-full bg-[#111827]" style={{ width: `${stat.progress}%` }}></div>
+              <div className="h-full bg-slate-900" style={{ width: `${stat.progress}%` }}></div>
             </div>
-            <p className="text-[10px] text-slate-400 font-medium">{stat.sub}</p>
+            <p className="text-[10px] text-slate-500 font-sans">{stat.sub}</p>
           </div>
         ))}
       </div>
 
-      {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        {/* Left 2 Cols: Worker Activity Log Table */}
-        <div className="lg:col-span-2 bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-3 shadow-2xs">
-          <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-3">
-            <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">Worker Activity & Compliance Log</h3>
+      {/* 3. Main Content 12-Column Responsive Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 overflow-hidden">
+        {/* Left 8 Cols: Worker Inventory Table (Internal Scroll) */}
+        <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans shadow-2xs flex-1 overflow-hidden flex flex-col lg:col-span-8">
+          <div className="flex items-center justify-between flex-shrink-0">
+            <div>
+              <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
+                WORKFORCE INVENTORY
+              </p>
+              <h3 className="text-sm font-bold text-slate-900 font-heading mt-0.5">
+                Worker Activity & Compliance Log
+              </h3>
+            </div>
             <div className="relative">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+              <Search className="w-3.5 h-3.5 absolute left-3 top-2 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search name, ID, or zone..."
+                placeholder="Search worker name, ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-slate-50 border border-[#E5E7EB] rounded-lg pl-9 pr-3 py-1.5 text-xs text-[#111827] placeholder-slate-400 focus:outline-none focus:border-slate-400 w-60 font-medium"
+                className="bg-slate-50 border border-slate-200 rounded-md pl-8 pr-3 py-1 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 w-52 font-medium"
               />
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs font-sans">
-              <thead className="bg-slate-50 text-[#111827] uppercase text-[10px] font-bold tracking-wider border-b border-[#E5E7EB]">
+          <div className="overflow-y-auto flex-1 pr-1">
+            <table className="w-full text-left text-xs font-sans border-collapse">
+              <thead className="sticky top-0 z-10 bg-slate-100 text-slate-700 uppercase text-[10px] font-bold tracking-wider border-b border-slate-200 font-mono shadow-xs">
                 <tr>
                   <th className="p-3">WORKER ID / NAME</th>
                   <th className="p-3">ROLE</th>
@@ -90,30 +102,35 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
                   <th className="p-3">STATUS</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#F1F5F9] text-slate-700">
+              <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
                 {filteredWorkers.map((w) => (
                   <tr key={w.id} className="hover:bg-slate-50/80 transition-colors">
                     <td className="p-3">
-                      <p className="font-bold text-[#111827] font-heading">{w.name}</p>
-                      <p className="text-[10px] text-slate-400 font-mono">{w.id}</p>
+                      <p className="font-bold text-slate-900 font-heading">{w.name}</p>
+                      <p className="text-[10px] text-slate-500 font-mono">{w.id}</p>
                     </td>
-                    <td className="p-3 text-slate-600 font-medium">{w.role}</td>
-                    <td className="p-3 text-slate-600 font-medium">{w.zone}</td>
-                    <td className="p-3 flex items-center space-x-2">
-                      <span className={w.helmet ? 'text-emerald-600' : 'text-red-600'}>
-                        {w.helmet ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                      </span>
-                      <span className={w.vest ? 'text-emerald-600' : 'text-red-600'}>
-                        {w.vest ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                      </span>
+                    <td className="p-3 text-slate-600">{w.role}</td>
+                    <td className="p-3 text-slate-600">{w.zone}</td>
+                    <td className="p-3">
+                      <div className="flex items-center space-x-1.5">
+                        <span className={w.helmet ? 'text-emerald-700' : 'text-red-600'}>
+                          {w.helmet ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                        </span>
+                        <span className={w.vest ? 'text-emerald-700' : 'text-red-600'}>
+                          {w.vest ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                        </span>
+                      </div>
                     </td>
                     <td className="p-3">
-                      <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full border uppercase ${w.status === 'VIOLATION'
-                        ? 'bg-red-50 text-red-600 border-red-200'
-                        : w.status === 'BREAK'
-                          ? 'bg-slate-100 text-slate-600 border-slate-200'
-                          : 'bg-emerald-50 text-emerald-600 border-emerald-200'
-                        }`}>
+                      <span
+                        className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                          w.status === 'VIOLATION'
+                            ? 'bg-red-100 text-red-700 border border-red-200'
+                            : w.status === 'BREAK'
+                            ? 'bg-slate-100 text-slate-700 border border-slate-200'
+                            : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                        }`}
+                      >
                         {w.status}
                       </span>
                     </td>
@@ -124,32 +141,34 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
           </div>
         </div>
 
-        {/* Right 1 Col: Maintenance Monitors */}
-        <div className="space-y-5">
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs space-y-3">
-            <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider flex items-center justify-between">
-              <span>Maintenance Stream Monitors</span>
-              <span className="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-bold uppercase">
-                2 Active
+        {/* Right 4 Cols: Maintenance Stream Monitors */}
+        <div className="lg:col-span-4 space-y-6">
+          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-xs font-bold text-slate-900 font-heading uppercase tracking-wider">
+                Maintenance Monitors
+              </h3>
+              <span className="text-[9px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold font-mono">
+                2 ACTIVE
               </span>
-            </h3>
+            </div>
 
-            <div className="space-y-3">
-              <div className="relative bg-slate-900 rounded-lg overflow-hidden border border-[#E5E7EB] h-36 flex items-center justify-center p-3 text-center">
-                <div className="absolute top-2.5 left-2.5 bg-slate-800 text-white text-[9px] font-mono px-2 py-0.5 rounded-md border border-slate-700">
+            <div className="space-y-4">
+              <div className="relative bg-slate-900 rounded-md overflow-hidden border border-slate-200 h-36 flex items-center justify-center p-3 text-center">
+                <div className="absolute top-2.5 left-2.5 bg-slate-800 text-white text-[9px] font-mono px-2 py-0.5 rounded border border-slate-700">
                   CAM-42 · SECTOR 4
                 </div>
-                <div className="absolute bottom-2.5 right-2.5 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+                <div className="absolute bottom-2.5 right-2.5 bg-emerald-600 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded">
                   ZONE SECURE
                 </div>
                 <p className="text-xs text-slate-200 font-medium">Crew Alpha Welding Team · Compliant</p>
               </div>
 
-              <div className="relative bg-slate-900 rounded-lg overflow-hidden border border-red-500 h-36 flex items-center justify-center p-3 text-center">
-                <div className="absolute top-2.5 left-2.5 bg-slate-800 text-white text-[9px] font-mono px-2 py-0.5 rounded-md border border-slate-700">
+              <div className="relative bg-slate-900 rounded-md overflow-hidden border border-red-500 h-36 flex items-center justify-center p-3 text-center">
+                <div className="absolute top-2.5 left-2.5 bg-slate-800 text-white text-[9px] font-mono px-2 py-0.5 rounded border border-slate-700">
                   CAM-18 · PLATFORM 3
                 </div>
-                <div className="absolute bottom-2.5 right-2.5 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+                <div className="absolute bottom-2.5 right-2.5 bg-red-600 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded">
                   VIOLATION LOGGED
                 </div>
                 <p className="text-xs text-red-300 font-medium">EMP-9102 Mahipal hardhat advisory logged</p>

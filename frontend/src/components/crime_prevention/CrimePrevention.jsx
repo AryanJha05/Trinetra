@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldAlert, AlertTriangle, Eye, Lock, RefreshCw, Send, CheckCircle2, ChevronRight, Zap } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, Eye, Send, Zap } from 'lucide-react';
 import Button from '../common/Button';
 
 export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
@@ -87,92 +87,104 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
     : crimeEvents.filter(e => e.category === activeCategory);
 
   return (
-    <div className="p-4 md:p-6 space-y-6 select-none font-sans text-[#111827]">
-      {/* Header Title */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs">
+    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+      {/* 1. Compact Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
         <div>
-          <div className="flex items-center space-x-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sans">
-              THREAT & ANOMALY DETECTION
-            </span>
+          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
+            <ShieldAlert className="w-3.5 h-3.5 text-slate-800" />
+            <span>ANOMALY DETECTION</span>
+            <span>·</span>
+            <span>PROACTIVE THREAT ENGINE</span>
           </div>
-          <h1 className="text-xl md:text-2xl font-bold text-[#111827] font-heading tracking-tight mt-0.5">
-            Crime Prevention & Threat Detection
+          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+            Threat Prevention & Anomaly Detection
           </h1>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">
-            Automated computer vision detection for unattended objects, perimeter breach, loitering, and motion anomalies.
+          <p className="text-xs text-slate-600 mt-0.5">
+            Automated computer vision triage for loitering, unattended objects, perimeter breach, and aggressive movement.
           </p>
         </div>
 
-        <div className="flex items-center space-x-2 text-xs font-semibold">
-          <span className="bg-[#111827] text-white border border-[#111827] px-3.5 py-2 rounded-full shadow-2xs flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-400" /> YOLOv11 THREAT ENGINE
+        <div className="flex items-center space-x-2 font-mono text-xs">
+          <span className="bg-slate-900 text-white px-3 py-1.5 rounded-md font-bold flex items-center gap-1.5 shadow-xs">
+            <Zap className="w-3.5 h-3.5 text-amber-400" /> YOLOv11 ENGINE ONLINE
           </span>
         </div>
       </div>
 
-      {/* Category Pills Filter */}
-      <div className="flex items-center space-x-2 overflow-x-auto pb-1 scrollbar-none text-xs font-medium">
+      {/* 2. Category Filter Chips */}
+      <div className="flex items-center space-x-1.5 overflow-x-auto text-xs font-medium flex-shrink-0">
         {categories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`px-3.5 py-1.5 rounded-full font-semibold transition-all flex-shrink-0 ${activeCategory === cat.id
-                ? 'bg-[#111827] text-white shadow-2xs'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
+            className={`px-2.5 py-1 rounded-md font-semibold transition-all font-mono flex-shrink-0 ${
+              activeCategory === cat.id
+                ? 'bg-slate-900 text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
+            }`}
           >
             {cat.label}
           </button>
         ))}
       </div>
 
-      {/* Grid of Detected Events */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* 3. Grid of Detected Events (Internal Container Scroll) */}
+      <div className="flex-1 overflow-y-auto pr-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredEvents.map((evt) => (
           <div
             key={evt.id}
-            className="bg-white border border-[#E5E7EB] hover:border-slate-300 rounded-xl p-5 space-y-3 flex flex-col justify-between transition-all shadow-2xs hover:shadow-xs"
+            className="bg-white border border-slate-200 hover:border-slate-300 rounded-lg p-5 space-y-4 flex flex-col justify-between transition-all shadow-2xs hover:shadow-xs font-sans"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full font-mono uppercase ${evt.severity === 'CRITICAL'
-                    ? 'bg-red-50 text-red-600 border border-red-200'
-                    : 'bg-amber-50 text-amber-600 border border-amber-200'
-                  }`}>
+                <span
+                  className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                    evt.severity === 'CRITICAL'
+                      ? 'bg-red-100 text-red-700 border border-red-200'
+                      : 'bg-amber-100 text-amber-700 border border-amber-200'
+                  }`}
+                >
                   {evt.severity}
                 </span>
-                <span className="text-xs font-mono text-slate-400 font-medium">{evt.id} · {evt.time}</span>
+                <span className="text-xs font-mono text-slate-500 font-medium">
+                  {evt.id} · {evt.time}
+                </span>
               </div>
 
               <div>
-                <h3 className="text-base font-bold text-[#111827] font-heading leading-snug">{evt.type}</h3>
-                <p className="text-xs text-slate-500 font-medium mt-0.5">CAM: <strong className="text-[#111827]">{evt.cam}</strong> · {evt.location}</p>
+                <h3 className="text-base font-bold text-slate-900 font-heading leading-snug">
+                  {evt.type}
+                </h3>
+                <p className="text-xs text-slate-600 mt-1">
+                  CAM: <span className="font-mono font-bold text-slate-900">{evt.cam}</span> · {evt.location}
+                </p>
               </div>
 
-              <p className="text-xs text-slate-600 font-medium leading-relaxed bg-slate-50 p-3 rounded-lg border border-[#E5E7EB]">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-700 leading-relaxed font-sans">
                 {evt.desc}
-              </p>
+              </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                <div className="bg-slate-50 p-2.5 rounded-lg border border-[#E5E7EB]">
-                  <span className="text-[9px] text-slate-400 block uppercase font-sans font-bold">AI Confidence</span>
-                  <span className="font-bold text-emerald-600">{evt.confidence}</span>
+                <div className="bg-slate-50 p-2.5 rounded-md border border-slate-200">
+                  <span className="text-[9px] text-slate-500 block uppercase font-sans font-bold">AI CONFIDENCE</span>
+                  <span className="font-bold text-emerald-700">{evt.confidence}</span>
                 </div>
-                <div className="bg-slate-50 p-2.5 rounded-lg border border-[#E5E7EB]">
-                  <span className="text-[9px] text-slate-400 block uppercase font-sans font-bold">Dwell / Duration</span>
-                  <span className="font-bold text-[#111827]">{evt.dwellTime}</span>
+                <div className="bg-slate-50 p-2.5 rounded-md border border-slate-200">
+                  <span className="text-[9px] text-slate-500 block uppercase font-sans font-bold">DWELL DURATION</span>
+                  <span className="font-bold text-slate-900">{evt.dwellTime}</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#F1F5F9] flex items-center justify-between gap-2">
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
               <Button
                 variant="secondary"
                 size="sm"
                 icon={Eye}
                 onClick={() => onNavigateToFeed && onNavigateToFeed(evt.cam)}
-                className="flex-1 !h-8 !text-[11px]"
+                className="flex-1 !h-8 !text-xs"
               >
                 CCTV Feed
               </Button>
@@ -181,13 +193,14 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
                 size="sm"
                 icon={Send}
                 onClick={() => onDispatchGuard && onDispatchGuard(evt.id)}
-                className="flex-1 !h-8 !text-[11px]"
+                className="flex-1 !h-8 !text-xs"
               >
                 Dispatch
               </Button>
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
