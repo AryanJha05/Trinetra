@@ -16,24 +16,24 @@ export default function Button({
   title,
   ...props
 }) {
-  // Base classes for standard enterprise button geometry
-  const baseClasses = 'inline-flex items-center justify-center font-heading font-bold text-xs rounded-xl select-none transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:transform-none';
+  // Base classes for enterprise software buttons
+  const baseClasses = 'inline-flex items-center justify-center font-sans font-semibold text-xs rounded-lg select-none transition-all duration-150 focus:outline-none focus:ring-1 focus:ring-[#111827] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none tracking-tight';
 
   // Fixed height & padding per size
   const sizeClasses = {
-    sm: 'h-8 px-3 text-[11px] gap-1.5',
-    md: 'h-9.5 px-4 text-xs gap-2',
-    lg: 'h-11 px-5 text-xs md:text-sm gap-2.5',
+    sm: 'h-8 px-3 text-xs gap-1.5',
+    md: 'h-9 px-4 text-xs gap-2',
+    lg: 'h-10 px-5 text-sm gap-2',
   };
 
-  // Explicit high-contrast standard Tailwind color variants
+  // Reference visual variants
   const variantClasses = {
-    primary: 'bg-slate-900 hover:bg-black text-white shadow-sm border border-slate-900',
-    secondary: 'bg-slate-200 hover:bg-slate-300 text-slate-900 border border-slate-300',
-    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm border border-red-600',
-    success: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm border border-emerald-600',
-    outline: 'bg-white hover:bg-slate-100 text-slate-800 border border-[#E4E4DF] shadow-sm',
-    ghost: 'bg-transparent hover:bg-slate-200/60 text-slate-800 border border-transparent',
+    primary: 'bg-[#111827] hover:bg-[#1F2937] text-white border border-[#111827] shadow-2xs',
+    secondary: 'bg-white hover:bg-slate-50 text-slate-700 border border-[#E2E8F0] shadow-2xs',
+    danger: 'bg-red-600 hover:bg-red-700 text-white border border-red-600 shadow-2xs',
+    success: 'bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-600 shadow-2xs',
+    outline: 'bg-white hover:bg-slate-50 text-[#111827] border border-[#E2E8F0] shadow-2xs',
+    ghost: 'bg-transparent hover:bg-slate-100 text-slate-700 border border-transparent',
   };
 
   return (

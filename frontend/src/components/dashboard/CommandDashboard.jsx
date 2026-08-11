@@ -1,245 +1,411 @@
 import React from 'react';
-import { Camera, AlertTriangle, Users, ShieldCheck, ArrowRight, Eye, Send, MoreVertical, Clock, AlertCircle } from 'lucide-react';
+import { Camera, AlertTriangle, Users, ShieldCheck, ArrowRight, Eye, Send, MoreHorizontal, Clock, Activity, Cpu, CheckCircle, TrendingDown, TrendingUp, Layers } from 'lucide-react';
 import StationBlueprintMap from './StationBlueprintMap';
 import Button from '../common/Button';
 
 export default function CommandDashboard({
+  deploymentEnv = 'Railway Station',
   onNavigateToFeed,
   onNavigateToAlerts,
   onDispatchGuard,
   onNavigateToCrowd,
   onNavigateToSafety,
+  onNavigateToRisk,
   incidentsList = []
 }) {
-  const platformsOverview = [
-    { name: 'Platform 1', pax: 450, risk: 'Low', status: 'Safe', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
-    { name: 'Platform 2', pax: 780, risk: 'Medium', status: 'Moderate', color: 'bg-blue-100 text-blue-800 border-blue-200' },
-    { name: 'Platform 3', pax: 1200, risk: 'High', status: 'Advisory', color: 'bg-amber-100 text-amber-800 border-amber-200' },
-    { name: 'Platform 4', pax: 1800, risk: 'Critical', status: 'Overcrowded', color: 'bg-red-100 text-red-800 border-red-200' },
+  // Minimal bar chart mock data for hourly/daily threat frequency
+  const chartData = [
+    { label: '1/7', val: 24 },
+    { label: '2/7', val: 30 },
+    { label: '3/7', val: 18 },
+    { label: '4/7', val: 35 },
+    { label: '5/7', val: 42 },
+    { label: '6/7', val: 28 },
+    { label: '7/7', val: 50 },
+    { label: '8/7', val: 65 },
+    { label: '9/7', val: 48 },
+    { label: '10/7', val: 95, highlight: true }, // Peak Surge Highlighted Bar
+    { label: '11/7', val: 82 },
+    { label: '12/7', val: 70 },
+    { label: '13/7', val: 55 },
+    { label: '14/7', val: 40 },
+    { label: '15/7', val: 38 },
+    { label: '16/7', val: 45 },
+    { label: '17/7', val: 52 },
+    { label: '18/7', val: 30 },
+    { label: '19/7', val: 42 },
+    { label: '20/7', val: 60 },
+    { label: '21/7', val: 80 },
+    { label: '22/7', val: 34 },
+    { label: '23/7', val: 26 },
+    { label: '24/7', val: 32 },
+    { label: '25/7', val: 40 },
+    { label: '26/7', val: 58 },
+    { label: '27/7', val: 36 },
+    { label: '28/7', val: 44 },
+    { label: '29/7', val: 50 },
+    { label: '30/7', val: 72 },
+    { label: '31/7', val: 64 },
   ];
 
-  return (
-    <div className="p-8 space-y-8 select-none">
-      {/* Top Banner Hero KPI Cards matching visual language */}
-      <div className="bg-[#ECECE7] border border-[#E4E4DF] rounded-3xl p-6 md:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        {/* Left Bar Chart Widget */}
-        <div className="lg:col-span-4 space-y-3">
-          <p className="text-xs font-extrabold text-slate-600 uppercase tracking-wider font-heading">Weekly Incident Trends</p>
-          <div className="flex items-end space-x-3 h-24 pt-2">
-            {[
-              { day: 'Mon', h: 'h-12' },
-              { day: 'Tue', h: 'h-20' },
-              { day: 'Wed', h: 'h-10' },
-              { day: 'Thu', h: 'h-16' },
-              { day: 'Fri', h: 'h-22' },
-            ].map((bar, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                <div className={`w-full ${bar.h} bg-slate-900 rounded-t-md`}></div>
-                <span className="text-[10px] font-semibold text-slate-600 font-mono">{bar.day}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+  const maxVal = Math.max(...chartData.map((d) => d.val));
 
-        {/* Center Semi-Circle Gauge Widget */}
-        <div
-          onClick={() => onNavigateToSafety && onNavigateToSafety()}
-          className="lg:col-span-4 flex flex-col items-center justify-center text-center space-y-1 border-y lg:border-y-0 lg:border-x border-[#D8D8D0] py-4 lg:py-0 px-4 cursor-pointer group hover:bg-[#E4E4DE] transition-colors rounded-2xl"
-          title="Click to view Workforce Safety Compliance"
-        >
-          <div className="relative w-44 h-24 flex flex-col items-center justify-end">
-            <svg className="w-44 h-22" viewBox="0 0 100 55">
-              <path 
-                d="M 10 50 A 40 40 0 0 1 90 50" 
-                fill="none" 
-                stroke="#D4D4CE" 
-                strokeWidth="9" 
-                strokeLinecap="round" 
-              />
-              <path 
-                d="M 10 50 A 40 40 0 0 1 87.2 35.3" 
-                fill="none" 
-                stroke="#0F172A" 
-                strokeWidth="9" 
-                strokeLinecap="round" 
-              />
-            </svg>
-            <div className="absolute bottom-0 text-center">
-              <span className="text-3xl font-extrabold text-slate-900 leading-none font-mono">88%</span>
-            </div>
-          </div>
-          <p className="text-xs font-bold text-slate-700 group-hover:text-slate-900 font-sans flex items-center gap-1">
-            Station Safety Score Index <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+  return (
+    <div className="p-4 md:p-6 space-y-6 select-none font-sans text-[#111827]">
+      {/* Top Greeting Header (Reference Image Style) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sans">
+            GOOD EVENING
+          </p>
+          <h1 className="text-xl md:text-2xl font-bold text-[#111827] font-heading tracking-tight mt-0.5">
+            Security Operations Center
+          </h1>
+          <p className="text-xs text-slate-500 mt-0.5 font-medium">
+            Real-time proactive CCTV telemetry across <strong className="text-[#111827]">{deploymentEnv}</strong>.
           </p>
         </div>
 
-        {/* Right Numerical Metrics */}
-        <div className="lg:col-span-4 flex items-center justify-around">
-          {/* Interactive Camera Counter Card */}
-          <div
-            onClick={() => onNavigateToFeed && onNavigateToFeed('CAM-101')}
-            className="text-center p-3 rounded-2xl hover:bg-[#E4E4DE] cursor-pointer transition-colors group"
-            title="Click to view Live CCTV Monitoring"
+        <div className="flex items-center space-x-2.5">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => onNavigateToRisk && onNavigateToRisk()}
           >
-            <div className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight font-mono group-hover:text-blue-900">1,248</div>
-            <p className="text-xs text-slate-600 font-medium mt-1 font-sans flex items-center justify-center gap-1">
-              <Camera className="w-3.5 h-3.5 text-slate-500" /> Cameras (1239 Active)
-            </p>
-          </div>
-
-          <div className="h-12 w-px bg-[#D8D8D0]"></div>
-
-          {/* Interactive Incidents Counter Card */}
-          <div
-            onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
-            className="text-center p-3 rounded-2xl hover:bg-[#E4E4DE] cursor-pointer transition-colors group"
-            title="Click to view Active Incidents"
-          >
-            <div className="text-3xl md:text-4xl font-extrabold text-red-700 tracking-tight font-mono group-hover:scale-105 transition-transform">{incidentsList.length}</div>
-            <p className="text-xs text-slate-600 font-medium mt-1 font-sans flex items-center justify-center gap-1">
-              <AlertTriangle className="w-3.5 h-3.5 text-red-600" /> Active Incidents
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Interactive Platform Crowd Status Row */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 font-heading">
-            <Users className="w-4 h-4 text-slate-900" /> Live Platform Crowd Status Overview
-          </h3>
+            Analytics
+          </Button>
           <button
-            onClick={() => onNavigateToCrowd && onNavigateToCrowd()}
-            className="text-xs font-bold text-slate-900 hover:underline font-mono flex items-center gap-1"
+            onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
+            className="h-8 px-4 bg-[#111827] text-white font-semibold text-xs rounded-full hover:bg-[#1F2937] transition-all shadow-xs"
           >
-            Open Crowd Analytics <ArrowRight className="w-3.5 h-3.5" />
+            Dispatch Unit
           </button>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {platformsOverview.map((p, idx) => (
-            <div
-              key={idx}
-              onClick={() => onNavigateToCrowd && onNavigateToCrowd()}
-              className="bg-white border border-[#E4E4DF] hover:border-slate-400 p-4 rounded-2xl space-y-2 cursor-pointer transition-all shadow-sm group hover:-translate-y-0.5"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-900 text-sm font-heading">{p.name}</span>
-                <span className={`text-[10px] font-extrabold font-mono px-2 py-0.5 rounded-md border ${p.color}`}>
-                  {p.risk} Risk
-                </span>
-              </div>
-              <div className="flex items-baseline justify-between pt-1">
-                <span className="text-2xl font-extrabold text-slate-900 font-mono">{p.pax.toLocaleString()}</span>
-                <span className="text-xs text-slate-500 font-medium font-sans">commuters</span>
-              </div>
-              <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                <div
-                  className={`h-full ${
-                    p.risk === 'Critical' ? 'bg-red-600' : p.risk === 'High' ? 'bg-amber-500' : p.risk === 'Medium' ? 'bg-blue-600' : 'bg-emerald-500'
-                  }`}
-                  style={{ width: `${Math.min(100, (p.pax / 2000) * 100)}%` }}
-                />
-              </div>
+      {/* Metric Cards Row (Reference Image 4 Cards) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Card 1: Connected Cameras */}
+        <div
+          onClick={() => onNavigateToFeed && onNavigateToFeed('CAM-001')}
+          className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs hover:shadow-xs transition-shadow cursor-pointer space-y-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
+              <Camera className="w-4 h-4 text-[#111827]" />
             </div>
-          ))}
+            <button className="text-slate-400 hover:text-slate-600 p-1">
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              CONNECTED CAMERAS
+            </p>
+            <div className="text-2xl font-bold text-[#111827] mt-0.5 font-heading">
+              1,248
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">1,239 active streams</p>
+          </div>
+        </div>
+
+        {/* Card 2: Active Incidents */}
+        <div
+          onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
+          className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs hover:shadow-xs transition-shadow cursor-pointer space-y-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+              <AlertTriangle className="w-4 h-4 text-red-600" />
+            </div>
+            <button className="text-slate-400 hover:text-slate-600 p-1">
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              ACTIVE INCIDENTS
+            </p>
+            <div className="text-2xl font-bold text-[#111827] mt-0.5 font-heading">
+              07
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">3 high priority</p>
+          </div>
+        </div>
+
+        {/* Card 3: Detected Objects */}
+        <div
+          onClick={() => onNavigateToCrowd && onNavigateToCrowd()}
+          className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs hover:shadow-xs transition-shadow cursor-pointer space-y-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
+              <Users className="w-4 h-4 text-[#111827]" />
+            </div>
+            <button className="text-slate-400 hover:text-slate-600 p-1">
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              DETECTED OBJECTS
+            </p>
+            <div className="text-2xl font-bold text-[#111827] mt-0.5 font-heading">
+              2,384
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">Live ByteTrack AI</p>
+          </div>
+        </div>
+
+        {/* Card 4: System Health */}
+        <div
+          onClick={() => onNavigateToRisk && onNavigateToRisk()}
+          className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs hover:shadow-xs transition-shadow cursor-pointer space-y-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
+            </div>
+            <button className="text-slate-400 hover:text-slate-600 p-1">
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              SYSTEM HEALTH
+            </p>
+            <div className="text-2xl font-bold text-emerald-600 mt-0.5 font-heading">
+              98.7%
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">12ms avg latency</p>
+          </div>
         </div>
       </div>
 
-      {/* Main Section: Interactive Blueprint & Incident Triage Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left 7 Cols: Blueprint & CCTV Nodes */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2 font-heading">
-              Station Operational Blueprint Map
-            </h3>
-            <span className="text-xs font-semibold text-slate-500 font-mono">New Delhi Central (NDLS)</span>
+      {/* Middle Trend Summary Row (Reference Image "LAST 30 DAYS" Style) */}
+      <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs space-y-4">
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+            30-DAY OPERATIONAL PERFORMANCE
+          </p>
+          <span className="text-xs text-slate-400 font-medium">Updated 1 min ago</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Trend Card 1 */}
+          <div className="border border-[#E5E7EB] rounded-lg p-4 space-y-2 bg-slate-50/50">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                THREAT INCIDENTS TRIAGED
+              </span>
+              <button className="text-slate-400 hover:text-slate-600">
+                <MoreHorizontal className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="flex items-baseline space-x-2">
+              <span className="text-2xl font-bold text-[#111827] font-heading">
+                735
+              </span>
+              <span className="inline-flex items-center text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
+                ↓ -5%
+              </span>
+            </div>
+            <p className="text-xs text-slate-500">Incident alerts resolved this period</p>
           </div>
 
+          {/* Trend Card 2 */}
+          <div className="border border-[#E5E7EB] rounded-lg p-4 space-y-2 bg-slate-50/50">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                SURGE THREAT METRICS
+              </span>
+              <button className="text-slate-400 hover:text-slate-600">
+                <MoreHorizontal className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="flex items-baseline space-x-2">
+              <span className="text-2xl font-bold text-[#111827] font-heading">
+                1,284
+              </span>
+              <span className="inline-flex items-center text-[10px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded-full border border-red-200">
+                ↑ +2%
+              </span>
+            </div>
+            <p className="text-xs text-slate-500">Total detected objects triaged</p>
+          </div>
+
+          {/* Trend Card 3 */}
+          <div className="border border-[#E5E7EB] rounded-lg p-4 space-y-2 bg-slate-50/50">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                SECURITY DISPATCH RESOLUTION
+              </span>
+              <button className="text-slate-400 hover:text-slate-600">
+                <MoreHorizontal className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="flex items-baseline space-x-2">
+              <span className="text-2xl font-bold text-[#111827] font-heading">
+                99.2%
+              </span>
+              <span className="inline-flex items-center text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
+                Optimal
+              </span>
+            </div>
+            <p className="text-xs text-slate-500">Response unit operational SLA</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Minimal Bar Chart (Reference Image Style: "COLLECTED PER DAY") */}
+      <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+              COLLECTED PER HOUR
+            </p>
+            <h3 className="text-sm font-bold text-[#111827] font-heading mt-0.5">
+              Hourly Threat & Crowd Density Frequency
+            </h3>
+          </div>
+          <span className="text-xs text-slate-500 font-medium">
+            <strong>1,284</strong> events in period
+          </span>
+        </div>
+
+        {/* Bar Chart Graphics */}
+        <div className="pt-4 pb-2">
+          <div className="h-44 flex items-end justify-between gap-1 sm:gap-2 px-1">
+            {chartData.map((d, i) => {
+              const heightPercent = (d.val / maxVal) * 100;
+              return (
+                <div key={i} className="flex-1 flex flex-col items-center group relative">
+                  {/* Tooltip Hover */}
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-[#111827] text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-10 font-medium">
+                    {d.label}: {d.val} threats
+                  </div>
+
+                  <div
+                    className={`w-full max-w-[14px] rounded-t-sm transition-all duration-300 ${d.highlight
+                        ? 'bg-[#111827] shadow-sm'
+                        : 'bg-[#E2E8F0] hover:bg-[#CBD5E1]'
+                      }`}
+                    style={{ height: `${heightPercent}%` }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* X Axis Labels */}
+          <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 mt-2 px-1 border-t border-[#F1F5F9] pt-2">
+            <span>1/7</span>
+            <span>5/7</span>
+            <span>10/7 (Surge Peak)</span>
+            <span>15/7</span>
+            <span>20/7</span>
+            <span>25/7</span>
+            <span>31/7</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Lower Section: CAD Map & Incident Table Stack */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* Spatial CAD Blueprint Map (7 Cols) */}
+        <div className="lg:col-span-6 bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">
+              CAD Surveillance Topology
+            </h3>
+            <span className="text-xs text-slate-500 font-medium">{deploymentEnv}</span>
+          </div>
           <StationBlueprintMap onSelectCamera={(camId) => onNavigateToFeed(camId)} />
         </div>
 
-        {/* Right 5 Cols: Live Incidents Stack */}
-        <div className="lg:col-span-5 space-y-4">
+        {/* Clean Enterprise Incident Triage Table (6 Cols) */}
+        <div className="lg:col-span-6 bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <h3 className="text-lg font-bold text-slate-900 font-heading">Incident Triage List</h3>
-              <span className="bg-slate-200 text-slate-800 text-xs font-bold px-2.5 py-0.5 rounded-full font-mono">
-                {incidentsList.length}
+              <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">
+                Incident Triage Queue
+              </h3>
+              <span className="bg-[#111827] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                {incidentsList.length} QUEUED
               </span>
             </div>
             <button
-              onClick={() => onNavigateToAlerts()}
-              className="text-xs font-bold text-slate-900 hover:underline flex items-center gap-1 font-mono"
+              onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
+              className="text-xs font-bold text-[#111827] hover:underline flex items-center gap-1"
             >
               View All <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          {/* Cards Stack */}
-          <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
-            {incidentsList.map((inc) => (
-              <div
-                key={inc.id}
-                className="bg-white text-slate-900 border border-[#E4E4DF] hover:border-slate-400 rounded-2xl p-5 space-y-3 transition-all shadow-sm"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 font-mono">
-                    <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase ${
-                      inc.severity === 'CRITICAL' 
-                        ? 'bg-red-100 text-red-800 border border-red-200' 
-                        : inc.severity === 'WARNING' 
-                        ? 'bg-amber-100 text-amber-800 border border-amber-200' 
-                        : 'bg-blue-100 text-blue-800 border border-blue-200'
-                    }`}>
-                      {inc.severity}
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500">
-                      {inc.id}
-                    </span>
-                  </div>
-                  <MoreVertical className="w-4 h-4 cursor-pointer text-slate-400 hover:text-slate-700" />
-                </div>
-
-                <h4 className="text-sm font-extrabold text-slate-900 font-heading leading-snug">{inc.title}</h4>
-                <p className="text-xs text-slate-600 font-sans leading-relaxed">
-                  {inc.desc}
-                </p>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                  <div className="flex items-center space-x-3 font-mono text-[11px]">
-                    <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5 text-slate-400" /> {inc.time}</span>
-                    <span>{inc.zone}</span>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      icon={Eye}
-                      onClick={() => onNavigateToFeed(inc.cam)}
-                      className="min-w-[75px]"
-                    >
-                      Feed
-                    </Button>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      icon={Send}
-                      onClick={() => onDispatchGuard(inc.id)}
-                      className="min-w-[95px]"
-                    >
-                      Dispatch
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs text-[#111827]">
+              <thead>
+                <tr className="border-b border-[#E5E7EB] text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                  <th className="pb-2">ID & Title</th>
+                  <th className="pb-2">Severity</th>
+                  <th className="pb-2">Zone</th>
+                  <th className="pb-2 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#F1F5F9]">
+                {incidentsList.map((inc) => (
+                  <tr key={inc.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-2.5 pr-2">
+                      <p className="font-bold text-xs text-[#111827] leading-tight truncate max-w-[140px]">
+                        {inc.title}
+                      </p>
+                      <span className="text-[10px] text-slate-400 font-mono">{inc.id}</span>
+                    </td>
+                    <td className="py-2.5 px-2">
+                      <span
+                        className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase ${inc.severity === 'CRITICAL'
+                            ? 'bg-red-50 text-red-600 border border-red-200'
+                            : inc.severity === 'WARNING'
+                              ? 'bg-amber-50 text-amber-600 border border-amber-200'
+                              : 'bg-slate-100 text-slate-700'
+                          }`}
+                      >
+                        {inc.severity}
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-2 text-xs text-slate-600 truncate max-w-[100px]">
+                      {inc.zone}
+                    </td>
+                    <td className="py-2.5 pl-2 text-right">
+                      <div className="flex items-center justify-end space-x-1.5">
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          icon={Eye}
+                          onClick={() => onNavigateToFeed && onNavigateToFeed(inc.cam)}
+                          className="!h-7 !px-2 !text-[10px]"
+                        >
+                          Feed
+                        </Button>
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          icon={Send}
+                          onClick={() => onDispatchGuard && onDispatchGuard(inc.id)}
+                          className="!h-7 !px-2.5 !text-[10px]"
+                        >
+                          Dispatch
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   );
 }
+

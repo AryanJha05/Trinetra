@@ -1,51 +1,75 @@
 import React from 'react';
-import { BarChart3, Download, TrendingUp, Clock, ShieldCheck } from 'lucide-react';
+import { BarChart3, Download, TrendingUp, Clock, ShieldCheck, FileCheck } from 'lucide-react';
+import Button from '../common/Button';
 
-export default function OperationalAnalytics() {
+export default function OperationalAnalytics({ deploymentEnv = 'Railway Station', onOpenReportModal }) {
   return (
-    <div className="p-8 space-y-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="p-4 md:p-6 space-y-6 select-none font-sans text-[#111827]">
+      {/* Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs">
         <div>
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2 font-heading">
-            <BarChart3 className="w-5 h-5 text-railway-navy" />
-            Operational Reports & Surveillance Analytics
-          </h2>
-          <p className="text-xs text-slate-500 font-sans mt-0.5">Aggregated metrics, RPF response KPIs, and DPDP audit compliance reports</p>
+          <div className="flex items-center space-x-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sans">
+              ANALYTICS & INTELLIGENCE
+            </span>
+          </div>
+          <h1 className="text-xl md:text-2xl font-bold text-[#111827] font-heading tracking-tight mt-0.5">
+            Operational Analytics & Reports
+          </h1>
+          <p className="text-xs text-slate-500 font-medium mt-0.5">
+            Aggregated system metrics, response times, and DPDP compliance logs for <strong className="text-[#111827]">{deploymentEnv}</strong>.
+          </p>
         </div>
-        <button className="px-4 py-2.5 bg-slate-900 hover:bg-black text-white rounded-xl text-xs font-bold font-mono flex items-center gap-2 shadow-sm">
-          <Download className="w-4 h-4 text-railway-mint" /> Export PDF Operational Report
-        </button>
+
+        <div>
+          <Button
+            variant="primary"
+            size="sm"
+            icon={Download}
+            onClick={onOpenReportModal}
+            className="!h-9 text-xs"
+          >
+            Export PDF Security Report
+          </Button>
+        </div>
       </div>
 
       {/* Analytics Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-3 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-2.5 hover:border-slate-300 transition-all shadow-2xs">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 font-heading">Multi-Frame Detection Accuracy</h3>
+            <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">AI Model Detection Accuracy</h3>
             <TrendingUp className="w-4 h-4 text-emerald-600" />
           </div>
-          <div className="text-4xl font-extrabold text-slate-900 font-mono">98.4%</div>
-          <p className="text-xs text-slate-500 font-sans leading-relaxed">Multi-frame verification engine successfully filtered 42 transient false-alarm anomalies today.</p>
+          <div className="text-3xl font-bold text-[#111827] font-heading">98.4%</div>
+          <p className="text-xs text-slate-500 font-medium leading-relaxed">
+            Multi-frame temporal verification engine successfully filtered 42 transient false-alarm anomalies today.
+          </p>
         </div>
 
-        <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-3 shadow-sm">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-2.5 hover:border-slate-300 transition-all shadow-2xs">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 font-heading">Average RPF Dispatch Response Time</h3>
-            <Clock className="w-4 h-4 text-emerald-600" />
+            <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">Avg Dispatch Response Time</h3>
+            <Clock className="w-4 h-4 text-[#111827]" />
           </div>
-          <div className="text-4xl font-extrabold text-emerald-700 font-mono">1m 42s</div>
-          <p className="text-xs text-slate-500 font-sans leading-relaxed">Down from legacy manual monitoring baseline of 8m 15s across major station concourses.</p>
+          <div className="text-3xl font-bold text-[#111827] font-heading">1m 42s</div>
+          <p className="text-xs text-slate-500 font-medium leading-relaxed">
+            Reduced response latency from legacy manual monitoring baseline of 8m 15s across all operational monitoring zones.
+          </p>
         </div>
 
-        <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-3 shadow-sm">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-2.5 hover:border-slate-300 transition-all shadow-2xs">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 font-heading">Privacy Anonymization Audit</h3>
-            <ShieldCheck className="w-4 h-4 text-purple-600" />
+            <h3 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">DPDP Privacy Anonymization</h3>
+            <ShieldCheck className="w-4 h-4 text-indigo-600" />
           </div>
-          <div className="text-4xl font-extrabold text-purple-800 font-mono">100% DPDP</div>
-          <p className="text-xs text-slate-500 font-sans leading-relaxed">All exported surveillance feeds automatically masked with Gaussian face blur compliance.</p>
+          <div className="text-3xl font-bold text-[#111827] font-heading">100% DPDP</div>
+          <p className="text-xs text-slate-500 font-medium leading-relaxed">
+            All exported video feeds & snapshots are automatically anonymized with real-time Gaussian face blur.
+          </p>
         </div>
       </div>
     </div>
   );
 }
+

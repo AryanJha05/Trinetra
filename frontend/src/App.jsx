@@ -5,70 +5,86 @@ import CreateIncidentModal from './components/common/CreateIncidentModal';
 import CommandDashboard from './components/dashboard/CommandDashboard';
 import LiveMonitoring from './components/live_monitoring/LiveMonitoring';
 import CrowdIntelligence from './components/crowd_intelligence/CrowdIntelligence';
-import IncidentAlertCenter from './components/incident_alerts/IncidentAlertCenter';
+import CrimePrevention from './components/crime_prevention/CrimePrevention';
 import WorkforceSafety from './components/workforce_safety/WorkforceSafety';
+import RiskAssessmentEngine from './components/risk_engine/RiskAssessmentEngine';
+import IncidentAlertCenter from './components/incident_alerts/IncidentAlertCenter';
 import OperationalAnalytics from './components/analytics/OperationalAnalytics';
+import ReportExportModal from './components/analytics/ReportExportModal';
 import AuditLogsView from './components/audit/AuditLogsView';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [selectedStation, setSelectedStation] = useState('New Delhi Central');
+  const [deploymentEnv, setDeploymentEnv] = useState('Railway Station');
   const [privacyMasking, setPrivacyMasking] = useState(true);
-  const [selectedCamForLive, setSelectedCamForLive] = useState('CAM-202');
+  const [selectedCamForLive, setSelectedCamForLive] = useState('CAM-001');
   const [notificationToast, setNotificationToast] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [demoMode, setDemoMode] = useState(false);
 
-  // Dynamic Incidents List state
+  // Dynamic Incidents List state across platform
   const [incidentsList, setIncidentsList] = useState([
     {
-      id: 'INC-2026-892',
-      title: 'Unattended Object Detected',
+      id: 'INC-2026-001',
+      title: 'Unattended Object Alert',
       type: 'Unattended Object',
-      desc: 'Black backpack stationary for >5 mins near Platform 3 Pillar 12 without owner in 10m perimeter.',
-      cam: 'CAM-202',
-      zone: 'Platform 3, Sector B',
-      time: '10:42 AM',
+      desc: 'Unattended object stationary for >4 mins near Public Zone B without owner in 10m perimeter.',
+      cam: 'CAM-001',
+      zone: 'Public Zone B',
+      time: '14:28 PM',
       severity: 'CRITICAL',
       conf: '96.4%',
       status: 'PENDING'
     },
     {
-      id: 'INC-2026-887',
-      title: 'Unauthorized Perimeter Access',
+      id: 'INC-2026-002',
+      title: 'Restricted Perimeter Breach',
       type: 'Perimeter Breach',
-      desc: 'Individual detected in non-uniform clothing breaching maintenance yard Gate 4.',
-      cam: 'CAM-042',
-      zone: 'Maintenance Yard B',
-      time: '10:15 AM',
+      desc: 'Individual detected breaching restricted access compound Gate A.',
+      cam: 'CAM-003',
+      zone: 'Restricted Access Compound',
+      time: '14:25 PM',
       severity: 'CRITICAL',
-      conf: '92.1%',
+      conf: '98.1%',
       status: 'PENDING'
     },
     {
-      id: 'INC-2026-881',
-      title: 'High Crowd Surge Warning',
+      id: 'INC-2026-003',
+      title: 'High Crowd Density Warning',
       type: 'Crowd Surge Warning',
-      desc: 'Commuter density exceeded 3.8 pax/m² near North FOB staircase due to delayed Express Train 1204.',
-      cam: 'CAM-301',
-      zone: 'Platform 2 North',
-      time: '09:50 AM',
+      desc: 'Density exceeded 3.8 pax/m² near Zone B transit hall.',
+      cam: 'CAM-002',
+      zone: 'Zone B Transit Hall',
+      time: '14:15 PM',
       severity: 'WARNING',
       conf: '88.5%',
       status: 'TEAM ASSIGNED'
     },
     {
-      id: 'INC-2026-875',
+      id: 'INC-2026-004',
       title: 'PPE Helmet Compliance Violation',
       type: 'PPE Violation',
-      desc: 'Technician working track maintenance line without high-visibility helmet.',
-      cam: 'CAM-200',
-      zone: 'Service Hall B',
-      time: '08:30 AM',
+      desc: 'Technician working maintenance sector without high-visibility helmet.',
+      cam: 'CAM-004',
+      zone: 'Zone D Service Depot',
+      time: '13:40 PM',
       severity: 'NOTICE',
       conf: '94.2%',
       status: 'RESOLVED'
+    },
+    {
+      id: 'INC-2026-005',
+      title: 'Suspicious Loitering Near Transaction Terminals',
+      type: 'Loitering Alert',
+      desc: 'Person observed hovering near transaction terminals without activity for >12 mins.',
+      cam: 'CAM-002',
+      zone: 'Public Access Terminal 4',
+      time: '13:18 PM',
+      severity: 'WARNING',
+      conf: '89.7%',
+      status: 'PENDING'
     },
   ]);
 
@@ -78,11 +94,11 @@ export default function App() {
 
     const interval = setInterval(() => {
       const simEvents = [
-        "AI Telemetry Update: Platform 4 crowd flow peaked at 1,840 pax.",
-        "Camera CAM-202 AI Inference Latency: 11ms (Optimal).",
+        "AI Telemetry Update: Sector 4 crowd flow peaked at 1,840 pax.",
+        "Camera CAM-001 AI Inference Latency: 11ms (Optimal).",
         "DPDP Privacy Engine: 142 faces anonymized in current frame.",
-        "Safety Audit Check: Maintenance Yard B Worker PPE Compliance 100%.",
-        "RPF Control Center: All 1,248 CCTV Nodes Operational."
+        "Safety Audit Check: Maintenance Yard Worker PPE Compliance 98%.",
+        "TRINETRA Command Center: All 1,248 CCTV Nodes Operational."
       ];
       const randomMsg = simEvents[Math.floor(Math.random() * simEvents.length)];
       setNotificationToast(`⚡ Live Simulation: ${randomMsg}`);
@@ -93,7 +109,7 @@ export default function App() {
   }, [demoMode]);
 
   const handleNavigateToFeed = (camId) => {
-    setSelectedCamForLive(camId);
+    setSelectedCamForLive(camId || 'CAM-001');
     setActiveTab('live_monitoring');
   };
 
@@ -105,7 +121,7 @@ export default function App() {
     setIncidentsList(prev =>
       prev.map(inc => inc.id === incidentId ? { ...inc, status: 'TEAM ASSIGNED' } : inc)
     );
-    setNotificationToast(`RPF Quick Response Unit dispatched to ${incidentId}`);
+    setNotificationToast(`Security Guard Quick Response Unit dispatched to ${incidentId}`);
     setTimeout(() => setNotificationToast(null), 4000);
   };
 
@@ -116,24 +132,24 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F4F0] text-slate-900 flex flex-col font-sans relative">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans relative">
       {/* Fixed Floating Notification Toast Overlay (z-[2000]) */}
       {notificationToast && (
-        <div className="fixed top-20 right-6 z-[2000] max-w-lg bg-slate-900/85 backdrop-blur-md border border-emerald-500/40 text-emerald-300 rounded-2xl px-4 py-3 shadow-2xl animate-slideInRight font-mono transition-all overflow-hidden flex items-center justify-between gap-3">
+        <div className="fixed top-20 right-6 z-[2000] max-w-lg bg-slate-900/90 backdrop-blur-md border border-teal-500/50 text-teal-300 rounded-2xl px-4 py-3 shadow-2xl animate-slideInRight font-mono transition-all overflow-hidden flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0 flex-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse flex-shrink-0"></span>
             <span className="text-xs font-bold truncate text-slate-100">{notificationToast}</span>
           </div>
-          <span className="text-[10px] font-semibold flex-shrink-0 bg-emerald-500/15 border border-emerald-500/30 px-2 py-1 rounded-lg text-emerald-400">
-            Trinetra Logged
+          <span className="text-[10px] font-semibold flex-shrink-0 bg-teal-500/20 border border-teal-500/30 px-2 py-1 rounded-lg text-teal-300">
+            TRINETRA Log
           </span>
         </div>
       )}
 
       {/* Fixed Top Header */}
       <Header
-        selectedStation={selectedStation}
-        setSelectedStation={setSelectedStation}
+        deploymentEnv={deploymentEnv}
+        setDeploymentEnv={setDeploymentEnv}
         activeAlertCount={incidentsList.filter(i => i.status !== 'RESOLVED').length}
         privacyMasking={privacyMasking}
         setPrivacyMasking={setPrivacyMasking}
@@ -155,27 +171,47 @@ export default function App() {
       />
 
       {/* Main Workspace Container */}
-      <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-[#F4F4F0] overflow-y-auto transition-all">
+      <main className="pl-0 md:pl-[260px] pt-[72px] min-h-screen bg-[#F8FAFC] overflow-y-auto transition-all">
         {activeTab === 'dashboard' && (
           <CommandDashboard
+            deploymentEnv={deploymentEnv}
             onNavigateToFeed={handleNavigateToFeed}
             onNavigateToAlerts={handleNavigateToAlerts}
             onDispatchGuard={handleDispatchGuard}
             onNavigateToCrowd={() => setActiveTab('crowd_intelligence')}
             onNavigateToSafety={() => setActiveTab('workforce_safety')}
+            onNavigateToRisk={() => setActiveTab('risk_engine')}
             incidentsList={incidentsList}
           />
         )}
 
         {activeTab === 'live_monitoring' && (
           <LiveMonitoring
+            deploymentEnv={deploymentEnv}
             privacyMasking={privacyMasking}
             setPrivacyMasking={setPrivacyMasking}
             initialCameraId={selectedCamForLive}
           />
         )}
 
-        {activeTab === 'crowd_intelligence' && <CrowdIntelligence />}
+        {activeTab === 'crowd_intelligence' && (
+          <CrowdIntelligence deploymentEnv={deploymentEnv} />
+        )}
+
+        {activeTab === 'crime_prevention' && (
+          <CrimePrevention
+            onNavigateToFeed={handleNavigateToFeed}
+            onDispatchGuard={handleDispatchGuard}
+          />
+        )}
+
+        {activeTab === 'workforce_safety' && (
+          <WorkforceSafety deploymentEnv={deploymentEnv} />
+        )}
+
+        {activeTab === 'risk_engine' && (
+          <RiskAssessmentEngine onNavigateToFeed={handleNavigateToFeed} />
+        )}
 
         {activeTab === 'incident_alerts' && (
           <IncidentAlertCenter
@@ -185,69 +221,80 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'workforce_safety' && <WorkforceSafety />}
-
-        {activeTab === 'analytics' && <OperationalAnalytics />}
+        {activeTab === 'analytics' && (
+          <OperationalAnalytics
+            deploymentEnv={deploymentEnv}
+            onOpenReportModal={() => setIsReportModalOpen(true)}
+          />
+        )}
 
         {activeTab === 'audit_logs' && <AuditLogsView />}
 
         {activeTab === 'settings' && (
-          <div className="p-8 text-slate-800 space-y-6 max-w-4xl">
+          <div className="p-6 md:p-8 text-slate-800 space-y-6 max-w-4xl font-sans">
             <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-1 font-heading">System Settings & Platform Credits</h2>
-              <p className="text-xs text-slate-500 font-mono">Trinetra Platform Config v1.0.0 · Model: YOLOv11x / ByteTrack / VideoMAE</p>
+              <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 mb-1 font-heading">
+                System Settings & Platform Credits
+              </h1>
+              <p className="text-xs text-slate-500 font-mono">TRINETRA Platform Config v2.4.0 · Models: YOLOv11 / ByteTrack / Explainable AI Engine</p>
             </div>
 
             {/* Platform Control Settings Panel */}
-            <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-4 shadow-sm text-xs font-mono">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 space-y-4 shadow-sm text-xs font-mono">
               <h3 className="text-sm font-bold text-slate-900 font-heading border-b border-slate-200 pb-3">AI Vision Model Configurations</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                  <span>AI Inference Precision</span>
-                  <span className="text-blue-600 font-bold">FP16 TensorRT</span>
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                  <span>Inference Acceleration</span>
+                  <span className="text-teal-700 font-bold">FP16 TensorRT Engine</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                  <span>ByteTrack Overlap Threshold</span>
-                  <span className="text-blue-600 font-bold">0.65 IoU</span>
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                  <span>ByteTrack IoU Threshold</span>
+                  <span className="text-teal-700 font-bold">0.65 Overlap IoU</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
                   <span>DPDP Act Privacy Mode</span>
-                  <span className="text-emerald-600 font-bold">{privacyMasking ? 'ENABLED (Face Masking Active)' : 'DISABLED'}</span>
+                  <span className="text-emerald-700 font-bold">{privacyMasking ? 'ENABLED (Face Masking)' : 'DISABLED'}</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                  <span>RPF Alert Auto-Dispatch</span>
-                  <span className="text-blue-600 font-bold">AUTOMATIC (&gt;90% Conf)</span>
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                  <span>Security Guard Auto-Dispatch</span>
+                  <span className="text-teal-700 font-bold">AUTOMATIC (&gt;90% Conf)</span>
                 </div>
               </div>
             </div>
 
             {/* Official SIH 2026 Team Section */}
-            <div className="bg-white border border-[#E4E4DF] rounded-2xl p-6 space-y-4 shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 space-y-4 shadow-sm">
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <h3 className="text-sm font-bold text-slate-900 font-heading">Smart India Hackathon 2026 — Official Team Trinetra (SIH1349)</h3>
-                <span className="text-[10px] font-bold font-mono bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-md">
-                  Ministry of Railways
+                <span className="text-[10px] font-bold font-mono bg-teal-50 text-teal-800 border border-teal-200 px-2.5 py-1 rounded-md">
+                  SIH 2026 GRAND FINALIST
                 </span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono">
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Mahipal</p>
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                  <p className="text-sm font-bold text-white font-heading">Aryan Jha</p>
+                  <p className="text-[10px] text-teal-400">Senior Systems Architect</p>
                 </div>
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Aryan Jha</p>
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                  <p className="text-sm font-bold text-white font-heading">Mahipal</p>
+                  <p className="text-[10px] text-teal-400">Full Stack Lead</p>
                 </div>
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Sandeep</p>
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                  <p className="text-sm font-bold text-white font-heading">Sandeep</p>
+                  <p className="text-[10px] text-teal-400">AI Vision Engineer</p>
                 </div>
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Nikita</p>
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                  <p className="text-sm font-bold text-white font-heading">Nikita</p>
+                  <p className="text-[10px] text-teal-400">Compliance & UI Lead</p>
                 </div>
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Aastha</p>
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                  <p className="text-sm font-bold text-white font-heading">Aastha</p>
+                  <p className="text-[10px] text-teal-400">Risk Analytics Lead</p>
                 </div>
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
-                  <p className="text-sm font-bold text-white">Smurtirani</p>
+                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center">
+                  <p className="text-sm font-bold text-white font-heading">Smurtirani</p>
+                  <p className="text-[10px] text-teal-400">UX & Operations Lead</p>
                 </div>
               </div>
             </div>
@@ -255,12 +302,24 @@ export default function App() {
         )}
       </main>
 
-      {/* Interactive New Incident Report Modal */}
+      {/* Interactive Log Event Modal */}
       <CreateIncidentModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSubmitIncident={handleAddIncident}
       />
+
+      {/* Interactive Report Export Modal */}
+      <ReportExportModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        deploymentEnv={deploymentEnv}
+        onShowToast={(msg) => {
+          setNotificationToast(msg);
+          setTimeout(() => setNotificationToast(null), 4000);
+        }}
+      />
     </div>
   );
 }
+

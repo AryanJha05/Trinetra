@@ -4,30 +4,30 @@
 
 @layer base {
   body {
-    background-color: #F4F4F0;
-    color: #0F172A;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #F4F5F6;
+    color: #111827;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Crisp minimalist scrollbars */
+/* Enterprise Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F4F4F0;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4D4CE;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A8A8A0;
+  background: #94A3B8;
 }
 
 /* Smooth Enterprise Animations */
@@ -39,6 +39,15 @@
   100% {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 
@@ -54,7 +63,7 @@
 @keyframes scaleUpSmooth {
   0% {
     opacity: 0;
-    transform: scale(0.96) translateY(8px);
+    transform: scale(0.97) translateY(6px);
   }
   100% {
     opacity: 1;
@@ -63,7 +72,11 @@
 }
 
 .animate-slideInRight {
-  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideLeft {
+  animation: slideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fadeInSmooth {
@@ -71,5 +84,5 @@
 }
 
 .animate-scaleUpSmooth {
-  animation: scaleUpSmooth 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUpSmooth 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

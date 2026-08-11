@@ -12,43 +12,50 @@ export default function AuditLogsView() {
   ];
 
   return (
-    <div className="p-8 space-y-8">
-      <div>
-        <h2 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-          <Lock className="w-5 h-5 text-slate-900" />
-          Privacy & RBAC Security Audit Logs
+    <div className="p-4 md:p-6 space-y-6 select-none font-sans text-[#111827]">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs">
+        <div className="flex items-center space-x-2">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sans">
+            GOVERNANCE & SECURITY AUDIT
+          </span>
+        </div>
+        <h2 className="text-xl md:text-2xl font-bold text-[#111827] font-heading tracking-tight mt-0.5 flex items-center gap-2">
+          <Lock className="w-5 h-5 text-[#111827]" />
+          Privacy & Security Audit Logs
         </h2>
-        <p className="text-xs text-slate-500 font-sans mt-0.5">Immutable governance log tracking every access, privacy face blur toggle, and RPF dispatch action</p>
+        <p className="text-xs text-slate-500 font-medium mt-0.5">
+          Immutable audit trail tracking all operator dispatch actions, privacy mask toggles, and system verification requests.
+        </p>
       </div>
 
-      <div className="bg-white border border-[#E4E4DF] rounded-3xl p-6 shadow-sm">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-[#F4F4F0] text-slate-500 uppercase text-[10px] font-bold tracking-wider border-b border-[#E4E4DF]">
+          <table className="w-full text-left text-xs font-sans">
+            <thead className="bg-slate-50 text-[#111827] uppercase text-[10px] font-bold tracking-wider border-b border-[#E5E7EB]">
               <tr>
-                <th className="p-3">Log ID</th>
-                <th className="p-3">User / System ID</th>
-                <th className="p-3">Action Type</th>
-                <th className="p-3">Target Resource</th>
-                <th className="p-3">Timestamp</th>
-                <th className="p-3">IP Address</th>
-                <th className="p-3">Status</th>
+                <th className="p-3">LOG ID</th>
+                <th className="p-3">USER / SYSTEM ID</th>
+                <th className="p-3">ACTION TYPE</th>
+                <th className="p-3">TARGET RESOURCE</th>
+                <th className="p-3">TIMESTAMP</th>
+                <th className="p-3">IP ADDRESS</th>
+                <th className="p-3">STATUS</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-800">
+            <tbody className="divide-y divide-[#F1F5F9] text-slate-700 font-medium">
               {auditLogs.map((log) => (
-                <tr key={log.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="p-3 font-bold text-slate-900">#LOG-{log.id}</td>
-                  <td className="p-3 font-sans font-bold text-slate-900">{log.user}</td>
+                <tr key={log.id} className="hover:bg-slate-50/80 transition-colors">
+                  <td className="p-3 font-bold font-mono text-[#111827]">#LOG-{log.id}</td>
+                  <td className="p-3 font-bold text-[#111827]">{log.user}</td>
                   <td className="p-3">
-                    <span className="bg-slate-100 border border-slate-200 text-slate-700 px-2 py-0.5 rounded text-[10px] font-bold">
+                    <span className="bg-[#111827] text-white px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider font-mono">
                       {log.action}
                     </span>
                   </td>
-                  <td className="p-3 text-slate-500">{log.resource}</td>
+                  <td className="p-3 font-mono text-slate-600">{log.resource}</td>
                   <td className="p-3 text-slate-500">{log.time}</td>
-                  <td className="p-3 text-slate-500">{log.ip}</td>
-                  <td className="p-3 text-emerald-700 font-bold">{log.status}</td>
+                  <td className="p-3 font-mono text-slate-500">{log.ip}</td>
+                  <td className="p-3 text-emerald-600 font-bold uppercase font-mono">{log.status}</td>
                 </tr>
               ))}
             </tbody>
