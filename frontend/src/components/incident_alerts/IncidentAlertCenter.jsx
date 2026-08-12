@@ -106,45 +106,47 @@ export default function IncidentAlertCenter({ onDispatchGuard, incidents = [], s
       </div>
 
       {/* 2. Incidents Grid */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredIncidents.map((inc) => (
           <div
             key={inc.id}
             onClick={() => setSelectedIncident(inc)}
-            className="bg-white text-slate-900 border border-slate-200 hover:border-slate-300 rounded-lg p-4 space-y-2.5 cursor-pointer transition-all shadow-2xs hover:shadow-xs"
+            className="bg-white text-slate-900 border border-slate-200 hover:border-slate-300 rounded-lg p-4 space-y-2.5 cursor-pointer transition-all shadow-2xs hover:shadow-xs flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2 font-mono">
-                <span
-                  className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
-                    inc.severity === 'CRITICAL'
-                      ? 'bg-red-100 text-red-700 border border-red-200'
-                      : inc.severity === 'WARNING'
-                      ? 'bg-amber-100 text-amber-700 border border-amber-200'
-                      : 'bg-slate-100 text-slate-700 border border-slate-200'
-                  }`}
-                >
-                  {inc.severity}
-                </span>
-                <span className="text-xs font-bold text-slate-500">{inc.id}</span>
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 font-mono">
+                  <span
+                    className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                      inc.severity === 'CRITICAL'
+                        ? 'bg-red-100 text-red-700 border border-red-200'
+                        : inc.severity === 'WARNING'
+                        ? 'bg-amber-100 text-amber-700 border border-amber-200'
+                        : 'bg-slate-100 text-slate-700 border border-slate-200'
+                    }`}
+                  >
+                    {inc.severity}
+                  </span>
+                  <span className="text-xs font-bold text-slate-500">{inc.id}</span>
+                </div>
+                <span className="text-xs text-slate-500 font-mono">{inc.time}</span>
               </div>
-              <span className="text-xs text-slate-500 font-mono">{inc.time}</span>
-            </div>
 
-            <h3 className="text-base font-bold text-slate-900 font-heading leading-snug">
-              {inc.title}
-            </h3>
-            <p className="text-xs text-slate-600">
-              LOCATION: <strong className="text-slate-900">{inc.zone}</strong> · CAM: <span className="font-mono">{inc.cam}</span>
-            </p>
+              <h3 className="text-base font-bold text-slate-900 font-heading leading-snug">
+                {inc.title}
+              </h3>
+              <p className="text-xs text-slate-600">
+                LOCATION: <strong className="text-slate-900">{inc.zone}</strong> · CAM: <span className="font-mono">{inc.cam}</span>
+              </p>
 
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-600 leading-relaxed font-sans">
-              <p className="line-clamp-2">{inc.details || inc.desc}</p>
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-600 leading-relaxed font-sans">
+                <p className="line-clamp-2">{inc.details || inc.desc}</p>
+              </div>
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <span className="font-mono text-xs">
-                CONFIDENCE: <strong className="text-emerald-700">{inc.conf || '95.0%'}</strong>
+                CONF: <strong className="text-emerald-700">{inc.conf || '95.0%'}</strong>
               </span>
               <div className="flex items-center space-x-2">
                 <Button

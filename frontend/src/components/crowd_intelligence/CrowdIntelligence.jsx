@@ -32,7 +32,7 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
             Density & Crowd Analytics
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
-            Real-time occupancy metrics, spatial density heatmaps, and 15-minute surge forecasting.
+            Real-time occupancy metrics, sector density mapping, and 15-minute surge forecasting.
           </p>
         </div>
 
@@ -68,55 +68,77 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
 
       {/* 3. Main Content 12-Column Responsive Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Spatial Density Heatmap (8 Columns) */}
-        <div className="lg:col-span-8 bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
+        {/* Restrained Operational Density Map (8 Columns) */}
+        <div className="lg:col-span-8 bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans shadow-2xs">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div>
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
-                SPATIAL DENSITY
+                SPATIAL OCCUPANCY MAP
               </p>
               <h3 className="text-base font-bold text-slate-900 font-heading mt-0.5">
-                Sector Density Heatmap & Motion Vectors
+                Sector Density Mapping & Flow Vectors
               </h3>
             </div>
-            <div className="flex items-center space-x-2 text-[10px] text-slate-500 font-mono">
-              <span>Low</span>
-              <div className="w-20 h-2 rounded bg-gradient-to-r from-emerald-500 via-amber-500 to-red-600"></div>
-              <span>High</span>
+            <div className="flex items-center space-x-3 text-[10px] text-slate-600 font-mono">
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Normal</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500"></span> Moderate</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-600"></span> Surge Alert</span>
             </div>
           </div>
 
-          <div className="relative w-full h-[320px] bg-slate-900 rounded-md border border-slate-200 p-4 overflow-hidden flex items-center justify-center select-none">
-            {/* CAD Grid Background Overlay */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:16px_16px]" />
+          <div className="relative w-full h-[320px] bg-slate-50 rounded-md border border-slate-200 p-4 overflow-hidden flex flex-col justify-between select-none">
+            {/* Grid Vector Background */}
+            <div className="absolute inset-0 opacity-40 pointer-events-none bg-[linear-gradient(to_right,#E2E8F0_1px,transparent_1px),linear-gradient(to_bottom,#E2E8F0_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-            {/* Density Blobs */}
-            <div className="absolute top-1/4 left-1/3 w-48 h-48 rounded-full bg-red-600/30 blur-3xl animate-pulse"></div>
-            <div className="absolute top-1/3 left-1/2 w-48 h-32 rounded-full bg-amber-500/25 blur-2xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-36 h-36 rounded-full bg-emerald-500/20 blur-2xl"></div>
-
-            <div className="relative z-10 w-full h-full border border-slate-700 rounded-md p-3 flex flex-col justify-between">
-              <div className="flex justify-between items-center text-[10px] font-mono text-slate-200 bg-slate-800/90 p-2 rounded border border-slate-700">
-                <span>ZONE A CONCOURSE ENTRANCE</span>
-                <span className="font-bold text-emerald-400">OCCUPANCY: 68%</span>
+            {/* Structured Zone Sectors */}
+            <div className="relative z-10 grid grid-cols-2 gap-4 h-full p-2">
+              {/* Zone A */}
+              <div className="bg-emerald-50/60 border border-emerald-200 rounded-md p-3 flex flex-col justify-between">
+                <div className="flex justify-between items-center text-[11px] font-mono font-bold text-emerald-900">
+                  <span>ZONE A (CONCOURSE)</span>
+                  <span className="bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded text-[9px]">NORMAL (1.4 pax/m²)</span>
+                </div>
+                <p className="text-xs text-slate-600">Occupancy: 1,240 pax · Pedestrian Flow Active</p>
               </div>
 
-              <div className="self-center bg-red-600 text-white font-bold text-xs px-4 py-2 rounded-md flex items-center gap-2 uppercase tracking-wide shadow-md font-mono">
-                <AlertTriangle className="w-4 h-4 text-white" /> Zone B Congested: 3.8 pax/m² (Surge Alert)
+              {/* Zone B (Alert) */}
+              <div className="bg-red-50/80 border-2 border-red-500 rounded-md p-3 flex flex-col justify-between shadow-xs">
+                <div className="flex justify-between items-center text-[11px] font-mono font-bold text-red-900">
+                  <span className="flex items-center gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5 text-red-600" /> ZONE B (GATE 2)
+                  </span>
+                  <span className="bg-red-100 text-red-700 border border-red-200 px-2 py-0.5 rounded text-[9px]">SURGING (3.8 pax/m²)</span>
+                </div>
+                <div className="bg-red-600 text-white p-2 rounded text-xs font-medium font-sans">
+                  Congestion detected. 3,850 pax present. Inbound flow rate exceeding capacity threshold.
+                </div>
               </div>
 
-              <div className="flex justify-between text-[10px] font-mono text-slate-200 bg-slate-800/90 p-2 rounded border border-slate-700">
-                <span>ZONE C (FLOWING)</span>
-                <span>ZONE D (NORMAL)</span>
+              {/* Zone C */}
+              <div className="bg-emerald-50/60 border border-emerald-200 rounded-md p-3 flex flex-col justify-between">
+                <div className="flex justify-between items-center text-[11px] font-mono font-bold text-emerald-900">
+                  <span>ZONE C (ESCALATOR LINK)</span>
+                  <span className="bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded text-[9px]">FLOWING (0.9 pax/m²)</span>
+                </div>
+                <p className="text-xs text-slate-600">Occupancy: 890 pax · Clear transit Corridor</p>
+              </div>
+
+              {/* Zone D */}
+              <div className="bg-amber-50/60 border border-amber-200 rounded-md p-3 flex flex-col justify-between">
+                <div className="flex justify-between items-center text-[11px] font-mono font-bold text-amber-900">
+                  <span>ZONE D (NORTH ACCESS)</span>
+                  <span className="bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded text-[9px]">MODERATE (2.3 pax/m²)</span>
+                </div>
+                <p className="text-xs text-slate-600">Occupancy: 2,100 pax · Steady ingress rate</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* AI Surge Forecasting & Queue Analytics (4 Columns) */}
-        <div className="lg:col-span-4 space-y-6">
+        {/* Surge Forecasting & Queue Analytics (4 Columns) */}
+        <div className="lg:col-span-4 space-y-4">
           {/* Surge Prediction Panel */}
-          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-3 font-sans">
+          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-3 font-sans shadow-2xs">
             <div className="flex items-center space-x-2 border-b border-slate-100 pb-3">
               <TrendingUp className="w-4 h-4 text-slate-900" />
               <h3 className="text-xs font-bold text-slate-900 font-heading uppercase tracking-wider">
@@ -127,7 +149,7 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
             <div className="p-4 bg-red-50 border border-red-200 rounded-md space-y-2">
               <div className="flex items-center justify-between text-xs font-bold text-red-900 font-mono">
                 <span>Predictive Surge: Zone B</span>
-                <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded text-[9px] uppercase">
+                <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded text-[9px] uppercase border border-red-200">
                   92% Prob
                 </span>
               </div>
@@ -143,7 +165,7 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
           </div>
 
           {/* Queue Wait-Time Analytics */}
-          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-3 font-sans">
+          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-3 font-sans shadow-2xs">
             <div className="flex items-center space-x-2 border-b border-slate-100 pb-3">
               <Clock className="w-4 h-4 text-slate-900" />
               <h3 className="text-xs font-bold text-slate-900 font-heading uppercase tracking-wider">

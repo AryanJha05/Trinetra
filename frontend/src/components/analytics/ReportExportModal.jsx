@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileText, Download, X, CheckCircle2, ShieldCheck, Clock, Layers } from 'lucide-react';
 import Button from '../common/Button';
 
@@ -7,6 +7,17 @@ export default function ReportExportModal({ isOpen, onClose, deploymentEnv = 'Ra
   const [dateRange, setDateRange] = useState('LAST_24_HOURS');
   const [includeXai, setIncludeXai] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -22,7 +33,10 @@ export default function ReportExportModal({ isOpen, onClose, deploymentEnv = 'Ra
   };
 
   return (
-    <div className="fixed inset-0 z-[600] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fadeInSmooth select-none font-sans">
+    <div
+      className="fixed inset-0 z-[600] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fadeInSmooth select-none font-sans"
+      onClick={onClose}
+    >
       <div
         className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 space-y-6 shadow-2xl animate-scaleUpSmooth text-slate-900 relative"
         onClick={(e) => e.stopPropagation()}
@@ -88,7 +102,7 @@ export default function ReportExportModal({ isOpen, onClose, deploymentEnv = 'Ra
               className="w-4 h-4 accent-[#111827] rounded cursor-pointer"
             />
             <div className="font-sans text-xs">
-              <span className="font-bold text-slate-900 block">Include Explainable AI (XAI) Factor Breakdowns</span>
+              <span className="font-bold text-slate-900 block">Include Risk Factor Analysis Breakdowns</span>
               <span className="text-slate-500 text-[11px]">Attaches computer vision decision logic to every incident</span>
             </div>
           </div>
@@ -99,7 +113,7 @@ export default function ReportExportModal({ isOpen, onClose, deploymentEnv = 'Ra
               <span>{deploymentEnv.toUpperCase()}</span>
             </div>
             <p className="text-[11px] text-slate-300 font-sans">
-              Report will be cryptographically signed by Team Trinetra command room authority.
+              Report will be cryptographically signed by TRINETRA command room authority.
             </p>
           </div>
         </div>

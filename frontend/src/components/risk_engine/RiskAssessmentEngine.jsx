@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity, ShieldAlert, Cpu, Sliders } from 'lucide-react';
+import { Activity, ShieldAlert, Cpu, SlidersHorizontal, ArrowRight } from 'lucide-react';
 import Button from '../common/Button';
 
 export default function RiskAssessmentEngine({ onNavigateToFeed }) {
@@ -9,49 +9,52 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
 
   const calculatedRisk = crowdWeight + motionWeight + restrictedWeight;
   const getSeverityLabel = (score) => {
-    if (score >= 80) return { label: 'CRITICAL', color: 'bg-red-600 text-white font-bold' };
-    if (score >= 60) return { label: 'HIGH RISK', color: 'bg-amber-500 text-slate-950 font-bold' };
-    if (score >= 40) return { label: 'MEDIUM', color: 'bg-blue-600 text-white font-bold' };
-    return { label: 'LOW', color: 'bg-emerald-600 text-white font-bold' };
+    if (score >= 80) return { label: 'CRITICAL', color: 'bg-red-100 text-red-700 border-red-200 font-bold' };
+    if (score >= 60) return { label: 'HIGH RISK', color: 'bg-amber-100 text-amber-800 border-amber-200 font-bold' };
+    if (score >= 40) return { label: 'MEDIUM', color: 'bg-blue-100 text-blue-700 border-blue-200 font-bold' };
+    return { label: 'LOW', color: 'bg-emerald-100 text-emerald-700 border-emerald-200 font-bold' };
   };
 
   const severity = getSeverityLabel(calculatedRisk);
 
-  const xaiCases = [
+  const riskCases = [
     {
-      id: 'XAI-CASE-101',
+      id: 'RISK-CASE-101',
       title: 'Zone B Public Hall Overcrowding',
       score: 87,
+      confidence: '96.2%',
       factors: [
         { factor: 'Crowd Density > 3.8 pax/m²', contrib: '+35%' },
-        { factor: 'Unusual Backward Movement Vectors', contrib: '+25%' },
-        { factor: 'Close Proximity to Restricted Perimeter', contrib: '+27%' },
+        { factor: 'Unusual Counter-Flow Vectors', contrib: '+25%' },
+        { factor: 'Proximity to Restricted Perimeter', contrib: '+27%' },
       ],
-      recommendation: 'Immediate perimeter barrier deployment & redirection to exit hall.',
+      recommendation: 'Deploy perimeter barrier & redirect crowd flow to secondary exit hall.',
       status: 'HIGH SEVERITY',
       cam: 'CAM-002',
     },
     {
-      id: 'XAI-CASE-102',
+      id: 'RISK-CASE-102',
       title: 'Restricted Gate Unattended Package Alert',
       score: 94,
+      confidence: '98.4%',
       factors: [
-        { factor: 'Unattended Object > 4m Dwell Time', contrib: '+45%' },
+        { factor: 'Unattended Object Dwell Time > 4m', contrib: '+45%' },
         { factor: 'Restricted Access Zone Location', contrib: '+35%' },
         { factor: 'Owner Abandonment Velocity Vector', contrib: '+14%' },
       ],
-      recommendation: 'Dispatch Security Response Unit & Inspect Zone A Concourse.',
+      recommendation: 'Dispatch Security Response Unit & inspect Zone A Concourse.',
       status: 'CRITICAL',
       cam: 'CAM-001',
     },
     {
-      id: 'XAI-CASE-103',
-      title: 'Ticket Vending Machine Suspicious Loitering',
+      id: 'RISK-CASE-103',
+      title: 'Vending Machine Area Suspicious Loitering',
       score: 58,
+      confidence: '89.1%',
       factors: [
         { factor: 'Stationary Dwell Time > 12 mins', contrib: '+30%' },
-        { factor: 'Low Commuter Flow Area', contrib: '+15%' },
-        { factor: 'Frequent Backward Glances Observed', contrib: '+13%' },
+        { factor: 'Low Commuter Flow Sector', contrib: '+15%' },
+        { factor: 'Repeated Glances Observed', contrib: '+13%' },
       ],
       recommendation: 'Issue automated audio prompt & log for supervisor review.',
       status: 'MEDIUM SEVERITY',
@@ -66,74 +69,74 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <Cpu className="w-3.5 h-3.5 text-slate-800" />
-            <span>EXPLAINABLE AI ENGINE</span>
+            <span>RISK INTELLIGENCE</span>
             <span>·</span>
-            <span>REAL-TIME THREAT MATRICES</span>
+            <span>REAL-TIME THREAT SCORING</span>
           </div>
           <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
-            Dynamic Risk Assessment & XAI Engine
+            Dynamic Risk Assessment & Threat Analysis
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
-            Algorithmic risk weighting, multi-factor anomaly calculation, and transparent Explainable AI decision trees.
+            Multi-factor anomaly calculation, risk weighting, and transparent decision breakdown.
           </p>
         </div>
 
         <div className="flex items-center space-x-2">
-          <span className={`px-3 py-1.5 rounded-md text-xs font-mono font-bold ${severity.color}`}>
-            AGGREGATE SCORE: {calculatedRisk}/100 ({severity.label})
+          <span className={`px-3 py-1.5 rounded-md text-xs font-mono border ${severity.color}`}>
+            AGGREGATE THREAT SCORE: {calculatedRisk}/100 ({severity.label})
           </span>
         </div>
       </div>
 
-      {/* 2. Interactive Risk Formula Tuner Card */}
-      <div className="bg-slate-900 text-white border border-slate-900 rounded-lg p-6 space-y-6 font-sans shadow-2xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      {/* 2. Light Enterprise Risk Factor Analysis Card */}
+      <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-5 font-sans shadow-2xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
           <div>
-            <h2 className="text-sm font-bold text-white font-heading tracking-wider uppercase flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-emerald-400" /> Interactive XAI Risk Formula Tuner
+            <h2 className="text-xs font-bold text-slate-900 font-heading tracking-wider uppercase flex items-center gap-2">
+              <SlidersHorizontal className="w-4 h-4 text-slate-900" /> Risk Factor Analysis & Weighting
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Adjust parameters below to evaluate synthesized real-time threat scores.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Adjust threat parameters to synthesize real-time risk index across all active cameras.
             </p>
           </div>
 
           <div className="flex items-center space-x-3 font-mono">
-            <span className="text-xs text-slate-400 uppercase">Synthesized Risk:</span>
-            <div className={`px-3 py-1 rounded text-xs uppercase font-bold font-mono ${severity.color}`}>
+            <span className="text-xs text-slate-500 font-medium">Synthesized Score:</span>
+            <div className={`px-2.5 py-1 rounded text-xs uppercase font-bold border font-mono ${severity.color}`}>
               {calculatedRisk}% · {severity.label}
             </div>
           </div>
         </div>
 
-        {/* Formula Synthesis Row */}
-        <div className="bg-slate-800/90 border border-slate-700/90 p-4 rounded-md flex flex-col md:flex-row items-center justify-around gap-4 font-mono text-xs">
+        {/* Formula Breakdown Row */}
+        <div className="bg-slate-50 border border-slate-200 p-4 rounded-md flex flex-col md:flex-row items-center justify-around gap-4 font-mono text-xs">
           <div className="text-center">
-            <span className="text-slate-400 block text-[9px] uppercase font-sans font-bold">CROWD DENSITY</span>
-            <span className="text-emerald-400 font-bold text-base">+{crowdWeight}%</span>
+            <span className="text-slate-500 block text-[9px] uppercase font-sans font-bold">CROWD DENSITY</span>
+            <span className="text-slate-900 font-bold text-base">+{crowdWeight}%</span>
           </div>
-          <span className="text-slate-500 text-lg font-bold">+</span>
+          <span className="text-slate-400 text-lg font-bold">+</span>
           <div className="text-center">
-            <span className="text-slate-400 block text-[9px] uppercase font-sans font-bold">UNUSUAL MOTION</span>
-            <span className="text-sky-400 font-bold text-base">+{motionWeight}%</span>
+            <span className="text-slate-500 block text-[9px] uppercase font-sans font-bold">MOTION VECTOR ANOMALY</span>
+            <span className="text-slate-900 font-bold text-base">+{motionWeight}%</span>
           </div>
-          <span className="text-slate-500 text-lg font-bold">+</span>
+          <span className="text-slate-400 text-lg font-bold">+</span>
           <div className="text-center">
-            <span className="text-slate-400 block text-[9px] uppercase font-sans font-bold">RESTRICTED ZONE</span>
-            <span className="text-amber-400 font-bold text-base">+{restrictedWeight}%</span>
+            <span className="text-slate-500 block text-[9px] uppercase font-sans font-bold">RESTRICTED ZONE ENTRY</span>
+            <span className="text-slate-900 font-bold text-base">+{restrictedWeight}%</span>
           </div>
-          <span className="text-slate-500 text-lg font-bold">=</span>
-          <div className="text-center bg-slate-900 px-4 py-2 rounded border border-slate-700">
-            <span className="text-slate-400 block text-[9px] uppercase font-sans font-bold">FINAL RISK SCORE</span>
-            <span className="text-red-400 font-bold text-lg">{calculatedRisk}%</span>
+          <span className="text-slate-400 text-lg font-bold">=</span>
+          <div className="text-center bg-white px-4 py-2 rounded border border-slate-300 shadow-2xs">
+            <span className="text-slate-500 block text-[9px] uppercase font-sans font-bold">FINAL RISK INDEX</span>
+            <span className="text-red-700 font-bold text-lg">{calculatedRisk}%</span>
           </div>
         </div>
 
         {/* Weight Sliders */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-1">
           <div className="space-y-2">
             <div className="flex justify-between text-xs font-sans">
-              <span className="text-slate-300 font-medium">Crowd Density Weight:</span>
-              <span className="text-emerald-400 font-bold font-mono">{crowdWeight}%</span>
+              <span className="text-slate-700 font-medium">Crowd Density Weight:</span>
+              <span className="text-slate-900 font-bold font-mono">{crowdWeight}%</span>
             </div>
             <input
               type="range"
@@ -141,14 +144,14 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
               max="50"
               value={crowdWeight}
               onChange={(e) => setCrowdWeight(Number(e.target.value))}
-              className="w-full accent-emerald-500 cursor-pointer"
+              className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900"
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between text-xs font-sans">
-              <span className="text-slate-300 font-medium">Motion Vector Anomaly:</span>
-              <span className="text-sky-400 font-bold font-mono">{motionWeight}%</span>
+              <span className="text-slate-700 font-medium">Motion Vector Anomaly:</span>
+              <span className="text-slate-900 font-bold font-mono">{motionWeight}%</span>
             </div>
             <input
               type="range"
@@ -156,14 +159,14 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
               max="40"
               value={motionWeight}
               onChange={(e) => setMotionWeight(Number(e.target.value))}
-              className="w-full accent-sky-400 cursor-pointer"
+              className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900"
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between text-xs font-sans">
-              <span className="text-slate-300 font-medium">Restricted Zone Entry:</span>
-              <span className="text-amber-400 font-bold font-mono">{restrictedWeight}%</span>
+              <span className="text-slate-700 font-medium">Restricted Zone Entry:</span>
+              <span className="text-slate-900 font-bold font-mono">{restrictedWeight}%</span>
             </div>
             <input
               type="range"
@@ -171,23 +174,23 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
               max="40"
               value={restrictedWeight}
               onChange={(e) => setRestrictedWeight(Number(e.target.value))}
-              className="w-full accent-amber-400 cursor-pointer"
+              className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900"
             />
           </div>
         </div>
       </div>
 
-      {/* 3. XAI Case Studies & Breakdown Cards (12 Column Responsive Layout: 4 columns each) */}
-      <div className="space-y-4">
+      {/* 3. Risk Factor Breakdown Cards */}
+      <div className="space-y-3">
         <h3 className="text-xs font-bold text-slate-900 font-heading uppercase tracking-wider">
-          Live XAI Threat Factor Breakdowns
+          Active Threat Case Breakdowns
         </h3>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
-          {xaiCases.map((cs) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {riskCases.map((cs) => (
             <div
               key={cs.id}
-              className="bg-white border border-slate-200 hover:border-slate-300 rounded-lg p-5 space-y-4 flex flex-col justify-between transition-all shadow-2xs hover:shadow-xs font-sans"
+              className="bg-white border border-slate-200 hover:border-slate-300 rounded-lg p-5 space-y-4 flex flex-col justify-between transition-all shadow-2xs font-sans"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -204,7 +207,7 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
                 {/* Factors List */}
                 <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
                   <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block font-mono">
-                    CONTRIBUTING FACTORS
+                    CONTRIBUTING FACTORS (CONFIDENCE: {cs.confidence})
                   </span>
                   {cs.factors.map((f, i) => (
                     <div key={i} className="flex items-center justify-between bg-slate-50 p-2 rounded border border-slate-200 text-xs font-medium">
@@ -214,11 +217,11 @@ export default function RiskAssessmentEngine({ onNavigateToFeed }) {
                   ))}
                 </div>
 
-                <div className="bg-slate-900 text-white p-3.5 rounded-md text-xs space-y-1 font-sans">
-                  <span className="text-[9px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
+                <div className="bg-slate-50 border border-slate-200 p-3 rounded-md text-xs space-y-1 font-sans">
+                  <span className="text-[9px] font-mono text-slate-900 font-bold uppercase tracking-wider block">
                     RECOMMENDED ACTION
                   </span>
-                  <p className="text-slate-200 leading-snug font-medium">{cs.recommendation}</p>
+                  <p className="text-slate-700 leading-snug font-medium">{cs.recommendation}</p>
                 </div>
               </div>
 

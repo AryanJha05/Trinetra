@@ -16,6 +16,9 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
     { camera_id: 'CAM-004', location: 'Service Depot & Maintenance (Zone D)', zone: 'Zone D - Service Yard', status: 'ONLINE' },
     { camera_id: 'CAM-005', location: 'Escalator Link & Staircase', zone: 'Transit Link', status: 'ONLINE' },
     { camera_id: 'CAM-006', location: 'Parking Yard & Perimeter Gate 2', zone: 'Perimeter', status: 'ONLINE' },
+    { camera_id: 'CAM-007', location: 'Baggage Handling Bay 3', zone: 'Zone D - Maintenance', status: 'ONLINE' },
+    { camera_id: 'CAM-008', location: 'Platform 2 North Corridor', zone: 'Zone B - Concourse', status: 'ONLINE' },
+    { camera_id: 'CAM-009', location: 'South Gate Vehicle Entry', zone: 'Perimeter', status: 'ONLINE' },
   ];
 
   const displayedCameras = cameras.slice(0, gridLayout);
@@ -27,15 +30,15 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <Camera className="w-3.5 h-3.5 text-slate-800" />
-            <span>LIVE MATRIX</span>
+            <span>LIVE MONITORING</span>
             <span>·</span>
             <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
           <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
-            CCTV Infrastructure Matrix
+            Live Surveillance Matrix
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
-            Real-time multi-camera feeds & ByteTrack computer vision inference matrix.
+            Real-time multi-camera CCTV feeds, object tracking overlays, and privacy compliance controls.
           </p>
         </div>
 
@@ -49,7 +52,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                 gridLayout === 4 ? 'bg-slate-900 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <Grid className="w-3 h-3" /> 2x2 (4)
+              <Grid className="w-3 h-3" /> 2x2 Grid
             </button>
             <button
               onClick={() => setGridLayout(9)}
@@ -57,7 +60,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                 gridLayout === 9 ? 'bg-slate-900 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <Grid className="w-3 h-3" /> 3x3 (9)
+              <Grid className="w-3 h-3" /> 3x3 Grid
             </button>
           </div>
 
@@ -99,10 +102,10 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
       </div>
 
       {/* 2. Main Content 12-Column Responsive Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         {/* Multi-Camera Streams Grid (9 Columns) */}
         <div className="lg:col-span-9">
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+          <div className={`grid gap-4 ${gridLayout === 4 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3'}`}>
             {displayedCameras.map((cam) => {
               const isActive = activeCamId === cam.camera_id;
               return (
@@ -129,7 +132,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                   <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs font-sans">
                     <div className="min-w-0 pr-2">
                       <span className="font-bold text-slate-900 font-mono">{cam.camera_id}</span>
-                      <span className="text-slate-500 ml-2 font-sans truncate inline-block max-w-[160px] align-bottom">{cam.zone}</span>
+                      <span className="text-slate-500 ml-2 font-sans truncate inline-block max-w-[140px] align-bottom">{cam.zone}</span>
                     </div>
                     <span
                       className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono flex-shrink-0 ${
@@ -147,19 +150,19 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
           </div>
         </div>
 
-        {/* Node Health & Active Stream Telemetry (3 Columns) */}
+        {/* Node Telemetry & Uptime Status (3 Columns) */}
         <div className="lg:col-span-3 space-y-3">
-          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 font-sans shadow-2xs">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-heading">
-                Active Node Telemetry
+                Active Camera Status
               </h3>
               <span className="font-mono text-xs text-slate-900 font-bold bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                 {activeCamId}
               </span>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-2.5 text-xs">
               <div className="flex justify-between text-slate-600">
                 <span>LOCATION:</span>
                 <span className="text-slate-900 font-semibold truncate max-w-[120px]">
@@ -171,11 +174,11 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                 <span className="text-slate-900 font-bold">1080P @ 30 FPS</span>
               </div>
               <div className="flex justify-between text-slate-600 font-mono">
-                <span>AI LATENCY:</span>
+                <span>PROCESSING TIME:</span>
                 <span className="text-emerald-700 font-bold">12MS</span>
               </div>
               <div className="flex justify-between text-slate-600 font-mono">
-                <span>DPDP MASK:</span>
+                <span>PRIVACY MASK:</span>
                 <span className={privacyMasking ? 'text-emerald-700 font-bold' : 'text-slate-400'}>
                   {privacyMasking ? 'ENABLED' : 'DISABLED'}
                 </span>
@@ -183,12 +186,12 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-heading border-b border-slate-100 pb-3">
-              Cluster Uptime Status
+          <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 font-sans shadow-2xs">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-heading border-b border-slate-100 pb-2.5">
+              System Uptime Status
             </h3>
-            <div className="space-y-3 text-xs">
-              <div className="p-3 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
+            <div className="space-y-2.5 text-xs">
+              <div className="p-2.5 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
                 <div>
                   <p className="font-bold text-slate-900">Concourse Nodes</p>
                   <p className="text-[10px] text-slate-500 font-mono">43/45 ACTIVE</p>
@@ -198,7 +201,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                 </span>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
+              <div className="p-2.5 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
                 <div>
                   <p className="font-bold text-slate-900">Platform Nodes</p>
                   <p className="text-[10px] text-slate-500 font-mono">28/30 ACTIVE</p>
@@ -208,7 +211,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                 </span>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
+              <div className="p-2.5 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
                 <div>
                   <p className="font-bold text-slate-900">Perimeter Nodes</p>
                   <p className="text-[10px] text-slate-500 font-mono">16/16 ACTIVE</p>
