@@ -12,9 +12,9 @@ export default function AuditLogsView() {
   ];
 
   return (
-    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <Lock className="w-3.5 h-3.5 text-slate-800" />
@@ -22,7 +22,7 @@ export default function AuditLogsView() {
             <span>·</span>
             <span>IMMUTABLE SYSTEM LOG</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             Privacy & Security Audit Logs
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
@@ -32,9 +32,9 @@ export default function AuditLogsView() {
       </div>
 
       {/* 2. Audit Table Card */}
-      <div className="bg-white border border-slate-200 rounded-lg p-3.5 shadow-2xs font-sans flex-1 overflow-hidden flex flex-col">
-        <div className="overflow-y-auto flex-1 pr-1">
-          <table className="w-full text-left text-xs font-sans border-collapse">
+      <div className="bg-white border border-slate-200 rounded-lg p-3.5 shadow-2xs font-sans">
+        <div className="responsive-table-wrapper">
+          <table className="w-full text-left text-xs font-sans border-collapse min-w-[640px]">
             <thead className="sticky top-0 z-10 bg-slate-100 text-slate-700 uppercase text-[10px] font-bold tracking-wider border-b border-slate-200 font-mono shadow-xs">
               <tr>
                 <th className="p-2.5">LOG ID</th>

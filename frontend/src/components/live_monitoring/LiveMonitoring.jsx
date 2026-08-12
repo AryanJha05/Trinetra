@@ -21,9 +21,9 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
   const displayedCameras = cameras.slice(0, gridLayout);
 
   return (
-    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <Camera className="w-3.5 h-3.5 text-slate-800" />
@@ -31,7 +31,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
             <span>·</span>
             <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             CCTV Infrastructure Matrix
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
@@ -98,24 +98,25 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
         </div>
       </div>
 
-      {/* 2. Main Content 12-Column Responsive Layout (Internal Scroll) */}
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-4 overflow-hidden">
-        {/* Multi-Camera Streams Grid (9 Columns - Internal Scroll) */}
-        <div className="lg:col-span-9 flex flex-col h-full min-h-0 overflow-y-auto pr-1">
-          <div className={`grid ${gridLayout === 4 ? 'grid-cols-1 md:grid-cols-2 gap-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3'}`}>
+      {/* 2. Main Content 12-Column Responsive Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Multi-Camera Streams Grid (9 Columns) */}
+        <div className="lg:col-span-9">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
             {displayedCameras.map((cam) => {
               const isActive = activeCamId === cam.camera_id;
               return (
                 <div
                   key={cam.camera_id}
                   onClick={() => setActiveCamId(cam.camera_id)}
-                  className={`bg-white border rounded-lg overflow-hidden cursor-pointer transition-all ${
+                  className={`bg-white border rounded-lg overflow-hidden cursor-pointer transition-all shadow-2xs ${
                     isActive
                       ? 'border-slate-900 ring-2 ring-slate-900/10'
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  <div className="h-56 w-full relative bg-slate-900">
+                  {/* Strict 16:9 Aspect Video Container */}
+                  <div className="w-full aspect-video relative bg-slate-950 overflow-hidden">
                     <VideoPlayerCanvas
                       camera={cam}
                       privacyMasking={privacyMasking}
@@ -123,13 +124,15 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                       zoomLevel={isActive ? zoomLevel : 1.0}
                     />
                   </div>
-                  <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs">
-                    <div>
+
+                  {/* Standardized Card Footer */}
+                  <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs font-sans">
+                    <div className="min-w-0 pr-2">
                       <span className="font-bold text-slate-900 font-mono">{cam.camera_id}</span>
-                      <span className="text-slate-500 ml-2 font-sans">{cam.zone}</span>
+                      <span className="text-slate-500 ml-2 font-sans truncate inline-block max-w-[160px] align-bottom">{cam.zone}</span>
                     </div>
                     <span
-                      className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                      className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono flex-shrink-0 ${
                         cam.status === 'ALERT'
                           ? 'bg-red-100 text-red-700 border border-red-200'
                           : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
@@ -145,7 +148,7 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
         </div>
 
         {/* Node Health & Active Stream Telemetry (3 Columns) */}
-        <div className="lg:col-span-3 flex flex-col h-full min-h-0 overflow-y-auto pr-1 space-y-3">
+        <div className="lg:col-span-3 space-y-3">
           <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-heading">

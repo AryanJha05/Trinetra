@@ -56,18 +56,18 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
 
   return (
     <>
-      {/* Mobile Backdrop */}
+      {/* Mobile / Tablet Backdrop */}
       {mobileMenuOpen && (
         <div
           onClick={() => setMobileMenuOpen(false)}
-          className="fixed inset-0 bg-slate-900/40 z-[90] md:hidden backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-slate-900/50 z-[90] lg:hidden backdrop-blur-xs transition-opacity"
         />
       )}
 
-      {/* Fixed Navigation Sidebar (250px) */}
+      {/* Fixed Navigation Sidebar (240px) */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-[100] w-[250px] bg-[#F8F9FA] text-slate-900 border-r border-slate-200 flex flex-col justify-between p-4 h-screen overflow-y-auto select-none transition-transform duration-200 ease-in-out ${
-          mobileMenuOpen ? 'translate-x-0 shadow-xl' : '-translate-x-full md:translate-x-0'
+        className={`fixed top-0 left-0 bottom-0 z-[100] w-[240px] bg-[#F8F9FA] text-slate-900 border-r border-slate-200 flex flex-col justify-between p-4 h-screen overflow-y-auto select-none transition-transform duration-200 ease-in-out ${
+          mobileMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         <div className="space-y-6">

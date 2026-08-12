@@ -4,24 +4,78 @@
 
 @layer base {
   html, body, #root {
-    height: 100vh;
-    max-height: 100vh;
-    overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     background-color: #F8FAFC;
-    color: #111827;
+    color: #0F172A;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
+  
+  /* Guarantee min-width: 0 on all grid items to prevent horizontal blowout */
+  *, ::before, ::after {
+    min-width: 0;
+  }
+}
+
+/* Grid & Fluid Typography Helpers */
+.app-grid-shell {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-rows: 64px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+@media (max-width: 1023px) {
+  .app-grid-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 64px minmax(0, 1fr);
+  }
+}
+
+.fluid-heading {
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.25;
+}
+
+.fluid-padding {
+  padding: clamp(12px, 1.5vw, 24px);
+}
+
+/* 16:9 Video Canvas Aspect Ratio Enforcer */
+.aspect-video-container {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Internal Scroll Container Utility */
+.internal-scroll-area {
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table Horizontal Scroll Wrapper */
+.responsive-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Enterprise Minimal Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {

@@ -11,60 +11,55 @@ export default function StationBlueprintMap({ onSelectCamera }) {
   ];
 
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 space-y-3 font-sans text-[#111827]">
-      <div className="flex items-center justify-between">
-        <div>
-          <h4 className="text-xs font-bold text-[#111827] font-heading uppercase tracking-wider">Spatial CAD Topology</h4>
-          <p className="text-[11px] text-slate-500">Interactive node matrix — Select node to view stream</p>
-        </div>
+    <div className="w-full h-full min-h-[220px] bg-slate-950 rounded-lg overflow-hidden border border-slate-200 relative select-none flex flex-col justify-between p-3">
+      {/* CAD Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:16px_16px]" />
 
+      {/* SVG Structural floorplan */}
+      <svg className="absolute inset-0 w-full h-full stroke-slate-700 opacity-60 pointer-events-none" strokeWidth="1" fill="none">
+        <rect x="5%" y="10%" width="90%" height="30%" rx="4" strokeDasharray="4 4" />
+        <line x1="5%" y1="52%" x2="95%" y2="52%" strokeWidth="1.5" />
+        <line x1="5%" y1="68%" x2="95%" y2="68%" strokeWidth="1.5" />
+        <line x1="5%" y1="84%" x2="95%" y2="84%" strokeWidth="1.5" />
+      </svg>
+
+      {/* Map Legend Bar Overlay */}
+      <div className="relative z-10 flex items-center justify-between bg-slate-900/80 backdrop-blur-xs p-2 rounded border border-slate-800 text-[10px] font-mono text-slate-300">
+        <span className="font-bold text-white uppercase tracking-wider">Spatial Topology Grid</span>
         <div className="flex items-center space-x-3 text-[10px] uppercase font-semibold">
-          <span className="flex items-center gap-1.5 text-slate-600">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Active (42)
+          <span className="flex items-center gap-1.5 text-slate-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Active (42)
           </span>
-          <span className="flex items-center gap-1.5 text-slate-600">
-            <span className="w-2 h-2 rounded-full bg-red-500"></span> Alert (2)
+          <span className="flex items-center gap-1.5 text-slate-300">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Alert (2)
           </span>
         </div>
       </div>
 
-      {/* Architectural Vector Blueprint */}
-      <div className="relative w-full h-[360px] bg-slate-900 rounded-lg overflow-hidden border border-[#E5E7EB] p-4 select-none">
-        {/* CAD Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:16px_16px]" />
-
-        {/* SVG Structural floorplan */}
-        <svg className="absolute inset-0 w-full h-full stroke-slate-700 opacity-60 pointer-events-none" strokeWidth="1" fill="none">
-          <rect x="5%" y="10%" width="90%" height="30%" rx="4" strokeDasharray="4 4" />
-          <line x1="5%" y1="52%" x2="95%" y2="52%" strokeWidth="1.5" />
-          <line x1="5%" y1="68%" x2="95%" y2="68%" strokeWidth="1.5" />
-          <line x1="5%" y1="84%" x2="95%" y2="84%" strokeWidth="1.5" />
-        </svg>
-
-        {/* Camera Nodes */}
-        {cameraNodes.map((node) => {
-          const isAlert = node.status === 'ALERT';
-          return (
-            <div
-              key={node.id}
-              onClick={() => onSelectCamera(node.id)}
-              style={{ left: `${node.x}%`, top: `${node.y}%` }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
-            >
-              <div className={`relative flex items-center justify-center w-7 h-7 rounded-lg border transition-all ${isAlert ? 'bg-red-600 border-white text-white shadow-xs' : 'bg-slate-800 border-slate-600 text-slate-200 hover:bg-[#111827] hover:border-white'
-                }`}>
-                <Camera className="w-3.5 h-3.5" />
-              </div>
-
-              {/* Tooltip on Hover */}
-              <div className="absolute top-9 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#111827] text-white text-[10px] p-2 rounded-lg shadow-xl whitespace-nowrap z-20 font-medium">
-                <p className="font-bold text-slate-200">{node.id} · {node.name}</p>
-                <p className="text-slate-400"> Commuter Occupancy: {node.pax} pax</p>
-              </div>
+      {/* Camera Nodes */}
+      {cameraNodes.map((node) => {
+        const isAlert = node.status === 'ALERT';
+        return (
+          <div
+            key={node.id}
+            onClick={() => onSelectCamera(node.id)}
+            style={{ left: `${node.x}%`, top: `${node.y}%` }}
+            className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
+          >
+            <div className={`relative flex items-center justify-center w-7 h-7 rounded-lg border transition-all shadow-xs ${
+              isAlert ? 'bg-red-600 border-white text-white shadow-red-900/40' : 'bg-slate-900 border-slate-700 text-slate-200 hover:bg-slate-800 hover:border-slate-400'
+            }`}>
+              <Camera className="w-3.5 h-3.5" />
             </div>
-          );
-        })}
-      </div>
+
+            {/* Tooltip on Hover */}
+            <div className="absolute top-9 left-1/2 -translate-x-1/2 hidden group-hover:block bg-slate-900 text-white text-[10px] p-2 rounded-md border border-slate-700 shadow-xl whitespace-nowrap z-30 font-medium">
+              <p className="font-bold text-white font-mono">{node.id} · {node.name}</p>
+              <p className="text-slate-400 font-sans"> Occupancy: <span className="text-emerald-400 font-bold font-mono">{node.pax} pax</span></p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

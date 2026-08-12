@@ -132,7 +132,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen max-h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 flex flex-col font-sans relative select-none">
+    <div className="min-h-screen w-full bg-slate-50 text-slate-900 font-sans relative select-none">
       {/* Fixed Floating Notification Toast Overlay (z-[2000]) */}
       {notificationToast && (
         <div className="fixed top-20 right-6 z-[2000] max-w-lg bg-slate-900/90 backdrop-blur-md border border-teal-500/50 text-teal-300 rounded-2xl px-4 py-3 shadow-2xl animate-slideInRight font-mono transition-all overflow-hidden flex items-center justify-between gap-3">
@@ -170,9 +170,9 @@ export default function App() {
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      {/* Main Workspace Container */}
-      <main className="pl-0 md:pl-[250px] pt-[64px] h-screen max-h-screen overflow-hidden flex flex-col flex-1 bg-slate-50">
-        <div className="h-[calc(100vh-64px)] max-h-[calc(100vh-64px)] w-full overflow-hidden flex flex-col p-3.5 md:p-4">
+      {/* Main Dynamic Page Area */}
+      <main className="pl-0 lg:pl-[240px] pt-[64px] min-h-screen w-full bg-slate-50">
+        <div className="w-full p-3 sm:p-4 md:p-6 space-y-4">
         {activeTab === 'dashboard' && (
           <CommandDashboard
             deploymentEnv={deploymentEnv}

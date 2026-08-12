@@ -35,9 +35,9 @@ export default function CommandDashboard({
   const maxVal = Math.max(...chartData.map((d) => d.val));
 
   return (
-    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 select-none font-sans text-slate-900">
+    <div className="w-full space-y-4 select-none font-sans text-slate-900">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -45,7 +45,7 @@ export default function CommandDashboard({
             <span>·</span>
             <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             TRINETRA Command Center
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
@@ -120,16 +120,15 @@ export default function CommandDashboard({
         />
       </div>
 
-      {/* 3. Main Operational Workspace Grid (Fits Single Viewport) */}
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-3 overflow-hidden">
+      {/* 3. Main Operational Workspace Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Left Column (8 Columns): Telemetry & CAD Topology */}
-        <div className="lg:col-span-8 flex flex-col space-y-3 min-h-0 overflow-hidden">
-          {/* Chart Panel (Compact Height) */}
+        <div className="lg:col-span-8 space-y-4">
+          {/* Chart Panel */}
           <ChartPanel
             title="Hourly Threat & Crowd Density Telemetry"
             subtitle="PERFORMANCE MONITORING"
             rightMetric="1,284 Events / 24 hrs"
-            className="flex-shrink-0"
           >
             <div className="pt-2 pb-1">
               <div className="h-32 flex items-end justify-between gap-1.5 px-1">
@@ -162,9 +161,9 @@ export default function CommandDashboard({
             </div>
           </ChartPanel>
 
-          {/* Spatial CAD Topology Map (Fills Remaining Space) */}
-          <div className="bg-white border border-slate-200 rounded-lg p-3 space-y-2 font-sans flex-1 min-h-0 flex flex-col overflow-hidden">
-            <div className="flex items-center justify-between flex-shrink-0">
+          {/* Spatial CAD Topology Map */}
+          <div className="bg-white border border-slate-200 rounded-lg p-3 space-y-2 font-sans">
+            <div className="flex items-center justify-between">
               <div>
                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
                   SITE OVERVIEW
@@ -177,15 +176,15 @@ export default function CommandDashboard({
                 {deploymentEnv}
               </span>
             </div>
-            <div className="flex-1 min-h-0 overflow-hidden">
+            <div>
               <StationBlueprintMap onSelectCamera={(camId) => onNavigateToFeed(camId)} />
             </div>
           </div>
         </div>
 
-        {/* Right Column (4 Columns): Active Incident Triage Queue with Dedicated Scroll */}
-        <div className="lg:col-span-4 flex flex-col space-y-3 h-full min-h-0 overflow-hidden">
-          <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans flex-1 min-h-0 flex flex-col overflow-hidden">
+        {/* Right Column (4 Columns): Active Incident Triage Queue */}
+        <div className="lg:col-span-4 space-y-4">
+          <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans">
             <div className="flex items-center justify-between pb-2 border-b border-slate-100 flex-shrink-0">
               <div>
                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
@@ -204,7 +203,7 @@ export default function CommandDashboard({
             </div>
 
             {/* Incident Queue Scrollable Container */}
-            <div className="flex-1 overflow-y-auto pr-1 space-y-2.5">
+            <div className="max-h-[380px] internal-scroll-area pr-1 space-y-2.5">
               {incidentsList.map((inc) => (
                 <div
                   key={inc.id}

@@ -59,21 +59,22 @@ export default function Header({
   };
 
   return (
-    <header className="fixed top-0 right-0 left-0 md:left-[250px] z-50 h-[64px] bg-[#F8F9FA] text-slate-900 border-b border-slate-200 px-4 md:px-6 flex items-center justify-between gap-4 select-none font-sans">
-      {/* Left: Mobile Toggle & Global Search */}
-      <div className="flex items-center space-x-3 flex-1 max-w-md">
+    <header className="fixed top-0 right-0 left-0 lg:left-[240px] z-40 h-[64px] bg-[#F8F9FA] text-slate-900 border-b border-slate-200 px-3 sm:px-4 lg:px-6 grid grid-cols-[minmax(160px,1fr)_auto_auto] sm:grid-cols-[minmax(220px,1fr)_auto_auto] items-center gap-2 sm:gap-4 select-none font-sans">
+      {/* Left: Mobile/Tablet Menu Toggle & Global Search */}
+      <div className="flex items-center space-x-2 sm:space-x-3 flex-1 max-w-md">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-1.5 text-slate-600 hover:bg-slate-200 rounded-md transition-colors"
+          className="lg:hidden p-2 text-slate-700 hover:bg-slate-200 rounded-md transition-colors flex-shrink-0"
           title="Toggle Navigation Menu"
+          aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}
         </button>
 
-        {/* Search Input Box */}
-        <div className="relative w-full hidden sm:block" ref={searchRef}>
+        {/* Global Search Input Box */}
+        <div className="relative w-full" ref={searchRef}>
           <div className="relative flex items-center">
-            <Search className="w-4 h-4 absolute left-3 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 text-slate-400 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
@@ -82,17 +83,17 @@ export default function Header({
                 setIsSearchOpen(true);
               }}
               onFocus={() => setIsSearchOpen(true)}
-              placeholder="Search cameras, alerts, zones... (⌘K)"
-              className="w-full bg-white border border-slate-200 rounded-md pl-9 pr-12 py-1.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800 shadow-2xs font-medium"
+              placeholder="Search cameras, alerts, zones..."
+              className="w-full bg-white border border-slate-200 rounded-md pl-9 pr-8 sm:pr-12 py-1.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800 shadow-2xs font-medium"
             />
-            <div className="absolute right-2.5 flex items-center text-[10px] font-mono text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+            <div className="hidden sm:flex absolute right-2.5 items-center text-[10px] font-mono text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
               ⌘K
             </div>
           </div>
 
-          {/* Autocomplete Dropdown */}
+          {/* Autocomplete Dropdown Overlay */}
           {isSearchOpen && searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-md shadow-lg overflow-hidden z-[500] divide-y divide-slate-100">
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-md shadow-lg overflow-hidden z-[500] divide-y divide-slate-100 max-h-80 overflow-y-auto">
               <div className="p-2 bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">
                 Search Results ({searchResults.length})
               </div>
@@ -102,14 +103,14 @@ export default function Header({
                   onClick={() => handleSearchResultClick(res)}
                   className="w-full text-left p-2.5 hover:bg-slate-50 flex items-center justify-between transition-colors text-xs text-slate-900"
                 >
-                  <div className="flex items-center space-x-2">
-                    {res.type === 'camera' && <Camera className="w-4 h-4 text-slate-800" />}
-                    {res.type === 'incident' && <AlertTriangle className="w-4 h-4 text-red-600" />}
-                    {res.type === 'zone' && <Map className="w-4 h-4 text-amber-600" />}
-                    {res.type === 'worker' && <HardHat className="w-4 h-4 text-emerald-600" />}
+                  <div className="flex items-center space-x-2 min-w-0">
+                    {res.type === 'camera' && <Camera className="w-4 h-4 text-slate-800 flex-shrink-0" />}
+                    {res.type === 'incident' && <AlertTriangle className="w-4 h-4 text-red-600 flex-shrink-0" />}
+                    {res.type === 'zone' && <Map className="w-4 h-4 text-amber-600 flex-shrink-0" />}
+                    {res.type === 'worker' && <HardHat className="w-4 h-4 text-emerald-600 flex-shrink-0" />}
                     <span className="font-medium truncate">{res.label}</span>
                   </div>
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0 ml-1" />
                 </button>
               ))}
             </div>
@@ -118,9 +119,9 @@ export default function Header({
       </div>
 
       {/* Center: Deployment Environment Selector */}
-      <div className="hidden lg:flex items-center space-x-2 bg-white border border-slate-200 px-3 py-1.5 rounded-md shadow-2xs h-9">
-        <Layers className="w-4 h-4 text-slate-500" />
-        <span className="text-xs text-slate-500 font-medium">Site:</span>
+      <div className="hidden xl:flex items-center space-x-2 bg-white border border-slate-200 px-3 py-1.5 rounded-md shadow-2xs h-9">
+        <Layers className="w-4 h-4 text-slate-500 flex-shrink-0" />
+        <span className="text-xs text-slate-500 font-medium whitespace-nowrap">Site:</span>
         <select
           value={deploymentEnv}
           onChange={(e) => setDeploymentEnv(e.target.value)}
@@ -135,11 +136,11 @@ export default function Header({
       </div>
 
       {/* Right: Toggles & Primary Action Button */}
-      <div className="flex items-center space-x-2 text-xs">
+      <div className="flex items-center space-x-1.5 sm:space-x-2 text-xs flex-shrink-0">
         {/* Simulation Toggle */}
         <button
           onClick={() => setDemoMode(!demoMode)}
-          className={`h-9 px-3 rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono ${
+          className={`h-9 px-2 sm:px-3 rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono ${
             demoMode
               ? 'bg-slate-900 text-white border-slate-900'
               : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
@@ -153,7 +154,7 @@ export default function Header({
         {/* Privacy Mask Toggle */}
         <button
           onClick={() => setPrivacyMasking(!privacyMasking)}
-          className={`h-9 px-3 rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono ${
+          className={`h-9 px-2 sm:px-3 rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono ${
             privacyMasking
               ? 'bg-emerald-700 text-white border-emerald-700'
               : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
@@ -161,21 +162,27 @@ export default function Header({
           title="Toggle Privacy Blur"
         >
           {privacyMasking ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-          <span className="hidden sm:inline">DPDP Mask</span>
+          <span className="hidden sm:inline">DPDP</span>
         </button>
 
         {/* Notifications */}
-        <button className="relative w-9 h-9 rounded-md bg-white border border-slate-200 flex items-center justify-center text-slate-700 hover:bg-slate-50 shadow-2xs transition-colors">
+        <button
+          className="relative w-9 h-9 rounded-md bg-white border border-slate-200 flex items-center justify-center text-slate-700 hover:bg-slate-50 shadow-2xs transition-colors"
+          title="Alert Notifications"
+          onClick={() => onNavigateToTab && onNavigateToTab('incident_alerts')}
+        >
           <Bell className="w-4 h-4 text-slate-700" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white font-bold text-[9px] font-mono rounded-full flex items-center justify-center">
-            {activeAlertCount}
-          </span>
+          {activeAlertCount > 0 && (
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white font-bold text-[9px] font-mono rounded-full flex items-center justify-center">
+              {activeAlertCount}
+            </span>
+          )}
         </button>
 
         {/* Primary Action Button */}
         <button
           onClick={onCreateIncident}
-          className="h-9 px-4 bg-slate-900 text-white font-semibold text-xs rounded-md hover:bg-slate-800 transition-all shadow-xs flex items-center space-x-1.5"
+          className="h-9 px-3 sm:px-4 bg-slate-900 text-white font-semibold text-xs rounded-md hover:bg-slate-800 transition-all shadow-xs flex items-center space-x-1.5"
         >
           <Plus className="w-4 h-4" />
           <span className="hidden sm:inline">Dispatch Guard</span>

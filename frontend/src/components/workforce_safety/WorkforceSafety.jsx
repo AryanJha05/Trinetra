@@ -29,9 +29,9 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
   );
 
   return (
-    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <HardHat className="w-3.5 h-3.5 text-slate-800" />
@@ -39,7 +39,7 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
             <span>·</span>
             <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             Workforce Safety & PPE Compliance
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
@@ -53,7 +53,7 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
       </div>
 
       {/* 2. Compact PPE Compliance Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 flex-shrink-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
         {ppeStats.map((stat, idx) => (
           <div key={idx} className="bg-white border border-slate-200 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition-all shadow-2xs">
             <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-mono">{stat.title}</span>
@@ -67,9 +67,9 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
       </div>
 
       {/* 3. Main Content 12-Column Responsive Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Left 8 Cols: Worker Inventory Table (Internal Scroll) */}
-        <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans shadow-2xs flex-1 overflow-hidden flex flex-col lg:col-span-8">
+        <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans shadow-2xs lg:col-span-8">
           <div className="flex items-center justify-between flex-shrink-0">
             <div>
               <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
@@ -86,13 +86,13 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
                 placeholder="Search worker name, ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-slate-50 border border-slate-200 rounded-md pl-8 pr-3 py-1 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 w-52 font-medium"
+                className="bg-slate-50 border border-slate-200 rounded-md pl-8 pr-3 py-1 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 w-44 sm:w-52 font-medium"
               />
             </div>
           </div>
 
-          <div className="overflow-y-auto flex-1 pr-1">
-            <table className="w-full text-left text-xs font-sans border-collapse">
+          <div className="overflow-y-auto flex-1 pr-1 responsive-table-wrapper">
+            <table className="w-full text-left text-xs font-sans border-collapse min-w-[500px]">
               <thead className="sticky top-0 z-10 bg-slate-100 text-slate-700 uppercase text-[10px] font-bold tracking-wider border-b border-slate-200 font-mono shadow-xs">
                 <tr>
                   <th className="p-3">WORKER ID / NAME</th>
@@ -142,9 +142,9 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
         </div>
 
         {/* Right 4 Cols: Maintenance Stream Monitors */}
-        <div className="lg:col-span-4 space-y-6">
-          <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="lg:col-span-4 space-y-4">
+          <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 font-sans shadow-2xs">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <h3 className="text-xs font-bold text-slate-900 font-heading uppercase tracking-wider">
                 Maintenance Monitors
               </h3>
@@ -153,25 +153,25 @@ export default function WorkforceSafety({ deploymentEnv = 'Railway Station' }) {
               </span>
             </div>
 
-            <div className="space-y-4">
-              <div className="relative bg-slate-900 rounded-md overflow-hidden border border-slate-200 h-36 flex items-center justify-center p-3 text-center">
-                <div className="absolute top-2.5 left-2.5 bg-slate-800 text-white text-[9px] font-mono px-2 py-0.5 rounded border border-slate-700">
+            <div className="space-y-3">
+              <div className="relative bg-slate-950 rounded-md overflow-hidden border border-slate-200 aspect-video flex items-center justify-center p-3 text-center">
+                <div className="absolute top-2.5 left-2.5 bg-slate-900/80 text-white text-[9px] font-mono px-2 py-0.5 rounded border border-slate-700">
                   CAM-42 · SECTOR 4
                 </div>
                 <div className="absolute bottom-2.5 right-2.5 bg-emerald-600 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded">
                   ZONE SECURE
                 </div>
-                <p className="text-xs text-slate-200 font-medium">Crew Alpha Welding Team · Compliant</p>
+                <p className="text-xs text-slate-200 font-medium z-10">Crew Alpha Welding Team · Compliant</p>
               </div>
 
-              <div className="relative bg-slate-900 rounded-md overflow-hidden border border-red-500 h-36 flex items-center justify-center p-3 text-center">
-                <div className="absolute top-2.5 left-2.5 bg-slate-800 text-white text-[9px] font-mono px-2 py-0.5 rounded border border-slate-700">
+              <div className="relative bg-slate-950 rounded-md overflow-hidden border border-red-500 aspect-video flex items-center justify-center p-3 text-center">
+                <div className="absolute top-2.5 left-2.5 bg-slate-900/80 text-white text-[9px] font-mono px-2 py-0.5 rounded border border-slate-700">
                   CAM-18 · PLATFORM 3
                 </div>
                 <div className="absolute bottom-2.5 right-2.5 bg-red-600 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded">
                   VIOLATION LOGGED
                 </div>
-                <p className="text-xs text-red-300 font-medium">EMP-9102 Mahipal hardhat advisory logged</p>
+                <p className="text-xs text-red-300 font-medium z-10">EMP-9102 Mahipal hardhat advisory logged</p>
               </div>
             </div>
           </div>

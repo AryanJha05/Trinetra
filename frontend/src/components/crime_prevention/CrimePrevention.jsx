@@ -87,9 +87,9 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
     : crimeEvents.filter(e => e.category === activeCategory);
 
   return (
-    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <ShieldAlert className="w-3.5 h-3.5 text-slate-800" />
@@ -97,7 +97,7 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
             <span>·</span>
             <span>PROACTIVE THREAT ENGINE</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             Threat Prevention & Anomaly Detection
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
@@ -113,7 +113,7 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
       </div>
 
       {/* 2. Category Filter Chips */}
-      <div className="flex items-center space-x-1.5 overflow-x-auto text-xs font-medium flex-shrink-0">
+      <div className="flex items-center space-x-1.5 overflow-x-auto text-xs font-medium pb-1">
         {categories.map((cat) => (
           <button
             key={cat.id}
@@ -129,9 +129,8 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
         ))}
       </div>
 
-      {/* 3. Grid of Detected Events (Internal Container Scroll) */}
-      <div className="flex-1 overflow-y-auto pr-1">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* 3. Grid of Detected Events */}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
         {filteredEvents.map((evt) => (
           <div
             key={evt.id}
@@ -200,7 +199,6 @@ export default function CrimePrevention({ onNavigateToFeed, onDispatchGuard }) {
             </div>
           </div>
         ))}
-        </div>
       </div>
     </div>
   );

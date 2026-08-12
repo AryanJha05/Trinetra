@@ -18,9 +18,9 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
   ];
 
   return (
-    <div className="h-full max-h-full overflow-hidden flex flex-col space-y-3 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <Users className="w-3.5 h-3.5 text-slate-800" />
@@ -28,7 +28,7 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
             <span>·</span>
             <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             Density & Crowd Analytics
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
@@ -44,7 +44,7 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
       </div>
 
       {/* 2. Sector Metrics Row (4 Compact Cards) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 flex-shrink-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {sectors.map((p, idx) => (
           <div key={idx} className="bg-white border border-slate-200 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition-all shadow-2xs">
             <div className="flex items-center justify-between">
@@ -66,9 +66,8 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
         ))}
       </div>
 
-      {/* 3. Main Content 12-Column Responsive Grid (Internal Scroll) */}
-      <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* 3. Main Content 12-Column Responsive Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Spatial Density Heatmap (8 Columns) */}
         <div className="lg:col-span-8 bg-white border border-slate-200 rounded-lg p-5 space-y-4 font-sans">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -168,7 +167,6 @@ export default function CrowdIntelligence({ deploymentEnv = 'Railway Station' })
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );
