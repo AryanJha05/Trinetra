@@ -11,14 +11,14 @@ export default function StationBlueprintMap({ onSelectCamera }) {
   ];
 
   return (
-    <div className="w-full h-[230px] bg-slate-900 rounded-lg overflow-hidden border border-slate-800 relative select-none flex flex-col justify-between p-3 font-sans">
+    <div className="w-full h-[230px] bg-slate-900 rounded-xl overflow-hidden border border-slate-800 relative select-none flex flex-col justify-between p-3 font-sans shadow-2xs">
       {/* Subtle Architectural Grid Lines */}
       <svg className="absolute inset-0 w-full h-full stroke-slate-800 opacity-80 pointer-events-none" strokeWidth="1" fill="none">
         {/* Zone Boundaries */}
-        <rect x="4%" y="8%" width="44%" height="42%" rx="3" strokeDasharray="3 3" />
-        <rect x="52%" y="8%" width="44%" height="42%" rx="3" strokeDasharray="3 3" />
-        <rect x="4%" y="54%" width="44%" height="40%" rx="3" strokeDasharray="3 3" />
-        <rect x="52%" y="54%" width="44%" height="40%" rx="3" strokeDasharray="3 3" />
+        <rect x="4%" y="8%" width="44%" height="42%" rx="4" strokeDasharray="3 3" />
+        <rect x="52%" y="8%" width="44%" height="42%" rx="4" strokeDasharray="3 3" />
+        <rect x="4%" y="54%" width="44%" height="40%" rx="4" strokeDasharray="3 3" />
+        <rect x="52%" y="54%" width="44%" height="40%" rx="4" strokeDasharray="3 3" />
         
         {/* Corridor Dividers */}
         <line x1="4%" y1="51%" x2="96%" y2="51%" strokeWidth="1" />
@@ -26,7 +26,7 @@ export default function StationBlueprintMap({ onSelectCamera }) {
       </svg>
 
       {/* Zone Label Watermarks */}
-      <div className="absolute inset-0 pointer-events-none p-4 text-[9px] font-mono text-slate-700 font-bold uppercase tracking-wider flex flex-col justify-between">
+      <div className="absolute inset-0 pointer-events-none p-4 text-[10px] font-sans text-slate-600 font-semibold uppercase tracking-wider flex flex-col justify-between">
         <div className="flex justify-between">
           <span>Zone A (North Concourse)</span>
           <span>Zone B (South Platform)</span>
@@ -38,14 +38,14 @@ export default function StationBlueprintMap({ onSelectCamera }) {
       </div>
 
       {/* Map Legend Bar */}
-      <div className="relative z-10 flex items-center justify-between bg-slate-950/80 backdrop-blur-xs px-3 py-1.5 rounded border border-slate-800 text-[10px] font-mono">
-        <span className="font-bold text-slate-200 uppercase tracking-wider">Live Camera Layout</span>
-        <div className="flex items-center space-x-3 text-[10px] uppercase font-semibold">
+      <div className="relative z-10 flex items-center justify-between bg-slate-950/80 backdrop-blur-xs px-3.5 py-1.5 rounded-lg border border-slate-800 text-xs font-sans">
+        <span className="font-semibold text-slate-200">Live Camera Layout</span>
+        <div className="flex items-center space-x-3 text-xs font-semibold">
           <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> 42 Active
+            <span className="w-2 h-2 rounded-full bg-[#10B981]"></span> 42 Active
           </span>
           <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-red-500"></span> 2 Alert
+            <span className="w-2 h-2 rounded-full bg-[#EF4444]"></span> 2 Alert
           </span>
         </div>
       </div>

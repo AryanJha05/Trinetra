@@ -14,47 +14,58 @@ export default function IncidentCard({
   onViewFeed,
   onDispatch
 }) {
+export default function IncidentCard({
+  id,
+  title,
+  severity = 'WARNING',
+  location,
+  time,
+  desc,
+  status,
+  cam,
+  onViewFeed,
+  onDispatch
+}) {
   const getSeverityBadge = (sev) => {
     switch (sev) {
       case 'CRITICAL':
-        return 'bg-red-50 text-red-700 border-red-200';
+        return 'bg-[#FEF2F2] text-[#B91C1C] border-[#FCA5A5]';
       case 'WARNING':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
+        return 'bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]';
       default:
-        return 'bg-slate-100 text-slate-700 border-slate-200';
+        return 'bg-[#F1F5F9] text-[#64748B] border-[#CBD5E1]';
     }
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 font-sans transition-all hover:border-slate-300">
+    <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 space-y-3 font-sans transition-all hover:border-[#CBD5E1] shadow-2xs">
       <div className="flex items-center justify-between">
-        <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase font-mono ${getSeverityBadge(severity)}`}>
+        <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase border font-sans ${getSeverityBadge(severity)}`}>
           {severity}
         </span>
-        <span className="text-xs font-mono text-slate-500">{id} {time ? `· ${time}` : ''}</span>
+        <span className="text-xs font-mono text-[#64748B]">{id} {time ? `· ${time}` : ''}</span>
       </div>
 
       <div>
-        <h4 className="text-sm font-bold text-slate-900 font-heading leading-tight">{title}</h4>
-        <p className="text-xs text-slate-500 mt-1">
-          {cam ? <strong className="text-slate-800">CAM: {cam}</strong> : null} {location ? `· ${location}` : ''}
+        <h4 className="text-sm font-bold text-[#0F172A] font-sans leading-tight">{title}</h4>
+        <p className="text-xs text-[#64748B] mt-1 font-sans">
+          {cam ? <strong className="text-[#0F172A]">CAM: {cam}</strong> : null} {location ? `· ${location}` : ''}
         </p>
       </div>
 
       {desc && (
-        <p className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded border border-slate-200 leading-relaxed">
+        <p className="text-xs text-[#334155] bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0] leading-relaxed font-sans">
           {desc}
         </p>
       )}
 
-      <div className="flex items-center justify-end space-x-2 pt-1 border-t border-slate-100">
+      <div className="flex items-center justify-end space-x-2 pt-2 border-t border-[#F1F5F9]">
         {onViewFeed && (
           <Button
             variant="secondary"
             size="sm"
             icon={Eye}
             onClick={onViewFeed}
-            className="!h-7 !px-2.5 !text-xs"
           >
             Feed
           </Button>
@@ -65,7 +76,6 @@ export default function IncidentCard({
             size="sm"
             icon={Send}
             onClick={onDispatch}
-            className="!h-7 !px-3 !text-xs"
           >
             Dispatch
           </Button>

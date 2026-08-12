@@ -24,20 +24,20 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
   const displayedCameras = cameras.slice(0, gridLayout);
 
   return (
-    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-[#0F172A] select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-[#E2E8F0]">
         <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
-            <Camera className="w-3.5 h-3.5 text-slate-800" />
-            <span>LIVE MONITORING</span>
+          <div className="flex items-center space-x-2 text-xs text-[#64748B] mb-1 font-sans">
+            <Camera className="w-3.5 h-3.5 text-[#0F172A]" />
+            <span className="font-semibold text-[#0F172A]">LIVE MONITORING</span>
             <span>·</span>
             <span>SITE: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="text-2xl font-bold text-[#0F172A] font-sans tracking-tight">
             Live Surveillance Matrix
           </h1>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-[#64748B] mt-0.5">
             Real-time multi-camera CCTV feeds, object tracking overlays, and privacy compliance controls.
           </p>
         </div>
@@ -45,19 +45,19 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
         {/* View Controls & Toggles */}
         <div className="flex items-center space-x-2 flex-wrap gap-2">
           {/* Grid Layout Toggle */}
-          <div className="flex items-center bg-slate-100 border border-slate-200 rounded-md p-0.5">
+          <div className="flex items-center bg-[#F1F5F9] rounded-full p-1 border border-[#E2E8F0]">
             <button
               onClick={() => setGridLayout(4)}
-              className={`px-2.5 py-1 text-xs font-semibold rounded font-mono flex items-center gap-1 transition-all ${
-                gridLayout === 4 ? 'bg-slate-900 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 transition-all ${
+                gridLayout === 4 ? 'bg-[#0F172A] text-white shadow-xs' : 'text-[#64748B] hover:text-[#0F172A]'
               }`}
             >
               <Grid className="w-3 h-3" /> 2x2 Grid
             </button>
             <button
               onClick={() => setGridLayout(9)}
-              className={`px-2.5 py-1 text-xs font-semibold rounded font-mono flex items-center gap-1 transition-all ${
-                gridLayout === 9 ? 'bg-slate-900 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 transition-all ${
+                gridLayout === 9 ? 'bg-[#0F172A] text-white shadow-xs' : 'text-[#64748B] hover:text-[#0F172A]'
               }`}
             >
               <Grid className="w-3 h-3" /> 3x3 Grid
@@ -67,33 +67,33 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
           {/* AI Overlays Toggle */}
           <button
             onClick={() => setAiOverlaysEnabled(!aiOverlaysEnabled)}
-            className={`h-7 px-2.5 rounded-md text-xs font-semibold font-mono transition-all border ${
+            className={`h-8 px-3 rounded-full text-xs font-semibold transition-all border ${
               aiOverlaysEnabled
-                ? 'bg-slate-900 text-white border-slate-900'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                ? 'bg-[#0F172A] text-white border-[#0F172A]'
+                : 'bg-white text-[#64748B] border-[#CBD5E1] hover:bg-[#F8FAFC]'
             }`}
           >
             AI Overlays: <strong>{aiOverlaysEnabled ? 'ON' : 'OFF'}</strong>
           </button>
 
           {/* Zoom Controls */}
-          <div className="flex items-center space-x-1 bg-slate-100 border border-slate-200 rounded-md px-1.5 py-0.5 text-xs font-mono text-slate-600">
-            <ZoomIn className="w-3.5 h-3.5 text-slate-400" />
+          <div className="flex items-center space-x-1 bg-[#F1F5F9] border border-[#E2E8F0] rounded-full px-2 py-1 text-xs font-sans text-[#64748B]">
+            <ZoomIn className="w-3.5 h-3.5 text-[#64748B]" />
             <button
               onClick={() => setZoomLevel(1.0)}
-              className={`px-1.5 py-0.5 rounded ${zoomLevel === 1.0 ? 'bg-slate-900 text-white font-bold' : 'text-slate-600'}`}
+              className={`px-2 py-0.5 rounded-full ${zoomLevel === 1.0 ? 'bg-[#0F172A] text-white font-bold' : 'text-[#64748B]'}`}
             >
               1.0x
             </button>
             <button
               onClick={() => setZoomLevel(1.5)}
-              className={`px-1.5 py-0.5 rounded ${zoomLevel === 1.5 ? 'bg-slate-900 text-white font-bold' : 'text-slate-600'}`}
+              className={`px-2 py-0.5 rounded-full ${zoomLevel === 1.5 ? 'bg-[#0F172A] text-white font-bold' : 'text-[#64748B]'}`}
             >
               1.5x
             </button>
             <button
               onClick={() => setZoomLevel(2.0)}
-              className={`px-1.5 py-0.5 rounded ${zoomLevel === 2.0 ? 'bg-slate-900 text-white font-bold' : 'text-slate-600'}`}
+              className={`px-2 py-0.5 rounded-full ${zoomLevel === 2.0 ? 'bg-[#0F172A] text-white font-bold' : 'text-[#64748B]'}`}
             >
               2.0x
             </button>
@@ -112,14 +112,14 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                 <div
                   key={cam.camera_id}
                   onClick={() => setActiveCamId(cam.camera_id)}
-                  className={`bg-white border rounded-lg overflow-hidden cursor-pointer transition-all shadow-2xs ${
+                  className={`bg-white border rounded-2xl overflow-hidden cursor-pointer transition-all shadow-2xs ${
                     isActive
-                      ? 'border-slate-900 ring-2 ring-slate-900/10'
-                      : 'border-slate-200 hover:border-slate-300'
+                      ? 'border-[#0F172A] ring-2 ring-[#0F172A]/10'
+                      : 'border-[#E2E8F0] hover:border-[#CBD5E1]'
                   }`}
                 >
                   {/* Strict 16:9 Aspect Video Container */}
-                  <div className="w-full aspect-video relative bg-slate-950 overflow-hidden">
+                  <div className="w-full aspect-video relative bg-slate-900 overflow-hidden">
                     <VideoPlayerCanvas
                       camera={cam}
                       privacyMasking={privacyMasking}
@@ -129,16 +129,16 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
                   </div>
 
                   {/* Standardized Card Footer */}
-                  <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs font-sans">
+                  <div className="p-3.5 bg-white border-t border-[#F1F5F9] flex items-center justify-between text-xs font-sans">
                     <div className="min-w-0 pr-2">
-                      <span className="font-bold text-slate-900 font-mono">{cam.camera_id}</span>
-                      <span className="text-slate-500 ml-2 font-sans truncate inline-block max-w-[140px] align-bottom">{cam.zone}</span>
+                      <span className="font-bold text-[#0F172A] font-mono">{cam.camera_id}</span>
+                      <span className="text-[#64748B] ml-2 font-sans truncate inline-block max-w-[140px] align-bottom">{cam.zone}</span>
                     </div>
                     <span
-                      className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono flex-shrink-0 ${
+                      className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase border font-sans flex-shrink-0 ${
                         cam.status === 'ALERT'
-                          ? 'bg-red-100 text-red-700 border border-red-200'
-                          : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                          ? 'bg-[#FEF2F2] text-[#B91C1C] border-[#FCA5A5]'
+                          : 'bg-[#ECFDF5] text-[#047857] border-[#A7F3D0]'
                       }`}
                     >
                       {cam.status}
@@ -151,72 +151,72 @@ export default function LiveMonitoring({ deploymentEnv = 'Railway Station', priv
         </div>
 
         {/* Node Telemetry & Uptime Status (3 Columns) */}
-        <div className="lg:col-span-3 space-y-3">
-          <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 font-sans shadow-2xs">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-heading">
+        <div className="lg:col-span-3 space-y-4">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 space-y-3 font-sans shadow-2xs">
+            <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-2.5">
+              <h3 className="text-xs font-bold text-[#0F172A] tracking-wider">
                 Active Camera Status
               </h3>
-              <span className="font-mono text-xs text-slate-900 font-bold bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+              <span className="font-mono text-xs text-[#0F172A] font-bold bg-[#F1F5F9] px-2.5 py-1 rounded-full border border-[#E2E8F0]">
                 {activeCamId}
               </span>
             </div>
 
             <div className="space-y-2.5 text-xs">
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[#64748B]">
                 <span>LOCATION:</span>
-                <span className="text-slate-900 font-semibold truncate max-w-[120px]">
+                <span className="text-[#0F172A] font-semibold truncate max-w-[120px]">
                   {cameras.find(c => c.camera_id === activeCamId)?.location}
                 </span>
               </div>
-              <div className="flex justify-between text-slate-600 font-mono">
+              <div className="flex justify-between text-[#64748B] font-sans">
                 <span>STREAM RES:</span>
-                <span className="text-slate-900 font-bold">1080P @ 30 FPS</span>
+                <span className="text-[#0F172A] font-bold">1080P @ 30 FPS</span>
               </div>
-              <div className="flex justify-between text-slate-600 font-mono">
+              <div className="flex justify-between text-[#64748B] font-sans">
                 <span>PROCESSING TIME:</span>
-                <span className="text-emerald-700 font-bold">12MS</span>
+                <span className="text-[#047857] font-bold">12MS</span>
               </div>
-              <div className="flex justify-between text-slate-600 font-mono">
+              <div className="flex justify-between text-[#64748B] font-sans">
                 <span>PRIVACY MASK:</span>
-                <span className={privacyMasking ? 'text-emerald-700 font-bold' : 'text-slate-400'}>
+                <span className={privacyMasking ? 'text-[#047857] font-bold' : 'text-[#64748B]'}>
                   {privacyMasking ? 'ENABLED' : 'DISABLED'}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 font-sans shadow-2xs">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-heading border-b border-slate-100 pb-2.5">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 space-y-3 font-sans shadow-2xs">
+            <h3 className="text-xs font-bold text-[#0F172A] tracking-wider border-b border-[#F1F5F9] pb-2.5">
               System Uptime Status
             </h3>
             <div className="space-y-2.5 text-xs">
-              <div className="p-2.5 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
+              <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] flex items-center justify-between">
                 <div>
-                  <p className="font-bold text-slate-900">Concourse Nodes</p>
-                  <p className="text-[10px] text-slate-500 font-mono">43/45 ACTIVE</p>
+                  <p className="font-bold text-[#0F172A]">Concourse Nodes</p>
+                  <p className="text-xs text-[#64748B]">43/45 ACTIVE</p>
                 </div>
-                <span className="text-[9px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold font-mono">
+                <span className="text-[10px] bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold font-sans">
                   100% UP
                 </span>
               </div>
 
-              <div className="p-2.5 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
+              <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] flex items-center justify-between">
                 <div>
-                  <p className="font-bold text-slate-900">Platform Nodes</p>
-                  <p className="text-[10px] text-slate-500 font-mono">28/30 ACTIVE</p>
+                  <p className="font-bold text-[#0F172A]">Platform Nodes</p>
+                  <p className="text-xs text-[#64748B]">28/30 ACTIVE</p>
                 </div>
-                <span className="text-[9px] bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded font-bold font-mono">
+                <span className="text-[10px] bg-[#FEF3C7] text-[#B45309] border border-[#FDE68A] px-2.5 py-0.5 rounded-full font-semibold font-sans">
                   93% UP
                 </span>
               </div>
 
-              <div className="p-2.5 bg-slate-50 rounded-md border border-slate-200 flex items-center justify-between">
+              <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] flex items-center justify-between">
                 <div>
-                  <p className="font-bold text-slate-900">Perimeter Nodes</p>
-                  <p className="text-[10px] text-slate-500 font-mono">16/16 ACTIVE</p>
+                  <p className="font-bold text-[#0F172A]">Perimeter Nodes</p>
+                  <p className="text-xs text-[#64748B]">16/16 ACTIVE</p>
                 </div>
-                <span className="text-[9px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold font-mono">
+                <span className="text-[10px] bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold font-sans">
                   100% UP
                 </span>
               </div>

@@ -14,7 +14,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    background-color: #F8FAFC;
+    background-color: #F7F8FA;
     color: #0F172A;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -32,6 +32,45 @@
   button, input, select, textarea {
     border-style: solid;
   }
+}
+
+/* Reference Theme Utility Components */
+.ref-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+}
+
+.ref-input {
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  color: #0F172A;
+  transition: all 0.15s ease;
+}
+
+.ref-input:focus {
+  outline: none;
+  border-color: #0F172A;
+  background-color: #FFFFFF;
+}
+
+.ref-pill-active {
+  background-color: #0F172A;
+  color: #FFFFFF;
+  border-radius: 9999px;
+}
+
+.ref-pill-inactive {
+  background-color: transparent;
+  color: #64748B;
+  border-radius: 9999px;
+}
+
+.ref-pill-inactive:hover {
+  background-color: #F1F5F9;
+  color: #0F172A;
 }
 
 /* Grid & Fluid Typography Helpers */

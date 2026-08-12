@@ -69,34 +69,34 @@ export default function IncidentAlertCenter({ onDispatchGuard, incidents = [], s
     : activeIncidentsList.filter(i => i.severity === selectedFilter || i.status === selectedFilter);
 
   return (
-    <div className="w-full space-y-4 font-sans text-slate-900 select-none">
+    <div className="w-full space-y-4 font-sans text-[#0F172A] select-none">
       {/* 1. Compact Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E2E8F0]">
         <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
-            <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
-            <span>OPERATIONS QUEUE</span>
+          <div className="flex items-center space-x-2 text-xs text-[#64748B] mb-1 font-sans">
+            <AlertTriangle className="w-3.5 h-3.5 text-[#DC2626]" />
+            <span className="font-semibold text-[#0F172A]">OPERATIONS QUEUE</span>
             <span>·</span>
             <span>{activeIncidentsList.length} TOTAL LOGGED</span>
           </div>
-          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="text-2xl font-bold text-[#0F172A] font-sans tracking-tight">
             Incident Management Center
           </h1>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-[#64748B] mt-0.5">
             Real-time threat triage, computer vision verification, and automated guard dispatch queue.
           </p>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center space-x-1.5 overflow-x-auto text-xs font-medium pb-1">
+        <div className="flex items-center space-x-2 overflow-x-auto text-xs font-medium pb-1">
           {['ALL', 'CRITICAL', 'WARNING', 'NOTICE', 'RESOLVED'].map((f) => (
             <button
               key={f}
               onClick={() => setSelectedFilter(f)}
-              className={`px-2.5 py-1 rounded-md font-semibold transition-all font-mono ${
+              className={`px-3.5 py-1.5 rounded-full font-semibold transition-all font-sans ${
                 selectedFilter === f
-                  ? 'bg-slate-900 text-white shadow-2xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
+                  ? 'bg-[#0F172A] text-white shadow-xs'
+                  : 'bg-[#F1F5F9] text-[#64748B] hover:bg-[#E2E8F0] hover:text-[#0F172A]'
               }`}
             >
               {f}
@@ -111,42 +111,42 @@ export default function IncidentAlertCenter({ onDispatchGuard, incidents = [], s
           <div
             key={inc.id}
             onClick={() => setSelectedIncident(inc)}
-            className="bg-white text-slate-900 border border-slate-200 hover:border-slate-300 rounded-lg p-4 space-y-2.5 cursor-pointer transition-all shadow-2xs hover:shadow-xs flex flex-col justify-between"
+            className="bg-white text-[#0F172A] border border-[#E2E8F0] hover:border-[#CBD5E1] rounded-2xl p-4 space-y-3 cursor-pointer transition-all shadow-2xs hover:shadow-xs flex flex-col justify-between"
           >
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2 font-mono">
+                <div className="flex items-center space-x-2">
                   <span
-                    className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                    className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase font-sans border ${
                       inc.severity === 'CRITICAL'
-                        ? 'bg-red-100 text-red-700 border border-red-200'
+                        ? 'bg-[#FEF2F2] text-[#B91C1C] border-[#FCA5A5]'
                         : inc.severity === 'WARNING'
-                        ? 'bg-amber-100 text-amber-700 border border-amber-200'
-                        : 'bg-slate-100 text-slate-700 border border-slate-200'
+                        ? 'bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]'
+                        : 'bg-[#F1F5F9] text-[#64748B] border-[#CBD5E1]'
                     }`}
                   >
                     {inc.severity}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">{inc.id}</span>
+                  <span className="text-xs font-mono text-[#64748B]">{inc.id}</span>
                 </div>
-                <span className="text-xs text-slate-500 font-mono">{inc.time}</span>
+                <span className="text-xs text-[#64748B] font-sans">{inc.time}</span>
               </div>
 
-              <h3 className="text-base font-bold text-slate-900 font-heading leading-snug">
+              <h3 className="text-sm font-bold text-[#0F172A] font-sans leading-snug">
                 {inc.title}
               </h3>
-              <p className="text-xs text-slate-600">
-                LOCATION: <strong className="text-slate-900">{inc.zone}</strong> · CAM: <span className="font-mono">{inc.cam}</span>
+              <p className="text-xs text-[#64748B] font-sans">
+                LOCATION: <strong className="text-[#0F172A]">{inc.zone}</strong> · CAM: <span className="font-mono">{inc.cam}</span>
               </p>
 
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-600 leading-relaxed font-sans">
+              <div className="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs text-[#334155] leading-relaxed font-sans">
                 <p className="line-clamp-2">{inc.details || inc.desc}</p>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-              <span className="font-mono text-xs">
-                CONF: <strong className="text-emerald-700">{inc.conf || '95.0%'}</strong>
+            <div className="pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-xs text-[#64748B]">
+              <span className="font-sans text-xs">
+                CONF: <strong className="text-[#047857]">{inc.conf || '95.0%'}</strong>
               </span>
               <div className="flex items-center space-x-2">
                 <Button
@@ -157,7 +157,6 @@ export default function IncidentAlertCenter({ onDispatchGuard, incidents = [], s
                     e.stopPropagation();
                     setSelectedIncident(inc);
                   }}
-                  className="!h-7 !px-2.5 !text-xs"
                 >
                   Evidence
                 </Button>
@@ -169,7 +168,6 @@ export default function IncidentAlertCenter({ onDispatchGuard, incidents = [], s
                     e.stopPropagation();
                     if (onDispatchGuard) onDispatchGuard(inc.id);
                   }}
-                  className="!h-7 !px-3 !text-xs"
                 >
                   Dispatch
                 </Button>

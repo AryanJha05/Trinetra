@@ -8,19 +8,19 @@ export default function ChartPanel({
   className = ''
 }) {
   return (
-    <div className={`bg-white border border-slate-200 rounded-lg p-3.5 space-y-2 font-sans ${className}`}>
+    <div className={`bg-white border border-[#E2E8F0] rounded-2xl p-4 space-y-3 font-sans shadow-2xs ${className}`}>
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
-            {subtitle || 'ANALYTICS & TELEMETRY'}
+          <p className="text-xs font-semibold text-[#64748B]">
+            {subtitle || 'Analytics & Telemetry'}
           </p>
-          <h3 className="text-base font-bold text-slate-900 font-heading mt-0.5">
+          <h3 className="text-base font-bold text-[#0F172A] mt-0.5">
             {title}
           </h3>
         </div>
         {rightMetric && (
           <div className="text-right">
-            <span className="text-xs text-slate-500 font-medium">{rightMetric}</span>
+            <span className="text-xs text-[#64748B] font-medium">{rightMetric}</span>
           </div>
         )}
       </div>

@@ -60,27 +60,27 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
       {mobileMenuOpen && (
         <div
           onClick={() => setMobileMenuOpen(false)}
-          className="fixed inset-0 bg-slate-900/50 z-[90] lg:hidden backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-slate-900/40 z-[90] lg:hidden backdrop-blur-xs transition-opacity"
         />
       )}
 
       {/* Fixed Navigation Sidebar (240px) */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-[100] w-[240px] bg-[#F8F9FA] text-slate-900 border-r border-slate-200 flex flex-col justify-between p-4 h-screen overflow-y-auto select-none transition-transform duration-200 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-[100] w-[240px] bg-white text-[#0F172A] border-r border-[#E2E8F0] flex flex-col justify-between p-4 h-screen overflow-y-auto select-none transition-transform duration-200 ease-in-out ${
           mobileMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         <div className="space-y-6">
           {/* TRINETRA Logo Header */}
-          <div className="flex items-center space-x-3 px-2 pt-1 pb-3 border-b border-slate-200">
-            <div className="w-8 h-8 rounded-md bg-slate-900 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-xs font-mono">
+          <div className="flex items-center space-x-3 px-2 pt-1 pb-3 border-b border-[#E2E8F0]">
+            <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-xs font-mono">
               T
             </div>
             <div className="min-w-0">
-              <h2 className="text-sm font-bold text-slate-900 font-heading tracking-tight leading-none">
+              <h2 className="text-sm font-bold text-[#0F172A] font-sans tracking-tight leading-none">
                 TRINETRA
               </h2>
-              <p className="text-[10px] text-slate-500 font-medium tracking-wide mt-1 truncate">
+              <p className="text-[10px] text-[#64748B] font-medium tracking-wide mt-1 truncate">
                 CCTV Surveillance SOC
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
           <nav className="space-y-5">
             {menuGroups.map((group, gIdx) => (
               <div key={gIdx} className="space-y-1.5">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2 font-mono">
+                <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest px-2 font-mono">
                   {group.group}
                 </p>
                 <div className="space-y-1">
@@ -102,16 +102,16 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
                       <button
                         key={item.id}
                         onClick={() => handleTabClick(item.id)}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-xs rounded-md transition-all ${
+                        className={`w-full flex items-center justify-between px-3 py-2 text-xs rounded-xl transition-all ${
                           isActive
-                            ? 'bg-slate-200/80 text-slate-900 font-bold border border-slate-300 shadow-2xs'
-                            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium'
+                            ? 'bg-[#0F172A] text-white font-semibold shadow-xs'
+                            : 'text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] font-medium'
                         }`}
                       >
                         <div className="flex items-center space-x-3 min-w-0">
                           <Icon
                             className={`w-4 h-4 flex-shrink-0 ${
-                              isActive ? 'text-slate-900' : 'text-slate-500'
+                              isActive ? 'text-white' : 'text-[#64748B]'
                             }`}
                           />
                           <span className="truncate font-sans">{item.label}</span>
@@ -121,8 +121,8 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
                           <span
                             className={`text-[10px] font-bold px-2 py-0.5 rounded-full font-mono flex-shrink-0 ${
                               isActive
-                                ? 'bg-slate-900 text-white'
-                                : 'bg-slate-200 text-slate-700'
+                                ? 'bg-[#231500] text-white'
+                                : 'bg-[#F1F5F9] text-[#64748B]'
                             }`}
                           >
                             {item.count}
@@ -138,22 +138,22 @@ export default function Sidebar({ activeTab, setActiveTab, mobileMenuOpen, setMo
         </div>
 
         {/* User Operator Profile Card */}
-        <div className="pt-3 border-t border-slate-200">
-          <div className="flex items-center justify-between p-2 rounded-md hover:bg-slate-100 cursor-pointer transition-colors">
+        <div className="pt-3 border-t border-[#E2E8F0]">
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
             <div className="flex items-center space-x-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0 font-mono">
+              <div className="w-7 h-7 rounded-full bg-[#0F172A] text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0 font-mono">
                 AJ
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-bold text-slate-900 truncate font-heading leading-tight">
+                <p className="text-xs font-bold text-[#0F172A] truncate font-sans leading-tight">
                   Aryan Jha
                 </p>
-                <p className="text-[10px] text-slate-500 truncate leading-none mt-0.5 font-mono">
+                <p className="text-[10px] text-[#64748B] truncate leading-none mt-0.5 font-mono">
                   Security Operator
                 </p>
               </div>
             </div>
-            <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+            <ChevronsUpDown className="w-3.5 h-3.5 text-[#64748B] flex-shrink-0" />
           </div>
         </div>
       </aside>

@@ -37,18 +37,18 @@ export default function CommandDashboard({
   return (
     <div className="w-full space-y-4 select-none font-sans text-slate-900">
       {/* 1. Page Header & Subtitle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E2E8F0]">
         <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>SYSTEM ACTIVE</span>
+          <div className="flex items-center space-x-2 text-xs text-[#64748B] mb-1 font-sans">
+            <span className="w-2 h-2 rounded-full bg-[#10B981]"></span>
+            <span className="font-semibold text-[#0F172A]">SYSTEM ACTIVE</span>
             <span>·</span>
-            <span className="uppercase">DEPLOYMENT: {deploymentEnv.toUpperCase()}</span>
+            <span className="uppercase font-medium">DEPLOYMENT: {deploymentEnv.toUpperCase()}</span>
           </div>
-          <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
+          <h1 className="text-2xl font-bold text-[#0F172A] font-sans tracking-tight">
             TRINETRA Command Center
           </h1>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-[#64748B] mt-0.5 font-sans">
             Monitor connected cameras, assess emerging risks, and coordinate incident response.
           </p>
         </div>
@@ -58,29 +58,29 @@ export default function CommandDashboard({
             variant="secondary"
             size="sm"
             onClick={() => onNavigateToRisk && onNavigateToRisk()}
-            className="!h-8 !px-3 text-xs font-semibold"
           >
             Analytics & XAI
           </Button>
-          <button
+          <Button
+            variant="primary"
+            size="sm"
+            icon={ShieldAlert}
             onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
-            className="h-8 px-3 bg-slate-900 text-white font-semibold text-xs rounded-md hover:bg-slate-800 transition-all shadow-xs flex items-center space-x-1.5"
           >
-            <ShieldAlert className="w-3.5 h-3.5" />
-            <span>Dispatch Unit</span>
-          </button>
+            Dispatch Unit
+          </Button>
         </div>
       </div>
 
       {/* 2. Compact KPI Metrics Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           title="Connected Cameras"
           value="1,248"
           subtitle="1,239 active node streams"
           icon={Camera}
-          iconBg="bg-slate-100"
-          iconColor="text-slate-800"
+          iconBg="bg-[#F1F5F9]"
+          iconColor="text-[#0F172A]"
           trend="↓ 99.2% Uptime"
           trendPositive={true}
           onClick={() => onNavigateToFeed && onNavigateToFeed('CAM-001')}
@@ -90,8 +90,8 @@ export default function CommandDashboard({
           value="07"
           subtitle="3 critical priority queued"
           icon={AlertTriangle}
-          iconBg="bg-red-50"
-          iconColor="text-red-600"
+          iconBg="bg-[#FEF2F2]"
+          iconColor="text-[#B91C1C]"
           trend="↑ 2 High Priority"
           trendPositive={false}
           onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
@@ -101,8 +101,8 @@ export default function CommandDashboard({
           value="2,384"
           subtitle="Live object detection activity"
           icon={Users}
-          iconBg="bg-slate-100"
-          iconColor="text-slate-800"
+          iconBg="bg-[#F1F5F9]"
+          iconColor="text-[#0F172A]"
           trend="↑ +4.2%"
           trendPositive={true}
           onClick={() => onNavigateToCrowd && onNavigateToCrowd()}
@@ -112,8 +112,8 @@ export default function CommandDashboard({
           value="98.7%"
           subtitle="12ms average processing time"
           icon={CheckCircle}
-          iconBg="bg-emerald-50"
-          iconColor="text-emerald-700"
+          iconBg="bg-[#ECFDF5]"
+          iconColor="text-[#047857]"
           trend="Optimal SLA"
           trendPositive={true}
           onClick={() => onNavigateToRisk && onNavigateToRisk()}
@@ -126,7 +126,7 @@ export default function CommandDashboard({
         <div className="lg:col-span-8">
           <ChartPanel
             title="Hourly Threat & Crowd Density Telemetry"
-            subtitle="PERFORMANCE MONITORING"
+            subtitle="Performance Monitoring"
             rightMetric="24-Hour Operations Digest"
           >
             <div className="pt-2 pb-1 space-y-3">
@@ -137,22 +137,22 @@ export default function CommandDashboard({
                   return (
                     <div key={i} className="flex-1 flex flex-col items-center group relative h-full justify-end">
                       {/* Tooltip */}
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-slate-900 text-white text-[9px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-20 font-mono">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-[#0F172A] text-white text-[10px] px-2 py-1 rounded-lg shadow-md pointer-events-none whitespace-nowrap z-20 font-sans">
                         {d.label} — Threat: {d.threat} | Density: {d.crowd}%
                       </div>
                       
                       {/* Side-by-Side Dual Telemetry Bars */}
-                      <div className="flex items-end gap-1 w-full justify-center h-full">
+                      <div className="flex items-end gap-1.5 w-full justify-center h-full">
                         {/* Threat Bar */}
                         <div
-                          className="w-1.5 sm:w-2 rounded-t bg-amber-500 transition-all"
+                          className="w-1.5 sm:w-2 rounded-t-sm bg-[#F59E0B] transition-all"
                           style={{ height: `${threatHeight}%` }}
                           title={`Threat Level: ${d.threat}`}
                         />
                         {/* Crowd Density Bar */}
                         <div
-                          className={`w-2.5 sm:w-3.5 rounded-t transition-all ${
-                            d.highlight ? 'bg-slate-900' : 'bg-slate-300 group-hover:bg-slate-400'
+                          className={`w-2.5 sm:w-3.5 rounded-t-sm transition-all ${
+                            d.highlight ? 'bg-[#0F172A]' : 'bg-[#CBD5E1] group-hover:bg-[#94A3B8]'
                           }`}
                           style={{ height: `${crowdHeight}%` }}
                           title={`Crowd Density: ${d.crowd}%`}
@@ -164,16 +164,16 @@ export default function CommandDashboard({
               </div>
 
               {/* X-Axis Timeline Labels & Legend */}
-              <div className="flex items-center justify-between text-[9px] font-mono text-slate-500 border-t border-slate-100 pt-2">
-                <div className="flex items-center space-x-3">
-                  <span className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-xs bg-amber-500"></span> Threat Level
+              <div className="flex items-center justify-between text-xs text-[#64748B] border-t border-[#F1F5F9] pt-2.5 font-sans">
+                <div className="flex items-center space-x-4">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-xs bg-[#F59E0B]"></span> Threat Level
                   </span>
-                  <span className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-xs bg-slate-900"></span> Crowd Density
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-xs bg-[#0F172A]"></span> Crowd Density
                   </span>
                 </div>
-                <span className="font-bold text-slate-700">14:00 (Peak Surge)</span>
+                <span className="font-bold text-[#0F172A]">14:00 (Peak Surge)</span>
               </div>
             </div>
           </ChartPanel>
@@ -181,40 +181,40 @@ export default function CommandDashboard({
 
         {/* Incident Triage Queue (4 Cols) */}
         <div className="lg:col-span-4">
-          <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans h-full flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 space-y-3 font-sans h-full flex flex-col justify-between shadow-2xs">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#F1F5F9]">
               <div>
-                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
-                  ACTIVE QUEUE
+                <p className="text-xs font-semibold text-[#64748B]">
+                  Active Queue
                 </p>
-                <h3 className="text-sm font-bold text-slate-900 font-heading mt-0.5">
+                <h3 className="text-base font-bold text-[#0F172A] mt-0.5">
                   Incident Triage
                 </h3>
               </div>
               <button
                 onClick={() => onNavigateToAlerts && onNavigateToAlerts()}
-                className="text-xs font-bold text-slate-900 hover:underline flex items-center gap-1 font-mono"
+                className="text-xs font-semibold text-[#0F172A] hover:underline flex items-center gap-1 font-sans"
               >
                 View All <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             {/* Scrollable Incident Items */}
-            <div className="max-h-[220px] internal-scroll-area pr-1 space-y-2">
+            <div className="max-h-[220px] internal-scroll-area pr-1 space-y-2.5">
               {incidentsList.slice(0, 4).map((inc) => (
                 <div
                   key={inc.id}
-                  className="p-2 bg-slate-50 border border-slate-200 rounded-md space-y-1 hover:border-slate-300 transition-colors"
+                  className="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl space-y-1.5 hover:border-[#CBD5E1] transition-colors"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono text-slate-500">{inc.id}</span>
+                    <span className="text-xs font-mono text-[#64748B]">{inc.id}</span>
                     <span
-                      className={`text-[9px] font-bold px-1.5 py-0.2 rounded uppercase font-mono ${
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase border font-sans ${
                         inc.severity === 'CRITICAL'
-                          ? 'bg-red-100 text-red-700 border border-red-200'
+                          ? 'bg-[#FEF2F2] text-[#B91C1C] border-[#FCA5A5]'
                           : inc.severity === 'WARNING'
-                          ? 'bg-amber-100 text-amber-700 border border-amber-200'
-                          : 'bg-slate-200 text-slate-700'
+                          ? 'bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]'
+                          : 'bg-[#F1F5F9] text-[#64748B] border-[#CBD5E1]'
                       }`}
                     >
                       {inc.severity}
@@ -222,21 +222,21 @@ export default function CommandDashboard({
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900 leading-tight font-heading">
+                    <h4 className="text-xs font-bold text-[#0F172A] leading-tight font-sans">
                       {inc.title}
                     </h4>
-                    <p className="text-[10px] text-slate-500 font-mono">
+                    <p className="text-[11px] text-[#64748B] mt-0.5 font-sans">
                       Zone: {inc.zone}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-end space-x-2 pt-1 border-t border-slate-200/60">
+                  <div className="flex items-center justify-end space-x-2 pt-1.5 border-t border-[#E2E8F0]">
                     <Button
                       variant="secondary"
                       size="sm"
                       icon={Eye}
                       onClick={() => onNavigateToFeed && onNavigateToFeed(inc.cam)}
-                      className="!h-6 !px-2 !text-[9px]"
+                      className="!h-6 !px-2 !text-[10px]"
                     >
                       View Cam
                     </Button>
@@ -245,7 +245,7 @@ export default function CommandDashboard({
                       size="sm"
                       icon={Send}
                       onClick={() => onDispatchGuard && onDispatchGuard(inc.id)}
-                      className="!h-6 !px-2 !text-[9px]"
+                      className="!h-6 !px-2 !text-[10px]"
                     >
                       Dispatch Unit
                     </Button>
@@ -261,17 +261,17 @@ export default function CommandDashboard({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Site Surveillance Map (7 Cols) */}
         <div className="lg:col-span-7">
-          <div className="bg-white border border-slate-200 rounded-lg p-3 space-y-2 font-sans">
-            <div className="flex items-center justify-between">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 space-y-3 font-sans shadow-2xs">
+            <div className="flex items-center justify-between pb-2 border-b border-[#F1F5F9]">
               <div>
-                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
+                <p className="text-xs font-semibold text-[#64748B]">
                   Live Camera Layout
                 </p>
-                <h3 className="text-sm font-bold text-slate-900 font-heading mt-0.5">
+                <h3 className="text-base font-bold text-[#0F172A] mt-0.5">
                   Site Surveillance Map
                 </h3>
               </div>
-              <span className="text-[10px] font-mono text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 font-semibold">
+              <span className="text-xs font-medium text-[#64748B] bg-[#F1F5F9] px-2.5 py-1 rounded-full border border-[#E2E8F0]">
                 {deploymentEnv}
               </span>
             </div>

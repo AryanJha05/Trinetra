@@ -69,7 +69,7 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
     >
       <form id="create-incident-form" onSubmit={handleSubmit} className="space-y-4 text-xs font-sans">
         <div>
-          <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1 font-mono text-[10px]">
+          <label className="block font-semibold text-[#64748B] mb-1 font-sans text-xs">
             Incident Title *
           </label>
           <input
@@ -78,19 +78,19 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
             placeholder="e.g. Unattended Package near West Entry Gate"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full bg-white border border-slate-200 rounded-md px-3.5 py-2 text-slate-900 focus:outline-none focus:border-slate-800"
+            className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3.5 py-2 text-[#0F172A] placeholder-[#64748B] focus:outline-none focus:bg-white focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] transition-all font-medium"
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3 font-mono">
+        <div className="grid grid-cols-2 gap-3 font-sans">
           <div>
-            <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">
+            <label className="block font-semibold text-[#64748B] mb-1 text-xs">
               Category
             </label>
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-900 focus:outline-none font-sans"
+              className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-[#0F172A] focus:outline-none focus:bg-white focus:border-[#0F172A] transition-all font-medium"
             >
               <option value="Unattended Object">Unattended Object</option>
               <option value="Perimeter Breach">Perimeter Breach</option>
@@ -102,13 +102,13 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
           </div>
 
           <div>
-            <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">
+            <label className="block font-semibold text-[#64748B] mb-1 text-xs">
               Severity Level
             </label>
             <select
               value={severity}
               onChange={(e) => setSeverity(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-900 focus:outline-none font-bold"
+              className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-[#0F172A] focus:outline-none focus:bg-white focus:border-[#0F172A] transition-all font-semibold"
             >
               <option value="CRITICAL">🔴 CRITICAL</option>
               <option value="WARNING">🟡 WARNING</option>
@@ -117,15 +117,15 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 font-mono">
+        <div className="grid grid-cols-2 gap-3 font-sans">
           <div>
-            <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">
+            <label className="block font-semibold text-[#64748B] mb-1 text-xs">
               Operational Zone
             </label>
             <select
               value={zone}
               onChange={(e) => setZone(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-900 focus:outline-none font-sans"
+              className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-[#0F172A] focus:outline-none focus:bg-white focus:border-[#0F172A] transition-all font-medium"
             >
               <option value="Zone A (Main Concourse Entrance)">Zone A (Main Concourse Entrance)</option>
               <option value="Public Zone B (Concourse)">Public Zone B (Concourse)</option>
@@ -136,13 +136,13 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
           </div>
 
           <div>
-            <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">
+            <label className="block font-semibold text-[#64748B] mb-1 text-xs">
               Associated Camera
             </label>
             <select
               value={cam}
               onChange={(e) => setCam(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-900 focus:outline-none font-mono"
+              className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-[#0F172A] focus:outline-none focus:bg-white focus:border-[#0F172A] transition-all font-medium"
             >
               <option value="CAM-001">CAM-001 (Concourse)</option>
               <option value="CAM-002">CAM-002 (Gathering Area)</option>
@@ -153,7 +153,7 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
         </div>
 
         <div>
-          <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1 font-mono text-[10px]">
+          <label className="block font-semibold text-[#64748B] mb-1 font-sans text-xs">
             Operator Notes / Description
           </label>
           <textarea
@@ -161,7 +161,7 @@ export default function CreateIncidentModal({ isOpen, onClose, onSubmitIncident 
             placeholder="Provide operational context for security response unit..."
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            className="w-full bg-white border border-slate-200 rounded-md px-3.5 py-2 text-slate-900 focus:outline-none focus:border-slate-800"
+            className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3.5 py-2 text-[#0F172A] placeholder-[#64748B] focus:outline-none focus:bg-white focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] transition-all font-medium"
           />
         </div>
       </form>
