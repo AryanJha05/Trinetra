@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, AlertTriangle, Users, CheckCircle, ArrowRight, Eye, Send, Activity, ShieldAlert } from 'lucide-react';
+import { Camera, AlertTriangle, Users, CheckCircle, ArrowRight, Eye, Send, ShieldAlert } from 'lucide-react';
 import StationBlueprintMap from './StationBlueprintMap';
 import MetricCard from '../common/MetricCard';
 import ChartPanel from '../common/ChartPanel';
@@ -7,7 +7,7 @@ import Timeline from '../common/Timeline';
 import Button from '../common/Button';
 
 export default function CommandDashboard({
-  deploymentEnv = 'Railway Station',
+  deploymentEnv = 'Railway Station Demo',
   onNavigateToFeed,
   onNavigateToAlerts,
   onDispatchGuard,
@@ -16,40 +16,40 @@ export default function CommandDashboard({
   onNavigateToRisk,
   incidentsList = []
 }) {
+  // Realistic hourly threat & crowd telemetry data across 24 hours
   const chartData = [
-    { label: '01:00', val: 24 },
-    { label: '03:00', val: 30 },
-    { label: '05:00', val: 18 },
-    { label: '07:00', val: 35 },
-    { label: '09:00', val: 42 },
-    { label: '11:00', val: 28 },
-    { label: '13:00', val: 50 },
-    { label: '14:00', val: 95, highlight: true }, // Peak Surge
-    { label: '15:00', val: 70 },
-    { label: '17:00', val: 55 },
-    { label: '19:00', val: 40 },
-    { label: '21:00', val: 30 },
-    { label: '23:00', val: 26 },
+    { label: '00:00', threat: 12, crowd: 18 },
+    { label: '02:00', threat: 15, crowd: 22 },
+    { label: '04:00', threat: 10, crowd: 14 },
+    { label: '06:00', threat: 28, crowd: 45 },
+    { label: '08:00', threat: 42, crowd: 78 },
+    { label: '10:00', threat: 36, crowd: 65 },
+    { label: '12:00', threat: 48, crowd: 82 },
+    { label: '14:00', threat: 85, crowd: 96, highlight: true }, // Peak Surge
+    { label: '16:00', threat: 62, crowd: 88 },
+    { label: '18:00', threat: 54, crowd: 74 },
+    { label: '20:00', threat: 38, crowd: 52 },
+    { label: '22:00', threat: 22, crowd: 30 },
   ];
 
-  const maxVal = Math.max(...chartData.map((d) => d.val));
+  const maxVal = Math.max(...chartData.map((d) => d.crowd));
 
   return (
     <div className="w-full space-y-4 select-none font-sans text-slate-900">
-      {/* 1. Compact Page Header */}
+      {/* 1. Page Header & Subtitle */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-200">
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-500 mb-0.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>SYSTEM ACTIVE</span>
             <span>·</span>
-            <span>SITE: {deploymentEnv.toUpperCase()}</span>
+            <span className="uppercase">DEPLOYMENT: {deploymentEnv.toUpperCase()}</span>
           </div>
           <h1 className="fluid-heading font-bold text-slate-900 font-heading tracking-tight">
             TRINETRA Command Center
           </h1>
           <p className="text-xs text-slate-600 mt-0.5">
-            Real-time proactive CCTV surveillance intelligence & incident response telemetry.
+            Monitor connected cameras, assess emerging risks, and coordinate incident response.
           </p>
         </div>
 
@@ -72,8 +72,8 @@ export default function CommandDashboard({
         </div>
       </div>
 
-      {/* 2. Compact Overview Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 flex-shrink-0">
+      {/* 2. Compact KPI Metrics Row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <MetricCard
           title="Connected Cameras"
           value="1,248"
@@ -99,7 +99,7 @@ export default function CommandDashboard({
         <MetricCard
           title="Detected Objects"
           value="2,384"
-          subtitle="Real-time ByteTrack inference"
+          subtitle="Live object detection activity"
           icon={Users}
           iconBg="bg-slate-100"
           iconColor="text-slate-800"
@@ -110,7 +110,7 @@ export default function CommandDashboard({
         <MetricCard
           title="System Health"
           value="98.7%"
-          subtitle="12ms avg TensorRT latency"
+          subtitle="12ms average processing time"
           icon={CheckCircle}
           iconBg="bg-emerald-50"
           iconColor="text-emerald-700"
@@ -120,72 +120,69 @@ export default function CommandDashboard({
         />
       </div>
 
-      {/* 3. Main Operational Workspace Grid */}
+      {/* 3. Middle Section: Telemetry Analytics + Incident Queue */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Left Column (8 Columns): Telemetry & CAD Topology */}
-        <div className="lg:col-span-8 space-y-4">
-          {/* Chart Panel */}
+        {/* Analytics Chart Panel (8 Cols) */}
+        <div className="lg:col-span-8">
           <ChartPanel
             title="Hourly Threat & Crowd Density Telemetry"
             subtitle="PERFORMANCE MONITORING"
-            rightMetric="1,284 Events / 24 hrs"
+            rightMetric="24-Hour Operations Digest"
           >
-            <div className="pt-2 pb-1">
-              <div className="h-32 flex items-end justify-between gap-1.5 px-1">
+            <div className="pt-2 pb-1 space-y-3">
+              <div className="h-36 flex items-end justify-between gap-2 px-1">
                 {chartData.map((d, i) => {
-                  const heightPercent = (d.val / maxVal) * 100;
+                  const crowdHeight = (d.crowd / maxVal) * 100;
+                  const threatHeight = (d.threat / maxVal) * 100;
                   return (
-                    <div key={i} className="flex-1 flex flex-col items-center group relative">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 bg-slate-900 text-white text-[9px] px-1.5 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-10 font-mono">
-                        {d.label}: {d.val} threats
+                    <div key={i} className="flex-1 flex flex-col items-center group relative h-full justify-end">
+                      {/* Tooltip */}
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 bg-slate-900 text-white text-[9px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-20 font-mono">
+                        {d.label} — Threat: {d.threat} | Density: {d.crowd}%
                       </div>
-                      <div
-                        className={`w-full max-w-[18px] rounded-t transition-all duration-300 ${
-                          d.highlight
-                            ? 'bg-slate-900 shadow-xs'
-                            : 'bg-slate-200 hover:bg-slate-300'
-                        }`}
-                        style={{ height: `${heightPercent}%` }}
-                      />
+                      
+                      {/* Side-by-Side Dual Telemetry Bars */}
+                      <div className="flex items-end gap-1 w-full justify-center h-full">
+                        {/* Threat Bar */}
+                        <div
+                          className="w-1.5 sm:w-2 rounded-t bg-amber-500 transition-all"
+                          style={{ height: `${threatHeight}%` }}
+                          title={`Threat Level: ${d.threat}`}
+                        />
+                        {/* Crowd Density Bar */}
+                        <div
+                          className={`w-2.5 sm:w-3.5 rounded-t transition-all ${
+                            d.highlight ? 'bg-slate-900' : 'bg-slate-300 group-hover:bg-slate-400'
+                          }`}
+                          style={{ height: `${crowdHeight}%` }}
+                          title={`Crowd Density: ${d.crowd}%`}
+                        />
+                      </div>
                     </div>
                   );
                 })}
               </div>
-              <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 mt-2 border-t border-slate-100 pt-1.5">
-                <span>01:00</span>
-                <span>07:00</span>
-                <span>14:00 (Peak Surge)</span>
-                <span>19:00</span>
-                <span>23:00</span>
+
+              {/* X-Axis Timeline Labels & Legend */}
+              <div className="flex items-center justify-between text-[9px] font-mono text-slate-500 border-t border-slate-100 pt-2">
+                <div className="flex items-center space-x-3">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-xs bg-amber-500"></span> Threat Level
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-xs bg-slate-900"></span> Crowd Density
+                  </span>
+                </div>
+                <span className="font-bold text-slate-700">14:00 (Peak Surge)</span>
               </div>
             </div>
           </ChartPanel>
-
-          {/* Spatial CAD Topology Map */}
-          <div className="bg-white border border-slate-200 rounded-lg p-3 space-y-2 font-sans">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
-                  SITE OVERVIEW
-                </p>
-                <h3 className="text-sm font-bold text-slate-900 font-heading mt-0.5">
-                  CAD Surveillance Topology Map
-                </h3>
-              </div>
-              <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-                {deploymentEnv}
-              </span>
-            </div>
-            <div>
-              <StationBlueprintMap onSelectCamera={(camId) => onNavigateToFeed(camId)} />
-            </div>
-          </div>
         </div>
 
-        {/* Right Column (4 Columns): Active Incident Triage Queue */}
-        <div className="lg:col-span-4 space-y-4">
-          <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 flex-shrink-0">
+        {/* Incident Triage Queue (4 Cols) */}
+        <div className="lg:col-span-4">
+          <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 font-sans h-full flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
               <div>
                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
                   ACTIVE QUEUE
@@ -202,17 +199,17 @@ export default function CommandDashboard({
               </button>
             </div>
 
-            {/* Incident Queue Scrollable Container */}
-            <div className="max-h-[380px] internal-scroll-area pr-1 space-y-2.5">
-              {incidentsList.map((inc) => (
+            {/* Scrollable Incident Items */}
+            <div className="max-h-[220px] internal-scroll-area pr-1 space-y-2">
+              {incidentsList.slice(0, 4).map((inc) => (
                 <div
                   key={inc.id}
-                  className="p-2.5 bg-slate-50 border border-slate-200 rounded-md space-y-1.5 hover:border-slate-300 transition-colors"
+                  className="p-2 bg-slate-50 border border-slate-200 rounded-md space-y-1 hover:border-slate-300 transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono text-slate-500">{inc.id}</span>
                     <span
-                      className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
+                      className={`text-[9px] font-bold px-1.5 py-0.2 rounded uppercase font-mono ${
                         inc.severity === 'CRITICAL'
                           ? 'bg-red-100 text-red-700 border border-red-200'
                           : inc.severity === 'WARNING'
@@ -228,7 +225,7 @@ export default function CommandDashboard({
                     <h4 className="text-xs font-bold text-slate-900 leading-tight font-heading">
                       {inc.title}
                     </h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5 font-mono">
+                    <p className="text-[10px] text-slate-500 font-mono">
                       Zone: {inc.zone}
                     </p>
                   </div>
@@ -239,37 +236,62 @@ export default function CommandDashboard({
                       size="sm"
                       icon={Eye}
                       onClick={() => onNavigateToFeed && onNavigateToFeed(inc.cam)}
-                      className="!h-5.5 !px-2 !text-[9px]"
+                      className="!h-6 !px-2 !text-[9px]"
                     >
-                      Feed
+                      View Cam
                     </Button>
                     <Button
                       variant="primary"
                       size="sm"
                       icon={Send}
                       onClick={() => onDispatchGuard && onDispatchGuard(inc.id)}
-                      className="!h-5.5 !px-2 !text-[9px]"
+                      className="!h-6 !px-2 !text-[9px]"
                     >
-                      Dispatch
+                      Dispatch Unit
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Compact Timeline Feed Panel */}
-          <div className="flex-shrink-0">
-            <Timeline
-              items={incidentsList.slice(0, 2).map((inc) => ({
-                id: inc.id,
-                title: inc.title,
-                time: inc.time,
-                severity: inc.severity,
-                desc: `Camera ${inc.cam} reported ${inc.type.toLowerCase()} near ${inc.zone}.`
-              }))}
-            />
+      {/* 4. Bottom Section: Site Surveillance Map + Operational Timeline */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Site Surveillance Map (7 Cols) */}
+        <div className="lg:col-span-7">
+          <div className="bg-white border border-slate-200 rounded-lg p-3 space-y-2 font-sans">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">
+                  Live Camera Layout
+                </p>
+                <h3 className="text-sm font-bold text-slate-900 font-heading mt-0.5">
+                  Site Surveillance Map
+                </h3>
+              </div>
+              <span className="text-[10px] font-mono text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 font-semibold">
+                {deploymentEnv}
+              </span>
+            </div>
+            <div>
+              <StationBlueprintMap onSelectCamera={(camId) => onNavigateToFeed && onNavigateToFeed(camId)} />
+            </div>
           </div>
+        </div>
+
+        {/* Operational Timeline Panel (5 Cols) */}
+        <div className="lg:col-span-5">
+          <Timeline
+            items={incidentsList.slice(0, 3).map((inc) => ({
+              id: inc.id,
+              title: inc.title,
+              time: inc.time,
+              severity: inc.severity,
+              desc: `Camera ${inc.cam} reported ${inc.type ? inc.type.toLowerCase() : 'activity'} in ${inc.zone}.`
+            }))}
+          />
         </div>
       </div>
     </div>

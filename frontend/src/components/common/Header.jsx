@@ -121,48 +121,49 @@ export default function Header({
       {/* Center: Deployment Environment Selector */}
       <div className="hidden xl:flex items-center space-x-2 bg-white border border-slate-200 px-3 py-1.5 rounded-md shadow-2xs h-9">
         <Layers className="w-4 h-4 text-slate-500 flex-shrink-0" />
-        <span className="text-xs text-slate-500 font-medium whitespace-nowrap">Site:</span>
+        <span className="text-xs text-slate-500 font-medium whitespace-nowrap">Deployment:</span>
         <select
           value={deploymentEnv}
           onChange={(e) => setDeploymentEnv(e.target.value)}
           className="bg-transparent font-bold text-slate-900 focus:outline-none cursor-pointer text-xs font-heading"
           title="Switch TRINETRA Deployment Site"
         >
-          <option value="Railway Station">Railway Site</option>
-          <option value="Airport">Airport Site</option>
-          <option value="Smart City">Smart City Site</option>
-          <option value="Industrial Facility">Industrial Site</option>
+          <option value="Railway Station Demo">Railway Station Demo</option>
+          <option value="Airport Demo">Airport Demo</option>
+          <option value="Smart City Demo">Smart City Demo</option>
+          <option value="Industrial Facility Demo">Industrial Facility Demo</option>
+          <option value="Campus Demo">Campus Demo</option>
         </select>
       </div>
 
       {/* Right: Toggles & Primary Action Button */}
       <div className="flex items-center space-x-1.5 sm:space-x-2 text-xs flex-shrink-0">
-        {/* Simulation Toggle */}
+        {/* Simulation / Demo Mode Toggle */}
         <button
           onClick={() => setDemoMode(!demoMode)}
-          className={`h-9 px-2 sm:px-3 rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono ${
+          className={`h-9 px-2 sm:px-3 sm:w-36 justify-center rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono select-none ${
             demoMode
               ? 'bg-slate-900 text-white border-slate-900'
               : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
           }`}
-          title="Toggle Simulation"
+          title="Toggle Demo Mode Simulation"
         >
-          <Zap className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Sim {demoMode ? 'ON' : 'OFF'}</span>
+          <Zap className="w-3.5 h-3.5 flex-shrink-0" />
+          <span className="hidden sm:inline font-mono">{demoMode ? 'Demo Mode ON' : 'Demo Mode OFF'}</span>
         </button>
 
         {/* Privacy Mask Toggle */}
         <button
           onClick={() => setPrivacyMasking(!privacyMasking)}
-          className={`h-9 px-2 sm:px-3 rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono ${
+          className={`h-9 px-2 sm:px-3 sm:w-36 justify-center rounded-md border text-xs font-semibold flex items-center space-x-1.5 transition-colors font-mono select-none ${
             privacyMasking
               ? 'bg-emerald-700 text-white border-emerald-700'
               : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
           }`}
-          title="Toggle Privacy Blur"
+          title="Toggle DPDP Compliance Privacy Masking"
         >
-          {privacyMasking ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-          <span className="hidden sm:inline">DPDP</span>
+          {privacyMasking ? <EyeOff className="w-3.5 h-3.5 flex-shrink-0" /> : <Eye className="w-3.5 h-3.5 flex-shrink-0" />}
+          <span className="hidden sm:inline font-mono">{privacyMasking ? 'Privacy Mask ON' : 'Privacy Mask OFF'}</span>
         </button>
 
         {/* Notifications */}
@@ -185,7 +186,7 @@ export default function Header({
           className="h-9 px-3 sm:px-4 bg-slate-900 text-white font-semibold text-xs rounded-md hover:bg-slate-800 transition-all shadow-xs flex items-center space-x-1.5"
         >
           <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">Dispatch Guard</span>
+          <span className="hidden sm:inline">Dispatch Unit</span>
         </button>
       </div>
     </header>

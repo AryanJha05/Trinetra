@@ -12,10 +12,11 @@ import IncidentAlertCenter from './components/incident_alerts/IncidentAlertCente
 import OperationalAnalytics from './components/analytics/OperationalAnalytics';
 import ReportExportModal from './components/analytics/ReportExportModal';
 import AuditLogsView from './components/audit/AuditLogsView';
+import SettingsView from './components/settings/SettingsView';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [deploymentEnv, setDeploymentEnv] = useState('Railway Station');
+  const [deploymentEnv, setDeploymentEnv] = useState('Railway Station Demo');
   const [privacyMasking, setPrivacyMasking] = useState(true);
   const [selectedCamForLive, setSelectedCamForLive] = useState('CAM-001');
   const [notificationToast, setNotificationToast] = useState(null);
@@ -23,6 +24,38 @@ export default function App() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [demoMode, setDemoMode] = useState(false);
+
+  // Centralized System Settings State
+  const [systemSettings, setSystemSettings] = useState({
+    appName: 'TRINETRA Surveillance SOC',
+    landingPage: 'dashboard',
+    language: 'English (US)',
+    timeZone: 'Asia/Kolkata (IST)',
+    cameraRefreshInterval: '5s',
+    detectionSensitivity: 'High',
+    crowdThreshold: 70,
+    riskThreshold: 65,
+    criticalNotifications: true,
+    warningNotifications: true,
+    soundAlerts: true,
+    desktopNotifications: true,
+    alertPriority: 'Critical First',
+    faceBlurStrength: 80,
+    evidenceAccess: 'Supervisor Level',
+    dataRetention: '90 Days',
+    sessionTimeout: '30 mins',
+    twoFactorAuth: true,
+    loginActivityLog: true,
+    rolePermissions: 'Strict Enterprise RBAC',
+    theme: 'Light',
+    compactDensity: false,
+    sidebarBehavior: 'Expanded',
+    reducedMotion: false,
+    exportFormat: 'PDF',
+    reportFrequency: 'Daily',
+    automatedDataExport: false,
+    auditLogRetention: '180 Days',
+  });
 
   // Dynamic Incidents List state across platform
   const [incidentsList, setIncidentsList] = useState([
@@ -232,68 +265,18 @@ export default function App() {
         {activeTab === 'audit_logs' && <AuditLogsView />}
 
         {activeTab === 'settings' && (
-          <div className="p-6 md:p-8 text-slate-800 space-y-6 max-w-4xl font-sans">
-            <div>
-              <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 mb-1 font-heading">
-                System Settings & Platform Credits
-              </h1>
-              <p className="text-xs text-slate-500 font-mono">TRINETRA Platform Config v2.4.0 · Models: YOLOv11 / ByteTrack / Explainable AI Engine</p>
-            </div>
-
-            {/* Platform Control Settings Panel */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 space-y-4 shadow-sm text-xs font-mono">
-              <h3 className="text-sm font-bold text-slate-900 font-heading border-b border-slate-200 pb-3">AI Vision Model Configurations</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                  <span>Inference Acceleration</span>
-                  <span className="text-teal-700 font-bold">FP16 TensorRT Engine</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                  <span>ByteTrack IoU Threshold</span>
-                  <span className="text-teal-700 font-bold">0.65 Overlap IoU</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                  <span>DPDP Act Privacy Mode</span>
-                  <span className="text-emerald-700 font-bold">{privacyMasking ? 'ENABLED (Face Masking)' : 'DISABLED'}</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                  <span>Security Guard Auto-Dispatch</span>
-                  <span className="text-teal-700 font-bold">AUTOMATIC (&gt;90% Conf)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Official SIH 2026 Team Section */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 space-y-4 shadow-sm">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                <h3 className="text-sm font-bold text-slate-900 font-heading">Smart India Hackathon 2026 — Official Team Trinetra (SIH1349)</h3>
-                <span className="text-[10px] font-bold font-mono bg-teal-50 text-teal-800 border border-teal-200 px-2.5 py-1 rounded-md">
-                  SIH 2026 GRAND FINALIST
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono">
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
-                  <p className="text-sm font-bold text-white font-heading">Aryan Jha</p>
-                </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
-                  <p className="text-sm font-bold text-white font-heading">Mahipal</p>
-                </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
-                  <p className="text-sm font-bold text-white font-heading">Sandeep</p>
-                </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
-                  <p className="text-sm font-bold text-white font-heading">Nikita</p>
-                </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
-                  <p className="text-sm font-bold text-white font-heading">Aastha</p>
-                </div>
-                <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800 text-center flex items-center justify-center min-h-[50px]">
-                  <p className="text-sm font-bold text-white font-heading">Smurtirani</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SettingsView
+            settings={systemSettings}
+            onSaveSettings={(newSettings) => setSystemSettings(newSettings)}
+            onShowToast={(msg) => {
+              setNotificationToast(msg);
+              setTimeout(() => setNotificationToast(null), 3500);
+            }}
+            deploymentEnv={deploymentEnv}
+            setDeploymentEnv={setDeploymentEnv}
+            privacyMasking={privacyMasking}
+            setPrivacyMasking={setPrivacyMasking}
+          />
         )}
         </div>
       </main>

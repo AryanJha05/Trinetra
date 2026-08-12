@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
   html, body, #root {
     width: 100%;
     min-height: 100vh;
@@ -22,6 +25,12 @@
   /* Guarantee min-width: 0 on all grid items to prevent horizontal blowout */
   *, ::before, ::after {
     min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Interaction stability: ensure borders & outlines never expand layout bounds */
+  button, input, select, textarea {
+    border-style: solid;
   }
 }
 
